@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ArcticBlast.Environment {
+
+    // Spawns power-ups 
+    public class PowerUpSpawner : MonoBehaviour
+    {
+	
+		// The range in which the power up can spawn from origin
+		public float range;
+		
+		public BeanCan powerUpPrefab;
+		public BeanBarrel bigPowerUpPrefab;
+		
+		public float RepeatRate = 1f;
+		public float Delay = 2f;
+		
+		// Start is called before the first frame update
+		void Start()
+		{
+			InvokeRepeating("LaunchPowerUp", Delay, RepeatRate);
+			
+		}
+		
+		void LaunchPowerUp() {
+			
+			// Randomize the start position
+			Vector2 spawnPosition = transform.position;
+			spawnPosition.x = Random.Range(transform.position.x - range/2, transform.position.x + range/2);
+			
+			Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+		}
+		
+    }
+    
+}

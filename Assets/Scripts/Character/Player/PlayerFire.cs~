@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using ArcticBlast.Ammo;
+using ArcticBlast.Audio;
+
+namespace ArcticBlast.Player {
+
+    // Manages the player's firing actions
+    public class PlayerFire : MonoBehaviour
+    {
+
+		void FixedUpdate() {
+			Fire();
+		}
+		
+        // Handles firing the flamethrower
+        void Fire() {
+            if (Input.GetButtonDown("Fire1")) {
+                				
+				// Megafart if the player has four ammo stockpiled
+				// TODO: Map to a separate control?
+				if (AmmoManager.HasMegaFartAmmo()) {
+					MegaFart();
+				} else if (AmmoManager.HasAmmo()) {
+					SingleFart();
+				} else {
+					// TODO: Player doesn't have any ammo; don't allow
+				}
+
+            }
+        }
+
+		void MegaFart() {
+
+			// TODO: Animations
+			
+			AmmoManager.RemoveAllAmmo();
+			
+			AudioEvents.PlayMegaFart();	
+			Events.MegaFart();
+		}
+
+		void SingleFart() {
+
+			// TODO: Animations
+			
+			AmmoManager.Remove();
+			
+			AudioEvents.PlayFart();
+			Events.Fart();
+		}		
+		
+    }
+    
+}

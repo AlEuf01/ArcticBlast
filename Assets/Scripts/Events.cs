@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Cyborg.Audio;
+using Cyborg.Scenes;
 
 namespace ArcticBlast {
     
@@ -10,6 +11,8 @@ namespace ArcticBlast {
 		
 		// Event handler for completing a level
 		public static event Action OnCompleteLevel;
+
+		public static event Action OnGameOver;
 		
 		// Event handler for killing the player
 		public static event Action OnKillPlayer;
@@ -25,6 +28,35 @@ namespace ArcticBlast {
 		public static event Action OnPause;
 		public static event Action OnUnPause;
 
+		public static event Action OnFire;
+		public static event Action OnJump;
+
+		public static void GameOver() {
+			if (OnGameOver != null) {
+				OnGameOver();
+			}
+		}
+		public static void Start() {
+			SceneEvents.ChangeScene("Tutorial");
+		}
+		
+		public static void Restart() {
+			AudioController.PlayLoop();
+			SceneEvents.ChangeScene("Tutorial");
+		}
+		
+		public static void Jump() {
+			if (OnJump != null) {
+				OnJump();
+			}
+		}
+		
+		public static void Fire() {
+			if (OnFire != null) {
+				OnFire();
+			}
+		}
+		
 		public static void Pause() {
 			AudioEvents.Pause();
             if (OnPause != null) {

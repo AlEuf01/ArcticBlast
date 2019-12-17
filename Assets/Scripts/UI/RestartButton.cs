@@ -7,31 +7,33 @@ using Cyborg.Scenes;
 
 namespace ArcticBlast.UI {
 
-
+	// Press this button to restart the game
 	public class RestartButton : MonoBehaviour, IButton
 	{
 
-
+		// True if this button has been clicked (but hasn't disappeared yet)
 		bool clicked = false;
+
+		// Fire or jump events trigger this button
+		void OnEnable() {
+			Events.OnFire += OnClick;
+			Events.OnJump += OnClick;
+		}
+
+		void OnDisable() {
+			Events.OnFire -= OnClick;
+			Events.OnJump -= OnClick;
+		}
 		
 		public void OnClick() {
 			if (!clicked) {
 				clicked = true;
-				AudioController.PlayLoop();
-				GameController.GotoStartLevel();
-			}
-
-		}
-
-		void Update() {
-			if (!clicked) {
 				
-				if (Input.GetButton("Jump") || Input.GetButton("Fire1")) {
-					OnClick();
-				}
+				Events.Restart();
 			}
-				   
 		}
+
+
 	}
 
 }

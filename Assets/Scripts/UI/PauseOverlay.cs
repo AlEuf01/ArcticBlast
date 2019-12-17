@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ArcticBlast.Utils;
+namespace ArcticBlast.UI {
 
-namespace ArcticBlast {
-	
-	public class PauseOverlay : Singleton<PauseOverlay>
+	// An overlay view that appears when the game is paused
+	public class PauseOverlay : MonoBehaviour
 	{
 		
 		void Start() {
@@ -23,14 +22,14 @@ namespace ArcticBlast {
 			Events.OnUnPause -= Hide;
 		}
 		
-		public static void Show() {
-			Instance.GetComponent<CanvasGroup>().alpha = 1f;
-			Instance.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		void Show() {
+			GetComponent<CanvasGroup>().alpha = 1f;
+			GetComponent<CanvasGroup>().blocksRaycasts = true;
 		}
 		
-		public static void Hide() {		
-			Instance.GetComponent<CanvasGroup>().alpha = 0f;
-			Instance.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		void Hide() {		
+			GetComponent<CanvasGroup>().alpha = 0f;
+			GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
 	}
 	

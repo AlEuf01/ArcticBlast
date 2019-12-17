@@ -8,7 +8,7 @@ namespace ArcticBlast.Ammo {
     {
 		const int maxAmmo = 4;
 		
-		public static int Amount = 0;
+		public static int Amount = 0;		
 		
 		public static void Add() {
 			if (Amount < maxAmmo) {
@@ -38,6 +38,6 @@ namespace ArcticBlast.Ammo {
 		public static void Fill() {
 			Amount = maxAmmo;
 		}
-    }
-    
+
+	}
 }

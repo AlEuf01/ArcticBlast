@@ -20,27 +20,26 @@ namespace ArcticBlast.Player {
 		
 		public Transform fartPointL;
 		public Transform fartPointR;
-		
-		void FixedUpdate() {
-			Fire();
-		}
-		
-        // Handles firing the flamethrower
-        void Fire() {
-            if (Input.GetButtonDown("Fire1")) {
-							
-				// Megafart if the player has four ammo stockpiled
-				// TODO: Map to a separate control?
-				if (AmmoManager.HasMegaFartAmmo()) {
-					MegaFart();
-				} else if (AmmoManager.HasAmmo()) {
-					SingleFart();
-				} else {
-					// TODO: Player doesn't have any ammo; don't allow
-				}
-            }
-        }
 
+		void OnEnable() {
+			Events.OnFire += Fire;
+		}
+
+		void OnDisable() {
+			Events.OnFire -= Fire;
+		}
+
+        // Handles firing the flamethrower
+        void Fire() {				   	
+			if (AmmoManager.HasMegaFartAmmo()) {
+				MegaFart();
+			} else if (AmmoManager.HasAmmo()) {
+				SingleFart();
+			} else {
+				NoFart();
+			}
+		}
+	
 		void MegaFart() {			
 
 			StartCoroutine(PlayFireAnimation(fartLarge));
@@ -79,7 +78,8 @@ namespace ArcticBlast.Player {
 
 		// Play a farting animation
 		IEnumerator PlayFireAnimation(GameObject fartPrefab) {
-			Debug.Log("Firing");
+			// Debug.Log("Firing");
+
 			animator.SetBool("IsFiring", true);
 
 			Transform fartPoint = GetFireDirection() == Direction.Left ? fartPointL : fartPointR;
@@ -113,9 +113,10 @@ namespace ArcticBlast.Player {
 			RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
 
 			if (hit.collider != null) {
-				Debug.Log("Hitting " + hit.collider.gameObject.name);
+				// Debug.Log("Hitting " + hit.collider.gameObject.name);
 			    result = hit.collider.gameObject.GetComponent<IEnemy>();		
 			}
+			
 			return result;
 		}
 		

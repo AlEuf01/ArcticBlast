@@ -10,9 +10,10 @@ using ArcticBlast.Utils;
 
 namespace ArcticBlast {
 
+	// Controller for the main logic of the game
 	public class GameController : Singleton<GameController>
 	{
-		
+
 		// Pause the game
 		public void Pause() {
 			Time.timeScale = 0.0f;
@@ -25,7 +26,7 @@ namespace ArcticBlast {
 			Events.UnPause();
 		}
 
-		public void Restart() {		   
+		void Restart() {		   
 			// Debug.Log("Restarting the game.");
 			
 			SceneEvents.ChangeScene("_GameOver");
@@ -53,6 +54,14 @@ namespace ArcticBlast {
 			}
 		}
 
+		void OnEnable() {
+			Events.OnGameOver += Restart;
+		}
+
+		void OnDisable() {
+			Events.OnGameOver -= Restart;
+		}
+		
 		// Resets the game from the beginning
 		IEnumerator Reset() {
 
@@ -60,14 +69,8 @@ namespace ArcticBlast {
 			
 			yield return new WaitForSeconds(3.0f);
 
-			AudioController.PlayLoop();
-
-			GotoStartLevel();
+			Events.Restart();
 			
-		}
-
-		public static void GotoStartLevel() {
-			SceneEvents.ChangeScene("Tutorial");
 		}
 
 	}

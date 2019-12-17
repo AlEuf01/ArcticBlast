@@ -51,8 +51,8 @@ namespace ArcticBlast {
 			animator.SetTrigger("Death");
 
 			yield return new WaitForSeconds(0.2f);
-			
-			GameController.Instance.Restart();
+
+			Events.GameOver();
 			
 			animator.ResetTrigger("Death");
 			

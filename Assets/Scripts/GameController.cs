@@ -12,28 +12,23 @@ namespace ArcticBlast {
 
 	public class GameController : Singleton<GameController>
 	{
-
-		public void Pause() {
-			// Play Sound Clip
-			AudioController.Pause();
-
-			Time.timeScale = 0.0f;
-
-			PauseOverlay.Show();
-		}
 		
-		public void Unpause() {
-			AudioEvents.UnPause();
-			
-			Time.timeScale = 1.0f;
+		// Pause the game
+		public void Pause() {
+			Time.timeScale = 0.0f;
+			Events.Pause();
+		}
 
-			PauseOverlay.Hide();
+		// Unpause the game
+		public void Unpause() {			
+			Time.timeScale = 1.0f;
+			Events.UnPause();
 		}
 
 		public void Restart() {		   
-			Debug.Log("Restarting the game.");
+			// Debug.Log("Restarting the game.");
+			
 			SceneEvents.ChangeScene("_GameOver");
-
 			StartCoroutine(Reset());
 		}
 

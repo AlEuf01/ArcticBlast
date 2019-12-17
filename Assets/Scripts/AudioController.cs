@@ -14,6 +14,8 @@ namespace ArcticBlast {
 			
 			Events.OnConsumeBeanBarrel += PlayCollect;
 			Events.OnConsumeBeanCan += PlayCollect;
+			
+			Events.OnPause += Pause;
 		}
 		
 		void OnDisable() {
@@ -22,30 +24,34 @@ namespace ArcticBlast {
 
 			Events.OnConsumeBeanBarrel -= PlayCollect;
 			Events.OnConsumeBeanCan -= PlayCollect;
+
+			Events.OnPause -= Pause;
 		}
-		
+
+		// Play a smaller fire event
 		void PlayFart() {
 			AudioEvents.PlaySound("fire_small");
 		}
-		
+
+		// Play a louder fire event
 		void PlayMegaFart() {
 			AudioEvents.PlaySound("fire");
 		}
-		
+
+		// Play a collection (ie, collect powerup) sound effect
 		void PlayCollect() {
 			AudioEvents.PlaySound("consume");
 		}
-
 		
+		// Play a pause sound effect
+		void Pause() {		   
+			AudioEvents.PlaySound("smb_pause");
+		}
+
+		// Play a kick sound effect
 		public static void PlayKick() {
 			AudioEvents.PlaySound("smb_kick");
 		}
-		
-		public static void Pause() {		   
-			AudioEvents.PlaySound("smb_pause");
-			AudioEvents.Pause();
-		}
-
 
 		public static void PlayWin() {
 			AudioEvents.PlayMusic("win");

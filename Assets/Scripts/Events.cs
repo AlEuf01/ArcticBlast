@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Cyborg.Audio;
 
 namespace ArcticBlast {
     
@@ -20,6 +21,19 @@ namespace ArcticBlast {
 		// Event handler for firing (fart, flamethrower)
 		public static event Action OnFart;
 		public static event Action OnMegaFart;
+
+		public static event Action OnPause;
+		public static event Action OnUnPause;
+
+		public static void Pause() {
+			AudioEvents.Pause();
+			OnPause();
+		}
+
+		public static void UnPause() {
+			AudioEvents.UnPause();
+			OnUnPause();
+		}
 		
 		public static void CompleteLevel() {
 			if (OnCompleteLevel != null) {

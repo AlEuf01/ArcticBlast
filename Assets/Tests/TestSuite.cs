@@ -9,7 +9,6 @@ public class TestSuite
 {
 	
 	private GameController gameController;
-	private AudioController audioController;
 	
 	[UnityTest]
 	public IEnumerator Pause()
@@ -29,15 +28,11 @@ public class TestSuite
 		
 		GameObject gc = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Start/@GameController"));
 		gameController = gc.GetComponent<GameController>();
-
-		GameObject audio = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Start/AudioController")); 
-		audioController = audio.GetComponent<AudioController>();
 		
 	}
 	
 	void Cleanup() {
 		Object.Destroy(gameController);
-		Object.Destroy(audioController);
 	}
 	
 }

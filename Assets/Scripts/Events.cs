@@ -27,12 +27,17 @@ namespace ArcticBlast {
 
 		public static void Pause() {
 			AudioEvents.Pause();
-			OnPause();
+            if (OnPause != null) {
+                 OnPause();  
+            }			
 		}
 
 		public static void UnPause() {
 			AudioEvents.UnPause();
-			OnUnPause();
+            if (OnUnPause != null) {
+                OnUnPause();    
+            }
+			
 		}
 		
 		public static void CompleteLevel() {

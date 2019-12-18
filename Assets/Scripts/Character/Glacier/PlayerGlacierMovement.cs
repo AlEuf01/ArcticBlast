@@ -18,10 +18,10 @@ namespace ArcticBlast {
 
 			if (hitDown.collider != null && hitDown.collider.gameObject.tag == "Glacier") {
 
-				Debug.Log("On top of Glacier");
+				// Debug.Log("On top of Glacier");
 				transform.SetParent(hitDown.collider.gameObject.transform);
 			} else {
-				Debug.Log("Not on top of Glacier.");
+				// Debug.Log("Not on top of Glacier.");
 
 				// Debug.Log("On top of: " + hitDown.collider.gameObject.name);
 				transform.SetParent(GameObject.Find("Environment").transform);

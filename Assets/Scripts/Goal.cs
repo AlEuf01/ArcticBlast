@@ -4,28 +4,16 @@ using UnityEngine;
 
 using Cyborg.Scenes;
 
-namespace ArcticBlast.Environment {
+namespace ArcticBlast {
 
 	// Player Goal; once the glacier goes past this point, the player wins
     public class Goal : GlacierTrigger
     {
 
-		// Returns true if the glacier is "behind" the goal
-		bool IsGlacierBehindGoal(Collider2D other) {
-			return other.transform.position.x < transform.position.x;
-		}
-		
-		void OnTriggerExit2D(Collider2D other) {
-			// Debug.Log("Collider entered.");
-			if (IsColliderGlacier(other) && IsGlacierBehindGoal(other)) {
-		
-				Debug.Log("Glacier pushed past the goal point.");
-				Debug.Log("You win!");
-				
-				Events.CompleteLevel();
-
-				GameController.Instance.Win();
-			}
+		protected override void EnterPayload() {
+			Debug.Log("Entered goal!");
+			Events.CompleteLevel();			   
+			GameController.Instance.Win();
 		}
     }
     

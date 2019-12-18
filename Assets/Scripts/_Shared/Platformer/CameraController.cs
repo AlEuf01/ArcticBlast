@@ -18,6 +18,9 @@ namespace Cyborg.Platformer {
 		
 		// Reference to the player character
 		private GameObject player;
+
+		// Reference to the edge of the glacier
+		private GameObject glacierEdge;
 		
 		Vector3 StartingPosition = new Vector3(0f, 0f, -10f);
 		
@@ -28,11 +31,20 @@ namespace Cyborg.Platformer {
 		void TrackPlayer() {
 			
 			SetPlayer();
+			SetGlacierEdge();
 			
 			if (player == null) {
 				ResetCamera();
 			} else {
 				SetPlayerPosition();
+			}
+		}
+
+		// Initializes the glacier edge
+		void SetGlacierEdge() {
+			if (glacierEdge == null) {
+				// TODO: Optimize reference
+				glacierEdge = GameObject.Find("GlacierEdge");
 			}
 		}
 		
@@ -44,6 +56,9 @@ namespace Cyborg.Platformer {
 		}
 		
 		void SetPlayerPosition() {
+			Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
+			xMin = Mathf.Max(xMin, glacierEdge.transform.position.x + 6.0f);
+			Debug.Log("Setting camera minimum to " + xMin);
 			float x = Mathf.Clamp(player.transform.position.x, xMin, xMax);
 			float y = Mathf.Clamp(player.transform.position.y, yMin, yMax);
 			

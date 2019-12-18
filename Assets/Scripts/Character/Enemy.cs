@@ -39,7 +39,7 @@ namespace ArcticBlast {
 		
 		void Stun() {
 			if (CanBeStunned) {
-				Debug.Log("Stunning enemy.");
+				// Debug.Log("Stunning enemy.");
 				StartCoroutine(StunForDuration(stunDuration));				
 			}
 		}
@@ -68,7 +68,7 @@ namespace ArcticBlast {
 				HandleJumpCollision();
 			}
 
-			Debug.Log("Checking collisions to left and right.");
+			// Debug.Log("Checking collisions to left and right.");
 	    }
 
 		// Check collision in a certain direction

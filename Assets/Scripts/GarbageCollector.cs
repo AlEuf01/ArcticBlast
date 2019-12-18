@@ -13,7 +13,7 @@ namespace ArcticBlast.Environment {
 		void OnTriggerEnter2D(Collider2D other) {
 			
 			if (other.gameObject.tag == "PowerUp") {
-				Debug.Log("Destroying powerup.");
+				// Debug.Log("Destroying powerup.");
 				Destroy(other.gameObject, delayLength);
 
 			}

@@ -1580,12 +1580,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4855981670628272771, guid: eb68348d30ca8a24f91281f8a820f20a,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -7012381272302753189, guid: 5b332f4fe1646afb58234a3f4eff1914,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb68348d30ca8a24f91281f8a820f20a, type: 3}
 --- !u!1001 &1863748294861365453
@@ -1603,12 +1597,12 @@ PrefabInstance:
     - target: {fileID: 1863748295647570187, guid: 0e3a373f11f877a6686a40619f4721a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.29
+      value: -2.94
       objectReference: {fileID: 0}
     - target: {fileID: 1863748295647570187, guid: 0e3a373f11f877a6686a40619f4721a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.08
+      value: 1.21
       objectReference: {fileID: 0}
     - target: {fileID: 1863748295647570187, guid: 0e3a373f11f877a6686a40619f4721a3,
         type: 3}
@@ -1676,6 +1670,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2085618258}
     m_Modifications:
+    - target: {fileID: 5109394605807522415, guid: 5da6758cf883c8e4aa8429f768466750,
+        type: 3}
+      propertyPath: m_Name
+      value: 'Boundary '
+      objectReference: {fileID: 0}
     - target: {fileID: 5109394605807522414, guid: 5da6758cf883c8e4aa8429f768466750,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1730,11 +1729,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109394605807522415, guid: 5da6758cf883c8e4aa8429f768466750,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Boundary '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5da6758cf883c8e4aa8429f768466750, type: 3}
@@ -1820,6 +1814,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 792348681}
     m_Modifications:
+    - target: {fileID: 6635152902780432994, guid: 6ec19c8c658d81db793b6308b8b4af70,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrel Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 6635152902780432995, guid: 6ec19c8c658d81db793b6308b8b4af70,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,11 +1874,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6635152902780432994, guid: 6ec19c8c658d81db793b6308b8b4af70,
-        type: 3}
-      propertyPath: m_Name
-      value: Barrel Spawner
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec19c8c658d81db793b6308b8b4af70, type: 3}
 --- !u!1001 &7006076666082582896
@@ -1889,10 +1883,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2085618258}
     m_Modifications:
+    - target: {fileID: 7006076667489864468, guid: 58d26b7c770f794aba1ad28614ef7a4a,
+        type: 3}
+      propertyPath: m_Name
+      value: End of Level
+      objectReference: {fileID: 0}
     - target: {fileID: 7006076667489864469, guid: 58d26b7c770f794aba1ad28614ef7a4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.86
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7006076667489864469, guid: 58d26b7c770f794aba1ad28614ef7a4a,
         type: 3}
@@ -1943,11 +1942,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7006076667489864468, guid: 58d26b7c770f794aba1ad28614ef7a4a,
-        type: 3}
-      propertyPath: m_Name
-      value: End of Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58d26b7c770f794aba1ad28614ef7a4a, type: 3}
@@ -1958,10 +1952,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2085618258}
     m_Modifications:
+    - target: {fileID: 7859527538585763950, guid: 60c236ca38b9e08a4bce9e7d098b0930,
+        type: 3}
+      propertyPath: m_Name
+      value: Goal For Glacier
+      objectReference: {fileID: 0}
     - target: {fileID: 7859527538585763953, guid: 60c236ca38b9e08a4bce9e7d098b0930,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.66
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 7859527538585763953, guid: 60c236ca38b9e08a4bce9e7d098b0930,
         type: 3}
@@ -2013,10 +2012,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7859527538585763950, guid: 60c236ca38b9e08a4bce9e7d098b0930,
+    - target: {fileID: 7859527538585763952, guid: 60c236ca38b9e08a4bce9e7d098b0930,
         type: 3}
-      propertyPath: m_Name
-      value: Goal For Glacier
+      propertyPath: m_Offset.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859527538585763952, guid: 60c236ca38b9e08a4bce9e7d098b0930,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859527538585763952, guid: 60c236ca38b9e08a4bce9e7d098b0930,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c236ca38b9e08a4bce9e7d098b0930, type: 3}
@@ -2027,6 +2036,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 792348681}
     m_Modifications:
+    - target: {fileID: 8572307277777818229, guid: 6997f53264cb9737f9ced4f880c258fc,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean Can Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 8572307277777818228, guid: 6997f53264cb9737f9ced4f880c258fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2081,11 +2095,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8572307277777818229, guid: 6997f53264cb9737f9ced4f880c258fc,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean Can Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 8572307277777818231, guid: 6997f53264cb9737f9ced4f880c258fc,
         type: 3}

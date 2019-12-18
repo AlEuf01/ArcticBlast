@@ -37,8 +37,6 @@ namespace ArcticBlast {
 		IEnumerator PlayerDeath() {		   			
 			Debug.Log("Handling player death");
 			AudioController.PlayLose();
-
-			AmmoManager.RemoveAllAmmo();
 			
 			Debug.Log("The player is dead!");
 			

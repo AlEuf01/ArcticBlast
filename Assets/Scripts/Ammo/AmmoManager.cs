@@ -3,40 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ArcticBlast.Ammo {
-    
-    public static class AmmoManager
+
+	// Manages the player's available ammo
+    public class AmmoManager : MonoBehaviour, IAmmoManager
     {
-		const int maxAmmo = 4;
-		
+
+		// Starting amount of ammo
 		public static int Amount = 0;		
+
+		// Maximum amounnt of ammo
+		private const int maxAmmo = 4;
 		
-		public static void Add() {
+		// Add ammo
+		public void Add() {
 			if (Amount < maxAmmo) {
 				Amount++;
 			}
 		}
-	
-		public static void Remove() {
+
+		// Remove ammo
+		public void Remove() {
 			if (Amount > 0) {
 				Amount--;
 			}
 		}
-		
-		public static bool HasAmmo() {
-			return Amount > 0;
+
+		// Fill the ammo to max after consuming a bean barrel
+		public void Fill() {
+			Amount = maxAmmo;
 		}
 
-		public static bool HasMegaFartAmmo() {
-			return Amount == maxAmmo;
-		}
 		
-		public static void RemoveAllAmmo() {
+		// Gets rid of all of the player's ammo
+		public void RemoveAllAmmo() {
 			Amount = 0;
 		}
 
-		// Fill the ammo to max after consuming a bean barrel
-		public static void Fill() {
-			Amount = maxAmmo;
+		// Returns true if player has ammo; false otherwise
+		public bool HasAmmo() {
+			return Amount > 0;
+		}
+
+		// Returns true if player has enough ammo for a mega-fart
+		public bool HasMegaFartAmmo() {
+			return Amount == maxAmmo;
 		}
 
 	}

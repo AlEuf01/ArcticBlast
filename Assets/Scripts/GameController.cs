@@ -63,9 +63,7 @@ namespace ArcticBlast {
 		}
 		
 		// Resets the game from the beginning
-		IEnumerator Reset() {
-
-			AmmoManager.RemoveAllAmmo();
+		IEnumerator Reset() {			
 			
 			yield return new WaitForSeconds(3.0f);
 

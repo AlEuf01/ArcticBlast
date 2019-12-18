@@ -7,7 +7,8 @@ namespace ArcticBlast {
 	// Manages keyboard input
 	public class InputManager : MonoBehaviour
 	{
-		
+
+		// Check for Jump or Fire events
 		void FixedUpdate()
 		{
 			if (Input.GetButton("Jump")) {

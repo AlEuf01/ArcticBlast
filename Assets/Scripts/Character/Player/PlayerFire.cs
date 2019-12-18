@@ -8,6 +8,7 @@ using ArcticBlast.Ammo;
 namespace ArcticBlast.Player {
 	
     // Manages the player's firing actions
+	[RequireComponent(typeof(AmmoManager))]
     public class PlayerFire : Character
     {
 
@@ -21,12 +22,35 @@ namespace ArcticBlast.Player {
 		public Transform fartPointL;
 		public Transform fartPointR;
 
+		public AmmoManager AmmoManager;
+		
 		void OnEnable() {
 			Events.OnFire += Fire;
+			Events.OnConsumeBeanCan += ConsumeBeanCan;
+			Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
+			Events.OnKillPlayer += AmmoManager.RemoveAllAmmo;
 		}
 
 		void OnDisable() {
 			Events.OnFire -= Fire;
+			Events.OnConsumeBeanCan -= ConsumeBeanCan;
+			Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
+			Events.OnKillPlayer -= AmmoManager.RemoveAllAmmo;
+		}
+
+		void Awake() {
+			AmmoManager = GetComponent<AmmoManager>();
+		}
+
+		void ConsumeBeanCan() {
+			// Debug.Log("Consumed a bean can");			
+			// Increment player's ammo			
+			AmmoManager.Add();			
+		}
+
+		void ConsumeBeanBarrel() {
+			// Debug.Log("Consumed a bean barrel");
+			AmmoManager.Fill();
 		}
 
         // Handles firing the flamethrower

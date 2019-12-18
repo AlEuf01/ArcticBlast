@@ -8,6 +8,9 @@ namespace ArcticBlast {
     // Class to handle all events for the game
     public class Events
     {
+
+		public delegate void IntEvent(int amount);
+		public static event IntEvent OnUpdateAmmo;
 		
 		// Event handler for completing a level
 		public static event Action OnCompleteLevel;
@@ -105,6 +108,12 @@ namespace ArcticBlast {
 		public static void MegaFart() {
 			if (OnMegaFart != null) {
 				OnMegaFart();
+			}
+		}
+
+		public static void UpdateAmmo(int amount) {
+			if (OnUpdateAmmo != null) {
+				OnUpdateAmmo(amount);
 			}
 		}
     }

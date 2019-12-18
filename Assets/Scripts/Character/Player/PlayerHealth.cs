@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Cyborg.Platformer;
-using ArcticBlast.Ammo;
 
 namespace ArcticBlast {
 

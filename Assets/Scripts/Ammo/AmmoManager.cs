@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast.Ammo {
+namespace ArcticBlast {
 
 	// Manages the player's available ammo
-    public class AmmoManager : MonoBehaviour, IAmmoManager
+    public class AmmoManager : IAmmoManager
     {
 
 		// Starting amount of ammo
 		public static int Amount = 0;		
 
 		// Maximum amounnt of ammo
-		private const int maxAmmo = 4;
+		public const int maxAmmo = 4;
+
+		public AmmoManager() {}
 		
 		// Add ammo
 		public void Add() {

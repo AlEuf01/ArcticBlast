@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast.Ammo {
+namespace ArcticBlast {
 	
 	public interface IAmmoManager 
 	{

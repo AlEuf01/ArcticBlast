@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ArcticBlast;
-using ArcticBlast.Ammo;
-
 namespace ArcticBlast.Player {
 	
     // Manages the player's firing actions
-	[RequireComponent(typeof(AmmoManager))]
     public class PlayerFire : Character
     {
 
@@ -28,29 +24,36 @@ namespace ArcticBlast.Player {
 			Events.OnFire += Fire;
 			Events.OnConsumeBeanCan += ConsumeBeanCan;
 			Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
-			Events.OnKillPlayer += AmmoManager.RemoveAllAmmo;
+			Events.OnKillPlayer += RemoveAmmo;
 		}
 
 		void OnDisable() {
 			Events.OnFire -= Fire;
 			Events.OnConsumeBeanCan -= ConsumeBeanCan;
 			Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
-			Events.OnKillPlayer -= AmmoManager.RemoveAllAmmo;
+			Events.OnKillPlayer -= RemoveAmmo;
 		}
 
 		void Awake() {
-			AmmoManager = GetComponent<AmmoManager>();
+			AmmoManager = new AmmoManager();
 		}
 
+		void RemoveAmmo() {
+			AmmoManager.RemoveAllAmmo();
+			Events.UpdateAmmo(AmmoManager.Amount);
+		}
+		
 		void ConsumeBeanCan() {
 			// Debug.Log("Consumed a bean can");			
 			// Increment player's ammo			
-			AmmoManager.Add();			
+			AmmoManager.Add();
+			Events.UpdateAmmo(AmmoManager.Amount);
 		}
 
 		void ConsumeBeanBarrel() {
 			// Debug.Log("Consumed a bean barrel");
 			AmmoManager.Fill();
+			Events.UpdateAmmo(AmmoManager.Amount);
 		}
 
         // Handles firing the flamethrower
@@ -62,6 +65,7 @@ namespace ArcticBlast.Player {
 			} else {
 				NoFart();
 			}
+			Events.UpdateAmmo(AmmoManager.Amount);
 		}
 	
 		void MegaFart() {			
@@ -69,7 +73,6 @@ namespace ArcticBlast.Player {
 			StartCoroutine(PlayFireAnimation(fartLarge));
 			
 			AmmoManager.RemoveAllAmmo();
-			
 			Events.MegaFart();
 			
 			IEnemy target = GetTarget();

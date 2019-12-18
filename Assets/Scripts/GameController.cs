@@ -5,7 +5,6 @@ using UnityEngine;
 using Cyborg.Audio;
 using Cyborg.Scenes;
 
-using ArcticBlast.Ammo;
 using ArcticBlast.Utils;
 
 namespace ArcticBlast {

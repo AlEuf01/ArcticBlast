@@ -58,8 +58,7 @@ namespace ArcticBlast {
 		}
 
 		public static void PlayLose() {
-			AudioEvents.PlayMusic("lose");								  
-		}
+			AudioEvents.PlayMusic("lose");					  	  	   }
 
 		public static void PlayLoop() {
 			AudioEvents.PlayMusic("loop");

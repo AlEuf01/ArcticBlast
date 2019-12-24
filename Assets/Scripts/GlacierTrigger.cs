@@ -12,6 +12,12 @@ namespace ArcticBlast {
 				TriggerEntered();
 			}
 		}
+
+		void OnTriggerExit2D(Collider2D other) {
+			if (IsColliderGlacier(other)) {
+				TriggerExited();
+			}
+		}
 		
 		// Returns true if the collider is named "Glacier"
 		bool IsColliderGlacier(Collider2D other) {
@@ -19,12 +25,20 @@ namespace ArcticBlast {
 		}
 
 		void TriggerEntered() {
-			// TODO
 			EnterPayload();
 		}
 
+		void TriggerExited() {
+			ExitPayload();
+		}
+		
 		protected virtual void EnterPayload() {
 			// Effect when glacier enters trigger
+		}
+
+		
+		protected virtual void ExitPayload() {
+			// Effect when glacier exits trigger
 		}
 
     }

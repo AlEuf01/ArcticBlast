@@ -58,9 +58,9 @@ namespace Cyborg.Platformer {
 		}
 		
 		void SetPlayerPosition() {
-			Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
+			//Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
 			xMin = Mathf.Max(xMin, glacierEdge.transform.position.x + offset);
-			Debug.Log("Setting camera minimum to " + xMin);
+			//Debug.Log("Setting camera minimum to " + xMin);
 			float x = Mathf.Clamp(player.transform.position.x, xMin, xMax);
 			float y = Mathf.Clamp(player.transform.position.y, yMin, yMax);
 			

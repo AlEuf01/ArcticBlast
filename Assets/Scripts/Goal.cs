@@ -10,10 +10,9 @@ namespace ArcticBlast {
     public class Goal : GlacierTrigger
     {
 
-		protected override void EnterPayload() {
+		protected override void ExitPayload() {
 			Debug.Log("Entered goal!");
 			Events.CompleteLevel();			   
-			GameController.Instance.Win();
 		}
     }
     

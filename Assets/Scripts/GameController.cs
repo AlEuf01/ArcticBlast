@@ -25,18 +25,17 @@ namespace ArcticBlast {
 			Events.UnPause();
 		}
 
-		void Restart() {		   
-			// Debug.Log("Restarting the game.");
+		void Restart() {
+
+			Debug.Log("Restarting the game.");
 			
-			SceneEvents.ChangeScene("_GameOver");
-			StartCoroutine(Reset());
+			StartCoroutine(Lose());
 		}
 
 		public void Win() {
-			AudioController.PlayWin();
-			SceneEvents.ChangeScene("_Win");
-
-			StartCoroutine(Reset());
+			Debug.Log("Winning the game.");
+			
+			StartCoroutine(Won());			
 		}
 		
 		void TogglePause() {
@@ -55,19 +54,52 @@ namespace ArcticBlast {
 
 		void OnEnable() {
 			Events.OnGameOver += Restart;
+			Events.OnCompleteLevel += Win;
 		}
 
 		void OnDisable() {
 			Events.OnGameOver -= Restart;
+			Events.OnCompleteLevel -= Win;
 		}
 		
 		// Resets the game from the beginning
 		IEnumerator Reset() {			
-			
+
+			AudioController.PlayLoop();
+
 			yield return new WaitForSeconds(3.0f);
 
-			Events.Restart();
+			Events.Restart();																		 
+		}
+
+		IEnumerator Won() {
+			AudioController.PlayWin();
+
+			SceneEvents.ChangeScene("_Win");
 			
+			yield return new WaitForSeconds(3.0f);
+		   			
+			Events.Restart();
+
+			yield return new WaitForSeconds(1.0f);
+			
+			AudioController.PlayLoop();
+
+		}
+		
+		IEnumerator Lose() {
+
+			AudioController.PlayLose();
+
+			SceneEvents.ChangeScene("_GameOver");
+			
+			yield return new WaitForSeconds(3.0f);
+			
+			Events.Restart();
+
+			yield return new WaitForSeconds(1.0f);
+			
+			AudioController.PlayLoop();
 		}
 
 	}

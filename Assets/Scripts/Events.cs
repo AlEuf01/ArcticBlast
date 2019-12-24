@@ -40,11 +40,10 @@ namespace ArcticBlast {
 			}
 		}
 		public static void Start() {
-			SceneEvents.ChangeScene("Tutorial");
+			Restart();
 		}
 		
 		public static void Restart() {
-			AudioController.PlayLoop();
 			SceneEvents.ChangeScene("Tutorial");
 		}
 		

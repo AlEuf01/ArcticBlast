@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using Cyborg.Audio;
+
 namespace Cyborg.Scenes {
 
     // Singleton to load and unload scenes

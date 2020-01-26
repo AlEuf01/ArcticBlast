@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cyborg.Scenes;
 
 namespace ArcticBlast {
     
@@ -10,16 +11,20 @@ namespace ArcticBlast {
 	int tutorialNumber = 0;
 	
 	void OnEnable() {
-	    Events.OnConsumeBeanCan += FartTutorial;
-	    Events.OnConsumeBeanBarrel += FartTutorial;
-		
+	    SceneController.AfterSceneLoad += MoveTutorial;
+	    Events.OnConsumeBeanCan += FartTutorial;		
 	}
-
+	
 	void OnDisable() {
-	    Events.OnConsumeBeanCan -= FartTutorial;
-	    Events.OnConsumeBeanBarrel -= FartTutorial;
+	    SceneController.AfterSceneLoad -= MoveTutorial;
+	    Events.OnConsumeBeanCan -= FartTutorial;	    
 	}
 
+	void MoveTutorial() {
+	    tutorialNumber = 0;
+	    Events.ChoosePath("start");
+	}
+	
 	void FartTutorial() {
 	    if (tutorialNumber == 0) {
 		tutorialNumber++;

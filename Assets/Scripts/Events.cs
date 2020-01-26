@@ -54,7 +54,7 @@ namespace ArcticBlast {
 		
 	public static void Restart() {
 	    SceneEvents.ChangeScene("Tutorial");
-		}
+	}
 	
 	public static void Jump() {
 	    if (OnJump != null) {

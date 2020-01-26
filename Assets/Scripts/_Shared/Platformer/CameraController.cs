@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ArcticBlast;
-
 namespace Cyborg.Platformer {
 
     // Camera controller designed for platformers
@@ -19,21 +17,17 @@ namespace Cyborg.Platformer {
 	public float yMax;
 	
 	// Reference to the player character
-	private GameObject player;
-	
-	// Reference to the edge of the glacier
-	private GlacierEdge glacierEdge;
-		
+	protected GameObject player;
+			
 	Vector3 StartingPosition = new Vector3(0f, 0f, -10f);
 	
 	void LateUpdate() {
 	    TrackPlayer();
 	}
 
-	void TrackPlayer() {
+	protected virtual void TrackPlayer() {
 	    
 	    SetPlayer();
-	    SetGlacierEdge();
 	    
 	    if (player == null) {
 		ResetCamera();
@@ -42,23 +36,14 @@ namespace Cyborg.Platformer {
 	    }
 	}
 	
-	// Initializes the glacier edge
-	void SetGlacierEdge() {
-	    if (glacierEdge == null) {
-		glacierEdge = GameObject.FindObjectOfType<GlacierEdge>();
-	    }
-	}
-	
 	// Initializes the player
-	void SetPlayer() {
+	protected void SetPlayer() {
 	    if (player == null) {
 		player = GameObject.FindWithTag("Player");
 	    }
 	}
 	
-	void SetPlayerPosition() {
-	    //Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
-	    xMin = Mathf.Max(xMin, glacierEdge.gameObject.transform.position.x + glacierEdge.cameraOffset);
+	protected virtual void SetPlayerPosition() {	    
 	    //Debug.Log("Setting camera minimum to " + xMin);
 	    float x = Mathf.Clamp(player.transform.position.x, xMin, xMax);
 	    float y = Mathf.Clamp(player.transform.position.y, yMin, yMax);
@@ -67,7 +52,7 @@ namespace Cyborg.Platformer {
 	}
 	
 	// Reset the camera to the starting position
-	void ResetCamera() {
+	protected void ResetCamera() {
 	    transform.position = StartingPosition;
 	}
 	

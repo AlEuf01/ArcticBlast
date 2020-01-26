@@ -18,6 +18,31 @@ namespace ArcticBlast {
 	    AdvanceStory();
 	}
 
+	void OnEnable() {
+	    Events.OnChoosePath += ChoosePath;
+	}
+
+	void OnDisable() {
+	    Events.OnChoosePath -= ChoosePath;
+	}
+
+	void ChoosePath(string knotName) {
+	    try {
+		Debug.Log(string.Format("Choosing path named {0}", knotName));
+		_inkStory.ChoosePathString(knotName);
+
+		_inkStory.Continue();
+		
+		Debug.Log("Current story text: " + _inkStory.currentText);
+		
+		UIEvents.ShowSpeech(_inkStory.currentText);
+		// AdvanceStory();
+	    } catch (StoryException e) {
+		Debug.LogError(string.Format("No knot specified for {0}; check the Ink script", knotName));
+		Debug.LogException(e);
+	    }
+	}
+	
 	void AdvanceStory() {
 	    if (_inkStory.canContinue) {
 		string text = _inkStory.Continue();

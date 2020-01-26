@@ -11,6 +11,9 @@ namespace ArcticBlast {
 	
 	public delegate void IntEvent(int amount);
 	public static event IntEvent OnUpdateAmmo;
+
+	public delegate void StringEvent(string text);
+	public static event StringEvent OnChoosePath;
 	
 	// Event handler for completing a level
 	public static event Action OnCompleteLevel;
@@ -33,6 +36,12 @@ namespace ArcticBlast {
 	
 	public static event Action OnFire;
 	public static event Action OnJump;
+
+	public static void ChoosePath(string text) {
+	    if (OnChoosePath != null) {
+		OnChoosePath(text);
+	    }
+	}
 	
 	public static void GameOver() {
 	    if (OnGameOver != null) {

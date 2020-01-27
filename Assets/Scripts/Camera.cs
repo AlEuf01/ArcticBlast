@@ -53,6 +53,9 @@ namespace ArcticBlast {
 	    // Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
 	    xMin = Mathf.Max(xMin, glacierEdge.gameObject.transform.position.x + glacierEdge.cameraOffset);
 
+	    // Make sure xMin is less than xMax
+	    xMin = Mathf.Min(xMax, xMin);
+	    
 	    base.SetPlayerPosition();
 	}
 	

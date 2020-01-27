@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635002967}
   - component: {fileID: 635002968}
+  - component: {fileID: 635002969}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -164,6 +165,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a917114c5b7ca6d1895cd1eeaf49ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &635002969
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635002966}
+  m_Enabled: 1
 --- !u!1001 &671460772
 PrefabInstance:
   m_ObjectHideFlags: 0

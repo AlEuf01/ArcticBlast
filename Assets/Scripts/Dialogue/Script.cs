@@ -28,12 +28,12 @@ namespace ArcticBlast {
 
 	void ChoosePath(string knotName) {
 	    try {
-		Debug.Log(string.Format("Choosing path named {0}", knotName));
+		//Debug.Log(string.Format("Choosing path named {0}", knotName));
 		_inkStory.ChoosePathString(knotName);
 
 		_inkStory.Continue();
 		
-		Debug.Log("Current story text: " + _inkStory.currentText);
+		//Debug.Log("Current story text: " + _inkStory.currentText);
 		
 		UIEvents.ShowSpeech(_inkStory.currentText);
 		// AdvanceStory();

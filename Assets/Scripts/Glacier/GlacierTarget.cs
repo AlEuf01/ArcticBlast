@@ -19,7 +19,7 @@ namespace ArcticBlast {
 	    Debug.Log("Farting on " + gameObject.name);
 	    Melt();
 	    
-		}
+	}
 	
 	public void MegaFartOn() {
 	    Debug.Log("Mega farting on " + gameObject.name);

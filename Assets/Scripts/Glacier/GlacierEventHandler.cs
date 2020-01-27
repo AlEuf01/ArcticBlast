@@ -7,7 +7,7 @@ namespace ArcticBlast {
     public class GlacierEventHandler : MonoBehaviour
     {
 			
-		
-	}
+	
+    }
     
 }

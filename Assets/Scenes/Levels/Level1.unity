@@ -449,7 +449,7 @@ PrefabInstance:
     - target: {fileID: 8572307277777818229, guid: 6997f53264cb9737f9ced4f880c258fc,
         type: 3}
       propertyPath: m_Name
-      value: Bean Can Spawner (1)
+      value: Bean Can Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 8572307277777818229, guid: 6997f53264cb9737f9ced4f880c258fc,
         type: 3}
@@ -512,7 +512,7 @@ PrefabInstance:
     - target: {fileID: 4855981670628272770, guid: eb68348d30ca8a24f91281f8a820f20a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.59
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 4855981670628272770, guid: eb68348d30ca8a24f91281f8a820f20a,
         type: 3}
@@ -665,7 +665,7 @@ PrefabInstance:
     - target: {fileID: 6494093706592152007, guid: 86db4a044466e1519b6aacda682f04c6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.106
+      value: -3.15
       objectReference: {fileID: 0}
     - target: {fileID: 6494093706592152007, guid: 86db4a044466e1519b6aacda682f04c6,
         type: 3}
@@ -856,6 +856,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 172506861}
     m_Modifications:
+    - target: {fileID: 1863748295647570181, guid: 0e3a373f11f877a6686a40619f4721a3,
+        type: 3}
+      propertyPath: Speed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1863748295647570185, guid: 0e3a373f11f877a6686a40619f4721a3,
         type: 3}
       propertyPath: m_Name

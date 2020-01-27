@@ -24,7 +24,8 @@ namespace ArcticBlast {
 	}
 	
 	public void MegaFartOn() {
-	    Stun();
+	    // Stun();
+	    Die();
 	}
 	
 	void FixedUpdate() {

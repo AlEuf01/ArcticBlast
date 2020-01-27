@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Cyborg.Platformer;
 using Cyborg.Scenes;
 
 namespace ArcticBlast {
     
-    public class Camera : Cyborg.Platformer.CameraController
+    public class Camera : CameraController
     {
 	// Reference to the edge of the glacier
 	private GlacierEdge glacierEdge;
@@ -22,7 +24,6 @@ namespace ArcticBlast {
 	}
 
 	void Awake() {
-	    // Cache the xMin specified by the user
 	    initXMin = xMin;
 	}
 
@@ -38,7 +39,7 @@ namespace ArcticBlast {
 	    }
 	}
 
-	protected override void TrackPlayer() {
+	protected override void TrackPlayer() {	    
 	    SetPlayer();	    
 	    SetGlacierEdge();
 	    
@@ -51,10 +52,10 @@ namespace ArcticBlast {
 
 	protected override void SetPlayerPosition() {	    
 	    // Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
-	    xMin = Mathf.Max(xMin, glacierEdge.gameObject.transform.position.x + glacierEdge.cameraOffset);
+	    xMin = Mathf.Max(initXMin, glacierEdge.gameObject.transform.position.x + glacierEdge.cameraOffset);
 
 	    // Make sure xMin is less than xMax
-	    xMin = Mathf.Min(xMax, xMin);
+	    xMin = Mathf.Min(xMin, xMax - 1.0f);
 	    
 	    base.SetPlayerPosition();
 	}

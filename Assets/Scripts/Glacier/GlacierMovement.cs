@@ -10,6 +10,7 @@ namespace ArcticBlast {
 	
 	// The movement speed of the glacier
 	public float Speed = 1f;
+	public float PushBackSpeed = 2f;
 	
 	bool isPushingBack;
 	float scalar= 0.0f;
@@ -30,7 +31,7 @@ namespace ArcticBlast {
 	}
 
 	void SlideBack() {
-	    transform.Translate(new Vector2(-Speed * Time.deltaTime * scalar * 4, 0f));
+	    transform.Translate(new Vector2(-PushBackSpeed * Time.deltaTime * scalar, 0f));
 	}
 
 	public void PushBack(float amount) {

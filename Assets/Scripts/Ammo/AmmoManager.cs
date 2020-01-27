@@ -15,7 +15,7 @@ namespace ArcticBlast {
 	public const int maxAmmo = 4;
 	
 	public AmmoManager() {}
-	
+
 	// Add ammo
 	public void Add() {
 	    if (Amount < maxAmmo) {

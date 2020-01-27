@@ -14,7 +14,7 @@ namespace ArcticBlast {
     {
 	
 	public int levelNumber = 0;
-	public int numLevels = 2;
+	public int numLevels = 3;
 	
 	// Pause the game
 	public void Pause() {
@@ -77,27 +77,46 @@ namespace ArcticBlast {
 	
 	IEnumerator Won() {
 	    AudioController.PlayWin();
-	    
-	    SceneEvents.ChangeScene("_Win");
-	    
-	    yield return new WaitForSeconds(3.0f);
 
+	    AmmoManager.Amount = 0;
+	    
 	    levelNumber++;
+	    
+	    if (levelNumber == numLevels) {
+		SceneEvents.ChangeScene("_Win");
+	    
+		yield return new WaitForSeconds(3.0f);
 
-	    if (levelNumber < numLevels) {
-		// TODO: Dynamically find the correct level
-		SceneEvents.ChangeScene("Level1");
-	    } else {
+		levelNumber = 0;
+		
 		Events.Restart();
+		
+	    } else {
+		NextLevel();
 	    }
-
+		
 	    yield return new WaitForSeconds(1.0f);
 	    
 	    AudioController.PlayLoop();
 	    
 	}
+
+	void NextLevel() {
+	    if (levelNumber == 1) {
+		// TODO: Go To Next Leve Dynamically
+		SceneEvents.ChangeScene("Level1");
+	    } else if (levelNumber == 2) {
+		SceneEvents.ChangeScene("Level2");
+	    } else {
+		Debug.LogError("No next level to jump towards.");
+	    }
+	}
 	
 	IEnumerator Lose() {
+
+	    AmmoManager.Amount = 0;
+	    
+	    levelNumber = 0;
 	    
 	    AudioController.PlayLose();
 	    

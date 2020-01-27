@@ -11,10 +11,11 @@ public class Character : MonoBehaviour
 	protected Collider2D collider;
 	
 	protected virtual void Start() {
-		rb = gameObject.GetComponent<Rigidbody2D>();
-		sr = gameObject.GetComponent<SpriteRenderer>();
-		animator = gameObject.GetComponent<Animator>();
-		collider = gameObject.GetComponent<Collider2D>();
+	    rb = gameObject.GetComponent<Rigidbody2D>();
+	    collider = gameObject.GetComponent<Collider2D>();
+	    
+	    sr = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+	    animator = gameObject.transform.GetChild(0).GetComponent<Animator>();	    
 	}
  
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cyborg.Scenes;
 
 namespace ArcticBlast {
     
@@ -8,6 +9,27 @@ namespace ArcticBlast {
     {
 	// Reference to the edge of the glacier
 	private GlacierEdge glacierEdge;
+
+	// Cache the xMin specified by the user
+	float initXMin;
+	
+	void OnEnable() {
+	    SceneController.AfterSceneLoad += ResetXMin;
+	}
+
+	void OnDisable() {
+	    SceneController.AfterSceneLoad -= ResetXMin;
+	}
+
+	void Awake() {
+	    // Cache the xMin specified by the user
+	    initXMin = xMin;
+	}
+
+	// Reset back to the initial value after loading a new level
+	void ResetXMin() {
+	    xMin = Mathf.Max(initXMin);
+	}
 	
 	// Initializes the glacier edge
 	void SetGlacierEdge() {

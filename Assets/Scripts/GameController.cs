@@ -14,7 +14,7 @@ namespace ArcticBlast {
     {
 	
 	public int levelNumber = 0;
-	public int numLevels = 3;
+	public int numLevels = 4;
 	
 	// Pause the game
 	public void Pause() {
@@ -107,6 +107,8 @@ namespace ArcticBlast {
 		SceneEvents.ChangeScene("Level1");
 	    } else if (levelNumber == 2) {
 		SceneEvents.ChangeScene("Level2");
+	    } else if (levelNumber == 3) {
+		SceneEvents.ChangeScene("Level3");
 	    } else {
 		Debug.LogError("No next level to jump towards.");
 	    }

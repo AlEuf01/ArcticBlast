@@ -16,6 +16,7 @@ namespace ArcticBlast {
 	public LayerMask layerMask;
 	
 	public bool isStunned = false;
+	public bool isAttacking;
 	
 	public float stunDuration = 3.0f;		
 	
@@ -34,8 +35,23 @@ namespace ArcticBlast {
 	
 	void OnCollisionEnter2D(Collision2D col) {
 	    if (!isStunned && col.gameObject.tag == "Player") {
-		Events.KillPlayer();
+		StartCoroutine(Attack());
 	    }
+	}
+
+	IEnumerator Attack() {
+	    isAttacking = true;
+	    
+	    animator.SetTrigger("Attack");
+
+	    // TODO: Play Sound Effect
+
+	    // TODO: Stun, don't kill, the player
+	    Events.KillPlayer();
+
+	    yield return new WaitForSeconds(0.2f);
+	    
+	    isAttacking = false;
 	}
 	
 	void Stun() {

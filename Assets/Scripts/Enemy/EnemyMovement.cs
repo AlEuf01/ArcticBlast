@@ -17,12 +17,19 @@ namespace ArcticBlast {
 	public float Speed = 1f;
 	
 	private GameObject player;
-	
+       	
 	private bool isStunned {
 	    get {
 		return GetComponent<Enemy>().isStunned;
 	    }
 	}
+
+	private bool isAttacking {
+	    get {
+		return GetComponent<Enemy>().isAttacking;
+	    }
+	}
+	
 		
 	protected override void Start() {
 	    base.Start();
@@ -34,7 +41,7 @@ namespace ArcticBlast {
 	void FixedUpdate() {
 	    // Chase the player;
 	    
-	    if (player != null && sr != null && player.GetComponent<PlayerHealth>().isDead == false) {
+	    if (player != null && sr != null && player.GetComponent<PlayerHealth>().isDead == false && !isAttacking) {
 		if (!isStunned) {
 		    Chase();
 		}

@@ -51,7 +51,7 @@ namespace ArcticBlast {
 	
 	void Update() {
 	    if (Input.GetKeyUp(KeyCode.P)) {
-				TogglePause();
+		TogglePause();
 	    }
 	}
 	
@@ -76,6 +76,8 @@ namespace ArcticBlast {
 	}
 	
 	IEnumerator Won() {
+
+	    
 	    AudioController.PlayWin();
 
 	    AmmoManager.Amount = 0;

@@ -16,10 +16,12 @@ namespace ArcticBlast {
 	
 	void OnEnable() {
 	    Events.OnKillPlayer += Die;
+	    Events.OnCompleteLevel += Freeze;
 	}
 	
 	void OnDisable() {
 	    Events.OnKillPlayer -= Die;
+	    Events.OnCompleteLevel -= Freeze;
 	}
 	
 	public void Die() {
@@ -32,18 +34,28 @@ namespace ArcticBlast {
 		StartCoroutine(PlayerDeath());
 	    }
 	}
+
+	void Freeze() {
+	    GetComponent<PlayerMovement>().enabled = false;
+	    rb.isKinematic = true;
+	    rb.velocity  = Vector2.zero;
+	    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+	    transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+	    collider.enabled = false;
+	}
+
+	void StopMovement() {
+	    GetComponent<PlayerMovement>().enabled = false;
+	    rb.velocity = Vector2.zero;
+	    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+	    collider.isTrigger = true;
+	}
 	
 	IEnumerator PlayerDeath() {		   			
 	    // Debug.Log("Handling player death");
 	    AudioController.PlayLose();
 			
-	    // Debug.Log("The player is dead!");
-	    
-	    GetComponent<PlayerMovement>().enabled = false;
-	    rb.velocity = Vector2.zero;
-	    
-	    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-	    collider.isTrigger = true;
+	    StopMovement();	    
 	    
 	    animator.SetTrigger("Death");
 	    

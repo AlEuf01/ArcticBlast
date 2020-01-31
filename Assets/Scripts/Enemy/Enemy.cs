@@ -74,6 +74,9 @@ namespace ArcticBlast {
 	
 	IEnumerator StunForDuration(float duration) {
 	    isStunned = true;
+
+	    animator.SetTrigger("Stun");
+
 	    // rb.simulated = false;
 	    
 	    yield return new WaitForSeconds(duration);

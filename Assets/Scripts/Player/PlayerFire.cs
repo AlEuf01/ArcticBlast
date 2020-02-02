@@ -21,6 +21,7 @@ namespace ArcticBlast.Player {
 	public Transform fartPointR;
 	
 	public AmmoManager AmmoManager;
+	public PlayerSound sound;
 	
 	void OnEnable() {
 	    Events.OnFire += Fire;
@@ -40,6 +41,8 @@ namespace ArcticBlast.Player {
 	
 	void Awake() {
 	    AmmoManager = new AmmoManager();
+
+	    sound = GetComponentInChildren<PlayerSound>();
 	}
 	
 	void RemoveAmmo() {
@@ -74,6 +77,8 @@ namespace ArcticBlast.Player {
 	}
 	
 	void MegaFart() {			
+
+	    sound.MegaFart();
 	    
 	    StartCoroutine(PlayFireAnimation(fartLarge));
 	    
@@ -87,6 +92,9 @@ namespace ArcticBlast.Player {
 	}
 		
 	void SingleFart() {
+
+	    // Sound Effect
+	    sound.Fart();
 	    
 	    StartCoroutine(PlayFireAnimation(fartSmall));
 	    
@@ -103,7 +111,8 @@ namespace ArcticBlast.Player {
 	void NoFart() {
 	    // The player clicks the fire button, but has no ammo
 	    
-	    // TODO: Decide on correct behavior
+	    // SFX
+	    sound.Poof();
 	    
 	    StartCoroutine(PlayFireAnimation(fartTiny));
 	}

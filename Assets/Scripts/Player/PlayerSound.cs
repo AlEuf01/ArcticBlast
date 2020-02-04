@@ -9,9 +9,9 @@ namespace ArcticBlast {
 
 	AudioSource audio;
 
-	public AudioClip fartClip;
-	public AudioClip megaFartClip;
-	public AudioClip poofClip;
+	public AudioClip[] fartClips;
+	public AudioClip[] megaFartClips;
+	public AudioClip[] poofClips;
 	
 	void Start() {
 	    audio = GetComponent<AudioSource>();
@@ -19,20 +19,29 @@ namespace ArcticBlast {
 
 	public void MegaFart() {
 
-	    audio.clip = megaFartClip;
+	    audio.clip = GetRandomClip(megaFartClips);
 	    audio.Play();
 	}
 
 	public void Fart() {
 	    
-	    audio.clip = fartClip;
+	    audio.clip = GetRandomClip(fartClips);
 	    audio.Play();
 	}
 
 	public void Poof() {
 	    
-	    audio.clip = poofClip;
+	    audio.clip = GetRandomClip(poofClips);
 	    audio.Play();
+	}
+
+	AudioClip GetRandomClip(AudioClip[] clips) {
+	    if (clips.Length == 0) {
+		Debug.LogError("No clips initialized.");
+		return null;
+	    } else {
+		return clips[Random.Range(0, clips.Length - 1)];
+	    }
 	}
     }
 }

@@ -8,10 +8,7 @@ namespace ArcticBlast {
 	public class AudioController : MonoBehaviour
 	{
 		
-		void OnEnable() {
-			Events.OnFart += PlayFart;
-			Events.OnMegaFart += PlayMegaFart;
-			
+		void OnEnable() {			
 			Events.OnConsumeBeanBarrel += PlayCollect;
 			Events.OnConsumeBeanCan += PlayCollect;
 			
@@ -19,23 +16,10 @@ namespace ArcticBlast {
 		}
 		
 		void OnDisable() {
-			Events.OnFart -= PlayFart;
-			Events.OnMegaFart -= PlayMegaFart;
-
 			Events.OnConsumeBeanBarrel -= PlayCollect;
 			Events.OnConsumeBeanCan -= PlayCollect;
 
 			Events.OnPause -= Pause;
-		}
-
-		// Play a smaller fire event
-		void PlayFart() {
-			AudioEvents.PlaySound("fire_small");
-		}
-
-		// Play a louder fire event
-		void PlayMegaFart() {
-			AudioEvents.PlaySound("fire");
 		}
 
 		// Play a collection (ie, collect powerup) sound effect

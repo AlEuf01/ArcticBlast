@@ -9,131 +9,142 @@ using ArcticBlast.Utils;
 
 namespace ArcticBlast {
 
-    // Controller for the main logic of the game
+    /// <summary>
+		/// Controller for the main logic of the game
+		/// </summary>
     public class GameController : Singleton<GameController>
     {
-	
-	public int levelNumber = 0;
-	public int numLevels = 4;
-	
-	// Pause the game
-	public void Pause() {
-	    Time.timeScale = 0.0f;
-	    Events.Pause();
-	}
-	
-	// Unpause the game
-	public void Unpause() {			
-	    Time.timeScale = 1.0f;
-	    Events.UnPause();
-	}
-	
-	void Restart() {
-	    
-	    Debug.Log("Restarting the game.");
-	    
-	    StartCoroutine(Lose());
-	}
-	
-	public void Win() {
-	    Debug.Log("Winning the game.");
 
-	    StartCoroutine(Won());			
-	}
+				/// <summary>
+				/// Current level
+				/// </summary>				
+				public int levelNumber = 0;
+
+				/// <summary> 
+				/// Total number of levels
+				/// </summary>
+				public int numLevels = 4;
+								
+				void OnEnable() {
+						Events.OnGameOver += Restart;
+						Events.OnCompleteLevel += Win;
+				}
 	
-	void TogglePause() {
-	    if (Time.timeScale == 0.0f) {
-		Unpause();
-	    } else {
-		Pause();
-	    }
-	}
+				void OnDisable() {
+						Events.OnGameOver -= Restart;
+						Events.OnCompleteLevel -= Win;
+				}
+				
+				/// <summary>
+				/// Pause the game
+				/// </summary>
+				public void Pause() {
+						Time.timeScale = 0.0f;
+						Events.Pause();
+				}
 	
-	void Update() {
-	    if (Input.GetKeyUp(KeyCode.P)) {
-		TogglePause();
-	    }
-	}
+				/// <summary>
+				/// Unpause the game
+				/// </summary>
+				public void Unpause() {			
+						Time.timeScale = 1.0f;
+						Events.UnPause();
+				}
+
+				
+				void Update() {
+						// Handle Key Events
+						if (Input.GetKeyUp(KeyCode.P)) {
+								TogglePause();
+						}
+				}
+				
+				void Restart() {	    
+						Debug.Log("Restarting the game.");	    
+						StartCoroutine(Lose());
+				}
 	
-	void OnEnable() {
-	    Events.OnGameOver += Restart;
-	    Events.OnCompleteLevel += Win;
-	}
+				public void Win() {
+						Debug.Log("Winning the game.");
+						StartCoroutine(Won());			
+				}
 	
-	void OnDisable() {
-	    Events.OnGameOver -= Restart;
-	    Events.OnCompleteLevel -= Win;
-	}
+				void TogglePause() {
+						if (Time.timeScale == 0.0f) {
+								Unpause();
+						} else {
+								Pause();
+						}
+				}
 	
-	// Resets the game from the beginning
-	IEnumerator Reset() {			
+				// Resets the game from the beginning
+				IEnumerator Reset() {			
 	    
-	    AudioController.PlayLoop();
+						AudioController.PlayLoop();
 	    
-	    yield return new WaitForSeconds(3.0f);
+						yield return new WaitForSeconds(3.0f);
 	    
-	    Events.Restart();																		 
-	}
+						SceneEvents.ChangeScene("Tutorial");
+				}
 	
-	IEnumerator Won() {
+				IEnumerator Won() {
 
 	    
-	    AudioController.PlayWin();
+						AudioController.PlayWin();
 
-	    AmmoManager.Amount = 0;
+						AmmoManager.Amount = 0;
 	    
-	    levelNumber++;
+						levelNumber++;
 	    
-	    if (levelNumber == numLevels) {
-		SceneEvents.ChangeScene("_Win");
+						if (levelNumber == numLevels) {
+								SceneEvents.ChangeScene("_Win");
 	    
-		yield return new WaitForSeconds(3.0f);
+								yield return new WaitForSeconds(3.0f);
 
-		levelNumber = 0;
+								levelNumber = 0;
+
+								SceneEvents.ChangeScene("Tutorial");
 		
-		Events.Restart();
+						} else {
+								NextLevel();
+						}
 		
-	    } else {
-		NextLevel();
-	    }
-		
-	    yield return new WaitForSeconds(1.0f);
+						yield return new WaitForSeconds(1.0f);
 	    
-	    AudioController.PlayLoop();
+						AudioController.PlayLoop();
 	    
-	}
+				}
 
-	void NextLevel() {
-	    if (levelNumber == 1) {
-		// TODO: Go To Next Leve Dynamically
-		SceneEvents.ChangeScene("Level1");
-	    } else if (levelNumber == 2) {
-		SceneEvents.ChangeScene("Level2");
-	    } else if (levelNumber == 3) {
-		SceneEvents.ChangeScene("Level3");
-	    } else {
-		Debug.LogError("No next level to jump towards.");
-	    }
-	}
+				void NextLevel() {
+						if (levelNumber == 1) {
+								// TODO: Go To Next Level Dynamically
+								SceneEvents.ChangeScene("Level1");
+						} else if (levelNumber == 2) {
+								SceneEvents.ChangeScene("Level2");
+						} else if (levelNumber == 3) {
+								SceneEvents.ChangeScene("Level3");
+						} else {
+								SceneEvents.ChangeScene("Tutorial");
+								Debug.LogError("No next level to jump towards.");
+						}
+				}
 	
-	IEnumerator Lose() {
+				IEnumerator Lose() {
 
-	    AmmoManager.Amount = 0;
+						AmmoManager.Amount = 0;
 	    
-	    levelNumber = 0;
+						AudioController.PlayLose();
 	    
-	    AudioController.PlayLose();
-	    
-	    SceneEvents.ChangeScene("_GameOver");
+						SceneEvents.ChangeScene("_GameOver");
 			
-	    yield return new WaitForSeconds(3.0f);
+						yield return new WaitForSeconds(3.0f);
 	    
-	    Events.Restart();
+						NextLevel();
 	    
-	    yield return new WaitForSeconds(1.0f);
+						yield return new WaitForSeconds(1.0f);
 	    
-	    AudioController.PlayLoop();
-	}
+						AudioController.PlayLoop();
+				}
 	
     }
 	

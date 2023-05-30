@@ -6,83 +6,82 @@ namespace ArcticBlast {
 
 
     public enum Direction {
-	Left,
-	Right
+				Left,
+				Right
     }
     
     public class EnemyMovement : Character
     {
 	
-	// The movement speed
-	public float Speed = 1f;
+				// The movement speed
+				public float Speed = 1f;
 	
-	private GameObject player;
+				private GameObject player;
        	
-	private bool isStunned {
-	    get {
-		return GetComponent<Enemy>().isStunned;
-	    }
-	}
+				private bool isStunned {
+						get {
+								return GetComponent<Enemy>().isStunned;
+						}
+				}
 
-	private bool isAttacking {
-	    get {
-		return GetComponent<Enemy>().isAttacking;
-	    }
-	}
+				private bool isAttacking {
+						get {
+								return GetComponent<Enemy>().isAttacking;
+						}
+				}
 	
 		
-	protected override void Start() {
-	    base.Start();
+				protected override void Start() {
+						base.Start();
 	    
-	    // Get the player
-	    player = GameObject.FindWithTag("Player");
-	}
+						// Get the player
+						player = GameObject.FindWithTag("Player");
+				}
 	
-	void FixedUpdate() {
-	    // Chase the player;
+				void FixedUpdate() {
+						// Chase the player;
 	    
-	    if (player != null && sr != null && player.GetComponent<PlayerHealth>().isDead == false && !isAttacking) {
-		if (!isStunned) {
-		    Chase();
-		}
+						if (player != null && sr != null && player.GetComponent<PlayerHealth>().isDead == false && !isAttacking) {
+								if (!isStunned) {
+										Chase();
+								}
 		
-		UpdateAnimator();	    						
-	    } else {
-		// Player is dead; be still
-		animator.SetBool("IsWalking", false);
-	    }
+								UpdateAnimator();	    						
+						} else {
+								// Player is dead; be still
+								animator.SetBool("IsWalking", false);
+						}
 	    
-	}
+				}
 	
-	void Chase() {
+				void Chase() {
 	    
-	    Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);
+						Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);
 		
-	    if (!IsPlayerAhead()) {
-		sr.flipX = true;
-		amount = -amount;
-	    } else {
-		sr.flipX = false;
-	    }
+						if (!IsPlayerAhead()) {
+								sr.flipX = true;
+								amount = -amount;
+						} else {
+								sr.flipX = false;
+						}
 		
-	    transform.Translate(amount);
-	}
+						transform.Translate(amount);
+				}
 	
-	// Returns true if the player is ahead of the enemy; false if behind
-	bool IsPlayerAhead() {
-		
-	    return player.transform.position.x > transform.position.x;
-	}
+				// Returns true if the player is ahead of the enemy; false if behind
+				bool IsPlayerAhead() {
+						return player.transform.position.x > transform.position.x;
+				}
 	
-	void UpdateAnimator() {
-	    // TODO: Idle if player is out of range
-	    if (isStunned) {
-		animator.SetBool("IsWalking", false);
-	    } else {
-		animator.SetBool("IsWalking", true);
-	    }
+				void UpdateAnimator() {
+						// TODO: Idle if player is out of range
+						if (isStunned) {
+								animator.SetBool("IsWalking", false);
+						} else {
+								animator.SetBool("IsWalking", true);
+						}
 		
-	}
+				}
 	
 	
     }

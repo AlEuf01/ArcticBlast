@@ -1,15 +1,11 @@
 # Arctic Blast
 
-Arctic Blast is a retro-style platform game about a penguin, flatulence, and a glacier.
+Arctic Blast is a retro-style platform game about a penguin, flatulence, and a glacier. Available for free under the GPL; pull requests, forks, etc are welcome.
 
 ## Requirements
 
-Requires Unity 2019.3.
+Requires [Unity 2021.3](https://unity.com/) and [Git LFS](https://git-lfs.com/).
 
-## Usage
+## Assets
 
-Clone this project. Open in Unity, and press Play from the Start scene.
-
-## Credits
-
-Art by Al Eufrasio.
+Art by Al Eufrasio, available under the CC-BY-SA license.

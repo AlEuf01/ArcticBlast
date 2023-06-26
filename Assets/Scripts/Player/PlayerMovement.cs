@@ -31,8 +31,9 @@ namespace Cyborg.Platformer {
 				// Handles movement
 				void Move() {
 						float deltaX = Input.GetAxisRaw("Horizontal") * Speed;
-			
-						UpdateAnimator(deltaX != 0, GroundChecker.IsGrounded);
+						float speed = Mathf.Abs(deltaX);
+						animator.SetFloat("Speed", speed);
+						animator.SetBool("IsJumping", !GroundChecker.IsGrounded);
 			
 						UpdateFlip(deltaX);
 			
@@ -58,24 +59,6 @@ namespace Cyborg.Platformer {
 								// Tie events to jumping
 								PlatformerEvents.Jump();
 						}
-				}
-		
-				// Update the Animator to reflect the player's current state
-				void UpdateAnimator(bool isWalking = false, bool isGrounded = false) {
-						animator.SetBool("isWalking", isGrounded && isWalking);
-
-						if (isGrounded)
-						{
-								animator.SetBool("isJumping", false);
-						}
-						else
-						{					 
-
-								animator.SetBool("isJumping", true);
-								// TODO: Ease in and out of jump
-								
-						}
-
 				}
 	
 				// Update the flip direction of the sprite

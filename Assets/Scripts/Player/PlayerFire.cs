@@ -10,156 +10,156 @@ namespace ArcticBlast.Player {
     public class PlayerFire : Character
     {
 
-	public float Range = 5f;		
+				public float Range = 5f;		
 	
-	// LayerMask of objects that can be fired on
-	public LayerMask layerMask;
+				// LayerMask of objects that can be fired on
+				public LayerMask layerMask;
 	
-	public GameObject fartLarge, fartSmall, fartTiny;
+				public GameObject fartLarge, fartSmall, fartTiny;
 	
-	public Transform fartPointL;
-	public Transform fartPointR;
+				public Transform fartPointL;
+				public Transform fartPointR;
 	
-	public AmmoManager AmmoManager;
-	public PlayerSound sound;
+				public AmmoManager AmmoManager;
+				public PlayerSound sound;
 	
-	void OnEnable() {
-	    Events.OnFire += Fire;
-	    Events.OnConsumeBeanCan += ConsumeBeanCan;
-	    Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
-	    Events.OnKillPlayer += RemoveAmmo;
-	    Events.OnCompleteLevel += RemoveAmmo;
-	}
+				void OnEnable() {
+						Events.OnFire += Fire;
+						Events.OnConsumeBeanCan += ConsumeBeanCan;
+						Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
+						Events.OnKillPlayer += RemoveAmmo;
+						Events.OnCompleteLevel += RemoveAmmo;
+				}
 	
-	void OnDisable() {
-	    Events.OnFire -= Fire;
-	    Events.OnConsumeBeanCan -= ConsumeBeanCan;
-	    Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
-	    Events.OnKillPlayer -= RemoveAmmo;
-	    Events.OnCompleteLevel -= RemoveAmmo;
-	}
+				void OnDisable() {
+						Events.OnFire -= Fire;
+						Events.OnConsumeBeanCan -= ConsumeBeanCan;
+						Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
+						Events.OnKillPlayer -= RemoveAmmo;
+						Events.OnCompleteLevel -= RemoveAmmo;
+				}
 	
-	void Awake() {
-	    AmmoManager = new AmmoManager();
+				void Awake() {
+						AmmoManager = new AmmoManager();
 
-	    sound = GetComponentInChildren<PlayerSound>();
-	}
+						sound = GetComponentInChildren<PlayerSound>();
+				}
 	
-	void RemoveAmmo() {
-	    Debug.Log("Killed player or completed level; removing all ammo.");
-	    AmmoManager.RemoveAllAmmo();
-	    Events.UpdateAmmo(0);
-	}
+				void RemoveAmmo() {
+						Debug.Log("Killed player or completed level; removing all ammo.");
+						AmmoManager.RemoveAllAmmo();
+						Events.UpdateAmmo(0);
+				}
 	
-	void ConsumeBeanCan() {
-	    // Debug.Log("Consumed a bean can");			
-	    // Increment player's ammo			
-	    AmmoManager.Add();
-	    Events.UpdateAmmo(AmmoManager.Amount);
-	}
+				void ConsumeBeanCan() {
+						// Debug.Log("Consumed a bean can");			
+						// Increment player's ammo			
+						AmmoManager.Add();
+						Events.UpdateAmmo(AmmoManager.Amount);
+				}
 	
-	void ConsumeBeanBarrel() {
-	    // Debug.Log("Consumed a bean barrel");
-	    AmmoManager.Fill();
-	    Events.UpdateAmmo(AmmoManager.Amount);
-	}
+				void ConsumeBeanBarrel() {
+						// Debug.Log("Consumed a bean barrel");
+						AmmoManager.Fill();
+						Events.UpdateAmmo(AmmoManager.Amount);
+				}
 	
         // Handles firing the flamethrower
         void Fire() {				   	
-	    if (AmmoManager.HasMegaFartAmmo()) {
-		MegaFart();
-	    } else if (AmmoManager.HasAmmo()) {
-		SingleFart();
-	    } else {
-		NoFart();
-	    }
-	    Events.UpdateAmmo(AmmoManager.Amount);
-	}
+						if (AmmoManager.HasMegaFartAmmo()) {
+								MegaFart();
+						} else if (AmmoManager.HasAmmo()) {
+								SingleFart();
+						} else {
+								NoFart();
+						}
+						Events.UpdateAmmo(AmmoManager.Amount);
+				}
 	
-	void MegaFart() {			
+				void MegaFart() {			
 
-	    sound.MegaFart();
+						sound.MegaFart();
 	    
-	    StartCoroutine(PlayFireAnimation(fartLarge));
+						StartCoroutine(PlayFireAnimation(fartLarge));
 	    
-	    AmmoManager.RemoveAllAmmo();
-	    Events.MegaFart();
+						AmmoManager.RemoveAllAmmo();
+						Events.MegaFart();
 	    
-	    IEnemy target = GetTarget();
-	    if (target != null) {
-		target.MegaFartOn();
-	    }
-	}
+						IEnemy target = GetTarget();
+						if (target != null) {
+								target.MegaFartOn();
+						}
+				}
 		
-	void SingleFart() {
+				void SingleFart() {
 
-	    // Sound Effect
-	    sound.Fart();
+						// Sound Effect
+						sound.Fart();
 	    
-	    StartCoroutine(PlayFireAnimation(fartSmall));
+						StartCoroutine(PlayFireAnimation(fartSmall));
 	    
-	    AmmoManager.Remove();		  
+						AmmoManager.Remove();		  
 	    
-	    Events.Fart();
+						Events.Fart();
 	    
-	    IEnemy target = GetTarget();
-	    if (target != null) {
-		target.FartOn();
-	    }			
-	}
+						IEnemy target = GetTarget();
+						if (target != null) {
+								target.FartOn();
+						}			
+				}
 	
-	void NoFart() {
-	    // The player clicks the fire button, but has no ammo
+				void NoFart() {
+						// The player clicks the fire button, but has no ammo
 	    
-	    // SFX
-	    sound.Poof();
+						// SFX
+						sound.Poof();
 	    
-	    StartCoroutine(PlayFireAnimation(fartTiny));
-	}
+						StartCoroutine(PlayFireAnimation(fartTiny));
+				}
 
-	// Play a farting animation
-	IEnumerator PlayFireAnimation(GameObject fartPrefab) {
-	    // Debug.Log("Firing");
+				// Play a farting animation
+				IEnumerator PlayFireAnimation(GameObject fartPrefab) {
+						// Debug.Log("Firing");
 	    
-	    animator.SetBool("IsFiring", true);
+						animator.SetBool("IsFiring", true);
 	    
-	    Transform fartPoint = GetFireDirection() == Direction.Left ? fartPointL : fartPointR;
+						Transform fartPoint = GetFireDirection() == Direction.Left ? fartPointL : fartPointR;
 	    
-	    GameObject fart = Instantiate(fartPrefab, fartPoint);
+						GameObject fart = Instantiate(fartPrefab, fartPoint);
 	    
-	    // TODO: Get length of animation clip
-	    yield return new WaitForSeconds(0.5f);
-	    animator.SetBool("IsFiring", false);
+						// TODO: Get length of animation clip
+						yield return new WaitForSeconds(0.5f);
+						animator.SetBool("IsFiring", false);
 
-	    // Create and destroy a fart particle effect		   
+						// Create and destroy a fart particle effect		   
 	    
-	    yield return new WaitForSeconds(1.0f);
+						yield return new WaitForSeconds(1.0f);
 	    
-	    Destroy(fart);
+						Destroy(fart);
 	    
-	}		
+				}		
 	
 	
-	// Get the direction of fire (opposite facing direction)
-	Direction GetFireDirection() {
-	    return sr.flipX ? Direction.Left : Direction.Right;
-	}
+				// Get the direction of fire (opposite facing direction)
+				Direction GetFireDirection() {
+						return sr.flipX ? Direction.Left : Direction.Right;
+				}
 	
-	IEnemy GetTarget() {
+				IEnemy GetTarget() {
 
-	    IEnemy result = null;
+						IEnemy result = null;
 	    
-	    Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
+						Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
 	    
-	    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
+						RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
 	    
-	    if (hit.collider != null) {
-		// Debug.Log("Hitting " + hit.collider.gameObject.name);
-		result = hit.collider.gameObject.GetComponent<IEnemy>();		
-	    }
+						if (hit.collider != null) {
+								// Debug.Log("Hitting " + hit.collider.gameObject.name);
+								result = hit.collider.gameObject.GetComponent<IEnemy>();		
+						}
 	    
-	    return result;
-	}
+						return result;
+				}
 	
     }
     

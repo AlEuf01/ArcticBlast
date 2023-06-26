@@ -3,19 +3,10 @@ importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Graphics/Beans/Beans.tpsheet
-- Assets/Graphics/Penguin/Penguin_Idle_SpriteAtlas.tpsheet
-- Assets/Graphics/Penguin/Penguin_Jump_Start.tpsheet
-- Assets/Graphics/Penguin/Penguin01.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Graphics/Beans/Beans.png
-- Assets/Graphics/Penguin/Penguin_Idle_SpriteAtlas.png
-- Assets/Graphics/Penguin/Penguin_Jump_Start.png
-- Assets/Graphics/Penguin/Penguin01.png
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
-- 
-- 
-- 
 - 
 enableDebugOutput: 0

@@ -16,7 +16,7 @@ namespace Cyborg.Platformer {
 		// Radius to check against
 		const float GROUND_CHECK_RADIUS = 0.07f;
 		
-		const float JUMP_MIDAIR_RADIUS = 0.6f;
+		const float JUMP_MIDAIR_RADIUS = 2.0f;
 		
 		public bool IsGrounded {
 			get {			
@@ -39,7 +39,7 @@ namespace Cyborg.Platformer {
 		
 		// See if there's overlap between the player and the ground
 		public bool IsJumpingInMidair() {
-			return Physics2D.OverlapCircle(IsGroundedChecker.position, JUMP_MIDAIR_RADIUS, GroundLayer);
+				return Physics2D.OverlapCircle(IsGroundedChecker.position, JUMP_MIDAIR_RADIUS, GroundLayer);
 		}
 		
 	}

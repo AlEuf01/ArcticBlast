@@ -9,62 +9,71 @@ namespace ArcticBlast {
     public class PlayerHealth : Character
     {
 	
-	public bool isDead = false;
-	
-	// Flag to make player immune to damage
-	bool invincible = false;
-	
-	void OnEnable() {
-	    Events.OnKillPlayer += Die;
-	    Events.OnCompleteLevel += Freeze;
-	}
-	
-	void OnDisable() {
-	    Events.OnKillPlayer -= Die;
-	    Events.OnCompleteLevel -= Freeze;
-	}
-	
-	public void Die() {
-	    // Debug.Log("Player should die.");
-	    if (invincible) {
-		// Do nothing		  
-	    } else {
-		invincible = true;
-		isDead = true;
-		StartCoroutine(PlayerDeath());
-	    }
-	}
+				public bool isDead = false;
 
-	void Freeze() {
-	    GetComponent<PlayerMovement>().enabled = false;
-	    rb.isKinematic = true;
-	    rb.velocity  = Vector2.zero;
-	    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-	    transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isWalking", false);
-	    collider.enabled = false;
-	}
-
-	void StopMovement() {
-	    GetComponent<PlayerMovement>().enabled = false;
-	    rb.velocity = Vector2.zero;
-	    gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-	    collider.isTrigger = true;
-	}
+				PlayerMovement movement;
 	
-	IEnumerator PlayerDeath() {		   			
-	    // Debug.Log("Handling player death");
-	    AudioController.PlayLose();
+				// Flag to make player immune to damage
+				bool invincible = false;
+	
+				void OnEnable() {
+						Events.OnKillPlayer += Die;
+						Events.OnCompleteLevel += Freeze;
+				}
+	
+				void OnDisable() {
+						Events.OnKillPlayer -= Die;
+						Events.OnCompleteLevel -= Freeze;
+				}
+
+				protected override void Start()
+				{
+						base.Start();
+						animator = GetComponent<Animator>();
+						movement = GetComponent<PlayerMovement>();
+				}
+				
+				public void Die() {
+						// Debug.Log("Player should die.");
+						if (invincible) {
+								// Do nothing		  
+						} else {
+								invincible = true;
+								isDead = true;
+								StartCoroutine(PlayerDeath());
+						}
+				}
+
+				void Freeze() {
+						movement.enabled = false;
+						rb.isKinematic = true;
+						rb.velocity  = Vector2.zero;
+						gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+						animator.SetFloat("Speed", 0f);
+						collider.enabled = false;
+				}
+
+				void StopMovement() {
+						movement.enabled = false;
+						rb.velocity = Vector2.zero;
+						gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+						collider.isTrigger = true;
+				}
+	
+				IEnumerator PlayerDeath() {		   			
+						// Debug.Log("Handling player death");
+						AudioController.PlayLose();
 			
-	    StopMovement();	    
+						StopMovement();	    
 	    
-	    animator.SetTrigger("Death");
+						animator.SetTrigger("Death");
 	    
-	    yield return new WaitForSeconds(0.2f);
+						yield return new WaitForSeconds(0.2f);
 	    
-	    Events.GameOver();
+						Events.GameOver();
 	    
-	    animator.ResetTrigger("Death");
+						animator.ResetTrigger("Death");
 	    
-	}
+				}
     }
 }

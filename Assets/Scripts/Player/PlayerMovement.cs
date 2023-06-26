@@ -16,13 +16,24 @@ namespace Cyborg.Platformer {
 				// Collider to check if the player is grounded
 				GroundChecker GroundChecker;
 
-				bool isMidair = false;
+				bool isLanding = false;
+
+				float moveX = 0f;
+				float moveY = 0f;
+				bool jump = false;
 	
 				protected override void Start() {
 						base.Start();
 						GroundChecker = GetComponent<GroundChecker>();
 				}
-		
+
+				void Update()
+				{
+						moveX = Input.GetAxisRaw("Horizontal") * Speed;
+						moveY = rb.velocity.y;
+						jump = Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow);
+						
+				}
 				void FixedUpdate() {
 						Move();
 						Jump();
@@ -30,37 +41,47 @@ namespace Cyborg.Platformer {
 		
 				// Handles movement
 				void Move() {
-						float deltaX = Input.GetAxisRaw("Horizontal") * Speed;
-						float speed = Mathf.Abs(deltaX);
+
+						float speed = Mathf.Abs(moveX * Time.fixedDeltaTime * 10f);
 						animator.SetFloat("Speed", speed);
 						animator.SetBool("IsJumping", !GroundChecker.IsGrounded);
-			
-						UpdateFlip(deltaX);
+
+						if (GroundChecker.IsGrounded)
+						{
+								isLanding = false;
+						}
+						
+						UpdateFlip(moveX);
 			
 						// Update the velocity
-						rb.velocity = new Vector2(deltaX, rb.velocity.y);
-			
+						if (isLanding)
+						{
+								// do nothing
+						}
+						else
+						{
+								rb.velocity = new Vector2(moveX, moveY);
+						}
+						
 				}
 
-				bool IsJumping() {
-						// If pressing the jump toggles
-						if (Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow)) {
-								// Only let the player jump if they are grounded
-								return GroundChecker.IsGrounded;
-						} else {
-								return false;
-						}
-				}
 		
 				void Jump() {
-						if (IsJumping()) {
+						if (jump && GroundChecker.IsGrounded) {
 								rb.AddForce(Vector2.up * JumpForce);
 				
 								// Tie events to jumping
 								PlatformerEvents.Jump();
 						}
+
+						jump = false;
 				}
-	
+
+				void Land()
+				{
+						isLanding = true;					 
+				}
+				
 				// Update the flip direction of the sprite
 				void UpdateFlip(float deltaX) {
 	    

@@ -14,8 +14,8 @@ public class Character : MonoBehaviour
 	    rb = gameObject.GetComponent<Rigidbody2D>();
 	    collider = gameObject.GetComponent<Collider2D>();
 	    
-	    sr = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-	    animator = gameObject.transform.GetChild(0).GetComponent<Animator>();	    
+	    sr = gameObject.GetComponent<SpriteRenderer>();
+	    animator = gameObject.GetComponent<Animator>();	    
 	}
  
 }

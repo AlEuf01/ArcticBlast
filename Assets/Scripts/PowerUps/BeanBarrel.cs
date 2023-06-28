@@ -4,23 +4,28 @@ using UnityEngine;
 
 namespace ArcticBlast {
 
-	public class BeanBarrel : PowerUp
-	{
+		/// <summary>
+		/// BeanBarrel.cs
+		/// </summary>
+		public class BeanBarrel : PowerUp
+		{
 		
-		// Handle special effects
-		protected override void PowerUpEffects() {
+				// Handle special effects
+				protected override void PowerUpEffects()
+				{
 			
-			base.PowerUpEffects();
+						base.PowerUpEffects();
 			
-			// TODO: Visual Effects
-		}
+						// TODO: Visual Effects
+				}
 		
-		// Handle in-game actions
-		protected override void PowerUpPayload() {
-			base.PowerUpPayload();
+				// Handle in-game actions
+				protected override void PowerUpPayload()
+				{
+						base.PowerUpPayload();
 			
-			Events.ConsumeBeanBarrel();
+						Events.ConsumeBeanBarrel();
+				}
 		}
-	}
 	
 }

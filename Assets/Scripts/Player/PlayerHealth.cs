@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Platformer;
-
 namespace ArcticBlast {
 
+		/// <summary>
+		/// PlayerHealth.cs
+		/// Keeps track of the player's health (hit points, alive or dead)
+		/// </summary>
     public class PlayerHealth : Character
     {
 	
@@ -38,9 +40,12 @@ namespace ArcticBlast {
 				public void Die()
 				{
 						// Debug.Log("Player should die.");
-						if (invincible) {
+						if (invincible)
+						{
 								// Do nothing		  
-						} else {
+						}
+						else
+						{
 								invincible = true;
 								isDead = true;
 								StartCoroutine(PlayerDeath());

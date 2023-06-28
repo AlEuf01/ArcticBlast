@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cyborg.Platformer {
-
-    // Handles movement and jumping for a character
+namespace ArcticBlast
+{
+		/// <summary>
+    /// Handles movement and jumping for a character
+		/// </summary>
     public class PlayerMovement : Character
     {
-				// The speed of the player's movement
+				/// <summary>
+				/// The speed of the player's movement
+				/// </summary>
 				public int Speed = 6;
-	
-				// The amount of force in a jump
+
+				/// <summary>
+				/// The amount of force in a jump
+				/// </summary>
 				public int JumpForce = 1250;
-		
-				// Collider to check if the player is grounded
+
+				/// <summary>
+				/// Collider to check if the player is grounded
+				/// </summary>
 				GroundChecker GroundChecker;
 
 				bool isLanding = false;
@@ -91,10 +99,13 @@ namespace Cyborg.Platformer {
 				void UpdateFlip(float deltaX)
 				{						
 	    
-						if (deltaX < 0.0f && !sr.flipX ) {
+						if (deltaX < 0.0f && !sr.flipX )
+						{
 								// If moving left and not flipped
 								FlipSprite();
-						} else if (deltaX > 0.0f && sr.flipX) {
+						}
+						else if (deltaX > 0.0f && sr.flipX)
+						{
 								// If moving right and flipped
 								FlipSprite();	
 						}		

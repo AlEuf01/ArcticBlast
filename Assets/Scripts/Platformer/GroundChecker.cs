@@ -2,27 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cyborg.Platformer
+namespace ArcticBlast
 {
-	
+
+		/// <summary>
+		/// GroundChecker.cs
+		/// Determines if a character is grounded or not
+		/// </summary>
 		public class GroundChecker : MonoBehaviour
 		{
-		
-				// Transform that checks to see if this is grounded
+
+				/// <summary>
+				/// Transform that checks to see if this is grounded
+				/// </summary>
 				public Transform IsGroundedChecker;
-		
-				// References the Ground layer to keep track of Ground objects
+
+				/// <summary>
+				/// References the Ground layer to keep track of Ground objects
+				/// </summary>
 				public LayerMask GroundLayer;
-		
-				// Radius to check against
+
+				/// <summary>
+				/// Radius to check against
+				/// </summary>
 				const float GROUND_CHECK_RADIUS = 0.07f;
-		
+
+				/// <summary>
+				/// Radius to check jumps against
+				/// </summary>
 				const float JUMP_MIDAIR_RADIUS = 2.0f;
-		
+
+				/// <summary>
+				/// Returns true if the player is grounded
+				/// </summary>
 				public bool IsGrounded
 				{
-						get {			
-								if (IsGroundedChecker == null) {
+						get
+						{			
+								if (IsGroundedChecker == null)
+								{
 										// Debug.LogError("Platformer needs a transform to check on whether it's grounded.");
 										return false;
 								}
@@ -32,15 +50,17 @@ namespace Cyborg.Platformer
 						}
 				}
 		
-		
-				// See if there's overlap between the player and the ground
+				/// <summary>
+				/// See if there's overlap between the player and the ground
+				/// </summary>
 				Collider2D GetGroundOverlapCircle()
 				{
 						return Physics2D.OverlapCircle(IsGroundedChecker.position, GROUND_CHECK_RADIUS, GroundLayer);
 				}
 
-		
-				// See if there's overlap between the player and the ground
+				/// <summary>
+				/// See if there's overlap between the player and the ground
+				/// </summary>
 				public bool IsJumpingInMidair()
 				{
 						return Physics2D.OverlapCircle(IsGroundedChecker.position, JUMP_MIDAIR_RADIUS, GroundLayer);

@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ArcticBlast {
-	
-	public class CanSpawner : PowerUpSpawner
-	{
-		
-		public BeanCan canPrefab;
-		
-		// Start is called before the first frame update
-		void Start()
+
+		/// <summary>
+		/// CanSpawner.cs
+		/// </summary>
+		public class CanSpawner : PowerUpSpawner
 		{
-			InvokeRepeating("LaunchBeanCan", Delay, RepeatRate);    
-		}
 		
-		void LaunchBeanCan() {
-			Instantiate(canPrefab, GetSpawnPosition(), GetSpawnRotation());
-		}
+				public BeanCan canPrefab;
 		
-	}
+				// Start is called before the first frame update
+				void Start()
+				{
+						InvokeRepeating("LaunchBeanCan", Delay, RepeatRate);    
+				}
+		
+				void LaunchBeanCan()
+				{
+						Instantiate(canPrefab, GetSpawnPosition(), GetSpawnRotation());
+				}
+		
+		}
 	
 }

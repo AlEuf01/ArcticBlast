@@ -7,19 +7,21 @@ namespace ArcticBlast {
     public class BeanCan : PowerUp
     {
 
-		// Handle special effects
-		protected override void PowerUpEffects() {
-			base.PowerUpEffects();
+				// Handle special effects
+				protected override void PowerUpEffects()
+				{
+						base.PowerUpEffects();
 			
-			// TODO: Visual Effects
-		}
+						// TODO: Visual Effects
+				}
 		
-		// Handle in-game actions
-		protected override void PowerUpPayload() {
-			base.PowerUpPayload();
+				// Handle in-game actions
+				protected override void PowerUpPayload()
+				{
+						base.PowerUpPayload();
 			
-			Events.ConsumeBeanCan();
-		}
+						Events.ConsumeBeanCan();
+				}
 
     }
 

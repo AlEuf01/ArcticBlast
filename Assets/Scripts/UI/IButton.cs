@@ -6,8 +6,8 @@ namespace ArcticBlast.UI {
 
     public interface IButton
     {
-		// Handles clicking the button
-		void OnClick();
+				// Handles clicking the button
+				void OnClick();
     }
     
 }

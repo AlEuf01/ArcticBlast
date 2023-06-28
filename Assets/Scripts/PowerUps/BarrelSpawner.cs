@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
-public class BarrelSpawner : PowerUpSpawner
+namespace ArcticBlast
 {
-	public BeanBarrel barrelPrefab;
+		/// <summary>
+		/// BarrelSpawner.cs
+		/// Spawns barrels
+		/// </summary>
+		public class BarrelSpawner : PowerUpSpawner
+		{
+				public BeanBarrel barrelPrefab;
 
-	void Start() {
-		InvokeRepeating("LaunchBarrel", Delay, RepeatRate);
-	}
+				void Start()
+				{
+						InvokeRepeating("LaunchBarrel", Delay, RepeatRate);
+				}
 
-	void LaunchBarrel() {
-		Instantiate(barrelPrefab, GetSpawnPosition(), GetSpawnRotation());
-	}
-}
+				void LaunchBarrel()
+				{
+						Instantiate(barrelPrefab, GetSpawnPosition(), GetSpawnRotation());
+				}
+		}
 
 }

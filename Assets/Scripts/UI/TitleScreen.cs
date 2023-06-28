@@ -14,13 +14,9 @@ namespace ArcticBlast {
 				{
 						if (Input.GetKeyDown(KeyCode.Space))
 						{
-								StartGame();
+								SceneEvents.RestartGame();							 
 						}
 				}
 
-				void StartGame()
-				{
-						SceneEvents.RestartGame();
-				}
     }
 }

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Platformer;
-
 namespace ArcticBlast {
 
 		/// <summary>

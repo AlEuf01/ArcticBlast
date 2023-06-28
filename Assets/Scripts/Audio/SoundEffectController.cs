@@ -11,7 +11,7 @@ namespace ArcticBlast
 		{
 				
 				public AudioClip consumeClip;
-				public AudioClip kickClip;
+				public AudioClip enemyKilledClip;
 				public AudioClip pauseClip;
 								
 				void OnEnable()
@@ -19,7 +19,7 @@ namespace ArcticBlast
 						Events.OnConsumeBeanBarrel += PlayCollect;
 						Events.OnConsumeBeanCan += PlayCollect;			
 						Events.OnPause += Pause;
-						Events.OnEnemyKilled += PlayKick;
+						Events.OnEnemyKilled += PlayEnemyKilled;
 				}
 		
 				void OnDisable()
@@ -27,7 +27,7 @@ namespace ArcticBlast
 						Events.OnConsumeBeanBarrel -= PlayCollect;
 						Events.OnConsumeBeanCan -= PlayCollect;
 						Events.OnPause -= Pause;
-						Events.OnEnemyKilled -= PlayKick;
+						Events.OnEnemyKilled -= PlayEnemyKilled;
 				}				
 				
 				/// <summary>
@@ -47,11 +47,11 @@ namespace ArcticBlast
 				}
 
 				/// <summary>
-				/// Play a kick sound effect
+				/// Play a clip when an enemy is killed
 				/// </summary>
-				void PlayKick()
+				void PlayEnemyKilled()
 				{
-						PlayClip(kickClip);
+						PlayClip(enemyKilledClip);
 				}			 
 
 		}

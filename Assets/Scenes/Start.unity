@@ -511,12 +511,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1740974154 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1324489239591782092, guid: ea9846ed38bee65df823e8e0acbbd127,
-    type: 3}
-  m_PrefabInstance: {fileID: 1324489239066282216}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1324489239066282216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,11 +522,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '@BackgroundMusicController'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1324489239591782092, guid: ea9846ed38bee65df823e8e0acbbd127,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1324489239591782094, guid: ea9846ed38bee65df823e8e0acbbd127,
         type: 3}
@@ -591,25 +580,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea9846ed38bee65df823e8e0acbbd127, type: 3}
---- !u!114 &1324489239468582222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740974154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25cc3fe64b3d7d24faee365493427c61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 926ea5001930a01d19ae77b0e2b0e9fe, type: 3}
-  - {fileID: 8300000, guid: 986eda5f21fa64a82962cb4b47304d72, type: 3}
-  - {fileID: 8300000, guid: 44f2486417a0c678399374b86fdf7599, type: 3}
-  winClip: {fileID: 8300000, guid: 44f2486417a0c678399374b86fdf7599, type: 3}
-  loseClip: {fileID: 8300000, guid: 986eda5f21fa64a82962cb4b47304d72, type: 3}
-  loopClip: {fileID: 8300000, guid: 926ea5001930a01d19ae77b0e2b0e9fe, type: 3}
 --- !u!1001 &3025186325801736983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -692,27 +662,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: kickClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ef5e9337a01c5ac7f8a12ebeb20079bc, type: 3}
-    - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: pauseClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 67d473f1bfe795b03978c45fae9c6fc8, type: 3}
-    - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: consumeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b9351f297e1d7f841907a666dfe60ce5, type: 3}
-    - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: clips.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: clips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 67d473f1bfe795b03978c45fae9c6fc8, type: 3}
-    - target: {fileID: 1072563385, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}
-      propertyPath: clips.Array.data[4]
+      propertyPath: enemyKilledClip
       value: 
       objectReference: {fileID: 8300000, guid: ef5e9337a01c5ac7f8a12ebeb20079bc, type: 3}
     - target: {fileID: 1698610787601764295, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec,
@@ -774,11 +724,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '@SoundEffectController'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2043754581501501843, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 499dac7f1ccfacdb9a7a8c1bfaadd9ec, type: 3}

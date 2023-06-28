@@ -25,27 +25,36 @@ namespace ArcticBlast {
 
 				// True if the enemy is currently attacking the player
 				public bool isAttacking;
-	
-				public void FartOn() {
+
+				public void FartOn()
+				{
 						Stun();
 				}
 	
-				public void MegaFartOn() {
+				public void MegaFartOn()
+				{
 						// Stun();
 						Die();
 				}
 	
-				void FixedUpdate() {
+				void FixedUpdate()
+				{
 						CheckCollisions();
 				}
 	
-				void OnCollisionEnter2D(Collision2D col) {
-						if (!isStunned && col.gameObject.tag == "Player") {
+				void OnCollisionEnter2D(Collision2D col)
+				{
+						if (!isStunned && col.gameObject.tag == "Player")
+						{
 								StartCoroutine(Attack());
 						}
 				}
 
-				IEnumerator Attack() {
+				/// <summary>
+				/// Play an attack animation
+				/// </summary>
+				IEnumerator Attack()
+				{
 						isAttacking = true;
 	    
 						animator.SetTrigger("Attack");
@@ -59,15 +68,25 @@ namespace ArcticBlast {
 	    
 						isAttacking = false;
 				}
-	
-				void Stun() {
-						if (CanBeStunned) {
+
+				
+				/// <summary>
+				/// Stun the enemy
+				/// </summary>
+				void Stun()
+				{
+						if (CanBeStunned)
+						{
 								// Debug.Log("Stunning enemy.");
 								StartCoroutine(StunForDurationOfClip());				
 						}
 				}
 
-				void Die() {
+				/// <summary>
+				/// Kill the enemy
+				/// </summary>
+				void Die()
+				{
 						// Play sound effects
 						Events.EnemyKilled();
 
@@ -79,7 +98,8 @@ namespace ArcticBlast {
 				/// <summary>
 				/// Stun the enemy for the duration of the animatoin clip
 				/// </summary>
-				IEnumerator StunForDurationOfClip() {
+				IEnumerator StunForDurationOfClip()
+				{
 						isStunned = true;
 
 						animator.SetTrigger("Stun");
@@ -93,28 +113,37 @@ namespace ArcticBlast {
 
 						isStunned = false;
 				}
-	
-				void CheckCollisions() {
-	    
-						// Check to see if the player jumped on me
+
+				/// <summary>
+				/// Check to see if the player jumped on the enemy
+				/// </summary>
+				void CheckCollisions()
+				{	    
 						if (CheckCollisionWithPlayer()) {
 								HandleJumpCollision();
-						}
-	    
-						// Debug.Log("Checking collisions to left and right.");
+						}	    				
 				}
-	
-				// Check collision in a certain direction
-				bool CheckCollisionWithPlayer() {
+
+				/// <summary>
+				/// Check collision in a certain direction
+				/// </summary>
+				bool CheckCollisionWithPlayer()
+				{
 						RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, HIT_DISTANCE, layerMask);
 						return hit.collider != null && hit.collider.gameObject.tag == "Player";
 				}
-	
-				// Handle the player jumping on this enemy
-				void HandleJumpCollision() {
-						if (isStunned) {
+
+				/// <summary>
+				/// Handle the player jumping on this enemy
+				/// </summary>
+				void HandleJumpCollision()
+				{
+						if (isStunned)
+						{
 								Die();
-						} else {
+						}
+						else
+						{
 								Events.KillPlayer();
 						}
 				}

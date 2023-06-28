@@ -2,85 +2,134 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
-
-
-    public enum Direction {
-				Left,
-				Right
-    }
-    
+namespace ArcticBlast
+{
+		
+		/// <summary>
+		/// EnemyMovement.cs
+		/// Controls movement of enemies
+		/// </summary>
     public class EnemyMovement : Character
     {
-	
-				// The movement speed
+				/// <summary>
+				/// The movement speed
+				/// </summary>
 				public float Speed = 1f;
-	
-				private GameObject player;
-       	
-				private bool isStunned {
-						get {
+
+				/// <summary>
+				/// Reference to the player
+				/// </summary>
+				private GameObject _player;
+
+				/// <summary>
+				/// Checks for whether the enemy is stunned
+				/// </summary>
+				bool IsStunned
+				{
+						get
+						{
 								return GetComponent<Enemy>().isStunned;
 						}
 				}
 
-				private bool isAttacking {
-						get {
+				/// <summary>
+				/// Checks for whether the enemy is attacking
+				/// </summary>
+				bool IsAttacking
+				{
+						get
+						{
 								return GetComponent<Enemy>().isAttacking;
 						}
 				}
-	
+
+				/// <summary>
+				/// Checks to see if the player is alive
+				/// </summary>
+				bool IsPlayerAlive
+				{
+						get
+						{
+								return _player != null && sr != null && _player.GetComponent<PlayerHealth>().isDead == false;
+						}
+				}
+
+				
+				/// <summary>
+				/// Returns true if the player is ahead of me, false if behind me
+				/// </summary>
+				bool IsPlayerAhead
+				{
+						get {
+								return _player.transform.position.x > transform.position.x;
+						}
+				}
 		
-				protected override void Start() {
+				protected override void Start()
+				{
 						base.Start();
-	    
-						// Get the player
-						player = GameObject.FindWithTag("Player");
+	   
+						_player = GameObject.FindWithTag("Player");
 				}
 	
-				void FixedUpdate() {
-						// Chase the player;
+				void FixedUpdate()
+				{
+						Move();
+						Animate();
+						UpdateDirection();
+				}
+				
+				/// <summary>
+				/// Updates the animations
+				/// </summary>
+				void Animate()
+				{
 	    
-						if (player != null && sr != null && player.GetComponent<PlayerHealth>().isDead == false && !isAttacking) {
-								if (!isStunned) {
-										Chase();
-								}
-		
-								UpdateAnimator();	    						
-						} else {
+						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						{
+								animator.SetBool("IsWalking", true);
+						}
+						else
+						{
 								// Player is dead; be still
 								animator.SetBool("IsWalking", false);
 						}
-	    
-				}
-	
-				void Chase() {
-	    
-						Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);
 		
-						if (!IsPlayerAhead()) {
-								sr.flipX = true;
-								amount = -amount;
-						} else {
-								sr.flipX = false;
+				}
+
+				
+				/// <summary>
+				/// Moves the enemy
+				/// </summary>
+				void Move()
+				{
+						
+						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						{
+								Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);								
+								transform.Translate(IsPlayerAhead ? amount : -amount);
+
 						}
-		
-						transform.Translate(amount);
 				}
-	
-				// Returns true if the player is ahead of the enemy; false if behind
-				bool IsPlayerAhead() {
-						return player.transform.position.x > transform.position.x;
-				}
-	
-				void UpdateAnimator() {
-						// TODO: Idle if player is out of range
-						if (isStunned) {
-								animator.SetBool("IsWalking", false);
-						} else {
-								animator.SetBool("IsWalking", true);
+
+				/// <summary
+				/// Update the enemy's facing direction
+				/// </summary>
+				void UpdateDirection()
+				{
+						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						{
+								
+								// Update the facing direction
+								if (IsPlayerAhead)
+								{
+										sr.flipX = false;
+								}
+								else
+								{
+										sr.flipX = true;								
+								}
 						}
-		
 				}
 	
 	

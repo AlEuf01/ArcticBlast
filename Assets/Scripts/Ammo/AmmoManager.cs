@@ -2,54 +2,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
+namespace ArcticBlast
+{
 
-    // Manages the player's available ammo
+		/// <summary>
+		/// AmmoManager.cs
+    /// Manages the player's available ammo
+		/// </summary>
     public class AmmoManager : IAmmoManager
     {
 	
-	// Starting amount of ammo
-	public static int Amount = 0;		
+				// Starting amount of ammo
+				public static int Amount = 0;		
 	
-	// Maximum amounnt of ammo
-	public const int maxAmmo = 4;
-	
-	public AmmoManager() {}
+				// Maximum amounnt of ammo
+				const int MAX = 4;
 
-	// Add ammo
-	public void Add() {
-	    if (Amount < maxAmmo) {
-		Amount++;
-	    }
-	}
-	
-	// Remove ammo
-	public void Remove() {
-	    if (Amount > 0) {
-		Amount--;
-	    }
-	}
-	
-	// Fill the ammo to max after consuming a bean barrel
-	public void Fill() {
-	    Amount = maxAmmo;
-	}
+				// Constructor
+				public AmmoManager() {}
 
-	
-	// Gets rid of all of the player's ammo
-	public void RemoveAllAmmo() {
-	    Amount = 0;
-	}
+				/// <summary>
+				/// Add ammo
+				/// </summary>
+				public void Add()
+				{
+						if (Amount < MAX)
+						{
+								Amount++;
+						}
+				}
 
-	// Returns true if player has ammo; false otherwise
-	public bool HasAmmo() {
-	    return Amount > 0;
-	}
-	
-	// Returns true if player has enough ammo for a mega-fart
-	public bool HasMegaFartAmmo() {
-	    return Amount == maxAmmo;
-	}
+				/// <summary>
+				/// Remove ammo
+				/// </summary>
+				public void Remove()
+				{
+						if (Amount > 0)
+						{
+								Amount--;
+						}
+				}
+				/// <summary>
+				/// Fill the ammo to max after consuming a bean barrel
+				/// </summary>
+				public void Fill()
+				{
+						Amount = MAX;
+				}
+
+				/// <summary>
+				/// Gets rid of all of the player's ammo
+				/// </summary>
+				public void RemoveAllAmmo()
+				{
+						Amount = 0;
+				}
+
+				/// <summary>
+				/// Returns true if player has ammo; false otherwise
+				/// </summary>
+				public bool HasAmmo()
+				{
+						return Amount > 0;
+				}
+
+				/// <summary>
+				/// Returns true if player has enough ammo for a mega-fart
+				/// </summary>
+				public bool HasMegaFartAmmo()
+				{
+						return Amount == MAX;
+				}
 	
     }
 }

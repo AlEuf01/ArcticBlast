@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
-    
+namespace ArcticBlast
+{
+
+		/// <summary>
+		/// Cloud.cs
+		/// Animate floating clouds
+		/// </summary>
     public class Cloud : MonoBehaviour
     {
 
-	public float Speed = 0.5f;
-	const int MAX_POSITION = 20;
+				public float Speed = 0.5f;
+				const int MAX_POSITION = 20;
 
-	void Update() {
-	    Move();
-	    DestroyIfOffScreen();
-	}
+				void Update()
+				{
+						Move();
+						DestroyIfOffScreen();
+				}
 
-	void Move() {
-	    transform.Translate(Speed * Time.deltaTime, 0, 0);
-	}
+				void Move()
+				{
+						transform.Translate(Speed * Time.deltaTime, 0, 0);
+				}
 	
-	void DestroyIfOffScreen() {
-	    if (transform.position.x > MAX_POSITION) {
-		Destroy(gameObject);
-	    }
-	}
+				void DestroyIfOffScreen()
+				{
+						if (transform.position.x > MAX_POSITION)
+						{
+								Destroy(gameObject);
+						}
+				}
     }
 }

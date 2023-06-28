@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
-	
+namespace ArcticBlast
+{
+
+
 	public interface IAmmoManager 
 	{
 

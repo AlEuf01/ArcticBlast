@@ -46,11 +46,6 @@ namespace ArcticBlast
 								OnEnemyKilled();
 						}
 				}
-				public static void ChoosePath(string text) {
-						if (OnChoosePath != null) {
-								OnChoosePath(text);
-						}
-				}
 	
 				public static void GameOver() {
 						if (OnGameOver != null) {

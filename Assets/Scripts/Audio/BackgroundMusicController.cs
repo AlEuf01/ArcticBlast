@@ -20,8 +20,8 @@ namespace ArcticBlast
 						AudioEvents.OnPlayWin += PlayWin;
 						AudioEvents.OnPlayLose += PlayLose;
 						AudioEvents.OnPlayLoop += PlayLoop;
-						AudioEvents.OnPause += Pause;
-						AudioEvents.OnUnPause += UnPause;
+						Events.OnPause += Pause;
+						Events.OnUnPause += UnPause;
 				}
 		
 				void OnDisable()
@@ -30,8 +30,8 @@ namespace ArcticBlast
 						AudioEvents.OnPlayWin -= PlayWin;
 						AudioEvents.OnPlayLose -= PlayLose;
 						AudioEvents.OnPlayLoop -= PlayLoop;
-						AudioEvents.OnPause -= Pause;
-						AudioEvents.OnUnPause -= UnPause;
+						Events.OnPause -= Pause;
+						Events.OnUnPause -= UnPause;
 				}
 
 				/// <summary>

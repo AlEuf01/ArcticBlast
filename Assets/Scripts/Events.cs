@@ -68,7 +68,6 @@ namespace ArcticBlast
 		
 				public static void Pause()
 				{
-						AudioEvents.Pause();
             if (OnPause != null) {
 								OnPause();  
             }			
@@ -76,7 +75,6 @@ namespace ArcticBlast
 	
 				public static void UnPause()
 				{
-						AudioEvents.UnPause();
             if (OnUnPause != null) {
                 OnUnPause();    
             }	    

@@ -13,39 +13,12 @@ namespace ArcticBlast
 		public class AudioEvents
 		{
 		
-				// Event when pausing the backgorund music
-				public static event Action OnPause;
-
-				// Event when unpausing the background music
-				public static event Action OnUnPause;
 
 				// Play when music state changes
 				public static event Action OnPlayWin;
 				public static event Action OnPlayLose;
 				public static event Action OnPlayLoop;
 
-				/// <summary>
-				/// Pauses the current music track
-				/// </summary>
-				public static void Pause()
-				{
-						if (OnPause != null)
-						{
-								OnPause();
-						}
-				}
-
-				
-				/// <summary>
-				/// Unpauses the current music track
-				/// </summary>
-				public static void UnPause()
-				{
-						if (OnUnPause != null)
-						{
-								OnUnPause();
-						}
-				}
 
 				/// <summary>
 				/// Plays the victory music

@@ -37,6 +37,15 @@ namespace ArcticBlast
 				public static event Action OnFire;
 				public static event Action OnJump;
 
+				public static event Action OnEnemyKilled;
+
+				public static void EnemyKilled()
+				{
+						if (OnEnemyKilled != null)
+						{
+								OnEnemyKilled();
+						}
+				}
 				public static void ChoosePath(string text) {
 						if (OnChoosePath != null) {
 								OnChoosePath(text);

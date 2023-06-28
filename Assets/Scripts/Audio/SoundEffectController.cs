@@ -10,28 +10,49 @@ namespace ArcticBlast
 		public class SoundEffectController : SoundController
 		{
 				
+				public AudioClip consumeClip;
+				public AudioClip kickClip;
+				public AudioClip pauseClip;
+								
 				void OnEnable()
 				{
-						AudioEvents.OnPlaySound += PlayClip;
+						Events.OnConsumeBeanBarrel += PlayCollect;
+						Events.OnConsumeBeanCan += PlayCollect;			
+						Events.OnPause += Pause;
+						Events.OnEnemyKilled += PlayKick;
 				}
 		
 				void OnDisable()
 				{
-						AudioEvents.OnPlaySound -= PlayClip;
+						Events.OnConsumeBeanBarrel -= PlayCollect;
+						Events.OnConsumeBeanCan -= PlayCollect;
+						Events.OnPause -= Pause;
+						Events.OnEnemyKilled -= PlayKick;
+				}				
+				
+				/// <summary>
+				/// Play a pause sound effect
+				/// </summary>
+				void Pause()
+				{
+						PlayClip(pauseClip);
 				}
 
 				/// <summary>
-				/// Plays a sound clip with a given name as a oneshot
+				/// Play a collection (ie, collect powerup) sound effect
 				/// </summary>
-				public void PlayClip(string clipName)
+				void PlayCollect()
 				{
-						AudioClip clip = GetClipByName(clipName);
-			
-						if (clip != null)
-						{
-								audioSource.PlayOneShot(clip, AudioPreferences.Volume);
-						}
+						PlayClip(consumeClip);
 				}
+
+				/// <summary>
+				/// Play a kick sound effect
+				/// </summary>
+				void PlayKick()
+				{
+						PlayClip(kickClip);
+				}			 
 
 		}
 	

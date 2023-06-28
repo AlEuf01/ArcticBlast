@@ -61,8 +61,8 @@ namespace ArcticBlast {
 				}
 	
 				IEnumerator PlayerDeath() {		   			
-						// Debug.Log("Handling player death");
-						AudioController.PlayLose();
+
+						AudioEvents.PlayLose();
 			
 						StopMovement();	    
 	    

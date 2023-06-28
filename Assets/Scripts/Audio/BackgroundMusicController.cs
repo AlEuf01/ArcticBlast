@@ -10,17 +10,26 @@ namespace ArcticBlast
 		/// </summary>
 		public class BackgroundMusicController : SoundController
 		{
-		
+
+				public AudioClip winClip;
+				public AudioClip loseClip;
+				public AudioClip loopClip;
+				
 				void OnEnable()
 				{
-						AudioEvents.OnPlayMusic += PlayMusic;
+						AudioEvents.OnPlayWin += PlayWin;
+						AudioEvents.OnPlayLose += PlayLose;
+						AudioEvents.OnPlayLoop += PlayLoop;
 						AudioEvents.OnPause += Pause;
 						AudioEvents.OnUnPause += UnPause;
 				}
 		
 				void OnDisable()
 				{
-						AudioEvents.OnPlayMusic -= PlayMusic;
+						
+						AudioEvents.OnPlayWin -= PlayWin;
+						AudioEvents.OnPlayLose -= PlayLose;
+						AudioEvents.OnPlayLoop -= PlayLoop;
 						AudioEvents.OnPause -= Pause;
 						AudioEvents.OnUnPause -= UnPause;
 				}
@@ -28,14 +37,14 @@ namespace ArcticBlast
 				/// <summary>
 				/// Plays a new music clip
 				/// </summary>
-				public void PlayMusic(string clipName)
+				public void PlayMusic(AudioClip clip)
 				{
-						if (!IsPlaying(clipName))
+						if (!IsPlaying(clip))
 						{
-								PlayClip(GetClipByName(clipName));
+								PlayClip(clip);
 						}
 				}
-
+				
 				/// <summary>
 				/// Pauses the current background track
 				/// </summary>
@@ -50,9 +59,34 @@ namespace ArcticBlast
 				public void UnPause()
 				{
 						audioSource.UnPause();
-				}
-}
+				}				
 
+				/// <summary>
+				/// Play a music clip after winning
+				/// </summary>
+				void PlayWin()
+				{
+						PlayMusic(winClip);
+				}
+				
+				/// <summary>
+				/// Play looping background music
+				/// </summary>
+				void PlayLoop()
+				{
+						PlayMusic(loopClip);
+				}
+				
+				/// <summary>
+				/// Play a music clip after losing
+				/// </summary>
+				void PlayLose()
+				{
+						PlayMusic(loseClip);
+				}
+				
+		}
+		
 }
 
 

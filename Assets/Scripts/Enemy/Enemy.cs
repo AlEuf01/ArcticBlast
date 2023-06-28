@@ -68,12 +68,10 @@ namespace ArcticBlast {
 				}
 
 				void Die() {
-						// TODO: Play sound effects
-						AudioController.PlayKick();
-	    
-						// TODO: Play animation
-	    
-						// Dead
+						// Play sound effects
+						Events.EnemyKilled();
+
+						// TODO: Play death animation, then destroy object
 						Destroy(gameObject);
 				}
 	

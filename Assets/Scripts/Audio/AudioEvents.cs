@@ -13,39 +13,16 @@ namespace ArcticBlast
 		public class AudioEvents
 		{
 		
-				// Play a sound effect clip
-				public delegate void PlaySoundHandler(string soundClipName);
-				public static event PlaySoundHandler OnPlaySound;
-				public static event PlaySoundHandler OnPlayMusic;
-		
+
 				// Event when pausing the backgorund music
 				public static event Action OnPause;
 
 				// Event when unpausing the background music
 				public static event Action OnUnPause;
 
-				/// <summary>
-				/// Handles playing a sound
-				/// <param name="clipName">the name of the clip to playe</param>
-				/// </summary>
-				public static void PlaySound(string clipName)
-				{
-						if (OnPlaySound != null) {
-								OnPlaySound(clipName);
-						}	
-				}
-
-				/// <summary>
-				/// Handles changing the background music track
-				/// <param name="clipName">the name of the clip to playe</param>
-				/// </summary>
-				public static void PlayMusic(string clipName)
-				{
-						if (OnPlayMusic != null)
-						{
-								OnPlayMusic(clipName);
-						}
-				}
+				public static event Action OnPlayWin;
+				public static event Action OnPlayLose;
+				public static event Action OnPlayLoop;
 
 				/// <summary>
 				/// Pauses the current music track
@@ -69,7 +46,23 @@ namespace ArcticBlast
 								OnUnPause();
 						}
 				}
-		
+
+				public static void PlayWin()
+				{
+						OnPlayWin();
+				}
+
+				
+				public static void PlayLose()
+				{
+						OnPlayLose();
+				}
+
+				
+				public static void PlayLoop()
+				{
+						OnPlayLoop();
+				}
 		}
 	
 }

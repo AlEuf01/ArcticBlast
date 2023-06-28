@@ -81,7 +81,7 @@ namespace ArcticBlast
 				// Resets the game from the beginning
 				IEnumerator Reset() {			
 	    
-						AudioController.PlayLoop();
+						AudioEvents.PlayLoop();
 	    
 						yield return new WaitForSeconds(3.0f);
 	    
@@ -91,7 +91,7 @@ namespace ArcticBlast
 				IEnumerator Won() {
 
 	    
-						AudioController.PlayWin();
+						AudioEvents.PlayWin();
 
 						AmmoManager.Amount = 0;
 	    
@@ -112,7 +112,7 @@ namespace ArcticBlast
 		
 						yield return new WaitForSeconds(1.0f);
 	    
-						AudioController.PlayLoop();
+						AudioEvents.PlayLoop();
 	    
 				}
 
@@ -134,7 +134,7 @@ namespace ArcticBlast
 
 						AmmoManager.Amount = 0;
 	    
-						AudioController.PlayLose();
+						AudioEvents.PlayLose();
 	    
 						SceneEvents.ChangeScene("_GameOver");
 			
@@ -144,7 +144,7 @@ namespace ArcticBlast
 	    
 						yield return new WaitForSeconds(1.0f);
 	    
-						AudioController.PlayLoop();
+						AudioEvents.PlayLoop();
 				}
 	
     }

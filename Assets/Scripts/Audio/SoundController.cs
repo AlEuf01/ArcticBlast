@@ -11,8 +11,6 @@ namespace ArcticBlast
 		[RequireComponent(typeof(AudioSource))]
 		public abstract class SoundController : MonoBehaviour
 		{
-				// Store a list of clips in this controller
-				public AudioClip[] clips;
 		
 				// The attached audio source that plays this clip
 				protected AudioSource audioSource;
@@ -33,6 +31,8 @@ namespace ArcticBlast
 								Play();  
 						}
 				}
+
+				
 				/// <summary>
 				/// Play the audio source
 				/// </summary>
@@ -42,19 +42,21 @@ namespace ArcticBlast
 				}
 				
 				/// <summary>
-				/// Get the audio clip from the array of clips by name
-				/// </summary>
-				protected AudioClip GetClipByName(string clipName)
-				{
-						return Array.Find(clips, element => element.name.ToLower() == clipName.ToLower());
-				}
-
-				/// <summary>
 				/// Return true if there's a clip queued matching this clip name
+				/// <param name="clip">The clip name to check</param>
 				/// </summary>
 				protected bool IsPlaying(string clipName)
 				{
 						return audioSource.clip && audioSource.clip.name.ToLower() == clipName.ToLower();
+				}
+				
+				/// <summary>
+				/// Return true if there's a clip queued matching this clip
+				/// <param name="clip">The clip to check</param>
+				/// </summary>
+				protected bool IsPlaying(AudioClip clip)
+				{
+						return IsPlaying(clip.name);
 				}
 
 		}

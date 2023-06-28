@@ -5,6 +5,7 @@ using UnityEngine;
 namespace ArcticBlast
 {
 		/// <summary>
+		/// BackgroundMusicController.cs
 		/// Handles background music for the game
 		/// </summary>
 		public class BackgroundMusicController : SoundController
@@ -24,6 +25,9 @@ namespace ArcticBlast
 						AudioEvents.OnUnPause -= UnPause;
 				}
 
+				/// <summary>
+				/// Plays a new music clip
+				/// </summary>
 				public void PlayMusic(string clipName)
 				{
 						if (!IsPlaying(clipName))

@@ -1,21 +1,29 @@
 ﻿using UnityEngine;
 
-namespace ArcticBlast {
+namespace ArcticBlast
+{
 
+		/// <summary>
+		/// Enumerates keys stored in PlayerPrefs
+		/// </summary>
 		public enum PlayerPrefKeys
-				{
+		{
 					Volume
-			}
+		}
 		
-		
-		// Manages user-defined audio controls
+		/// <summary>		
+		/// Manages user-defined audio controls
+		/// </summary>
 		public static class AudioPreferences 
 		{
 				
 				// Audio controls don't start out maxed
 				const float DEFAULT_VOLUME = 0.75f;
-		
-				public static float Volume
+
+				/// <summary>
+				/// Getter and setter for the overall volume of the game (sound effects and music)
+				/// </summary>
+				public static float Volume				
 				{
 						get
 						{

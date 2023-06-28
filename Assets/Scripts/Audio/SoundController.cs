@@ -14,7 +14,7 @@ namespace ArcticBlast
 				// Store a list of clips in this controller
 				public AudioClip[] clips;
 		
-				// The attached audio source to play this clip
+				// The attached audio source that plays this clip
 				protected AudioSource audioSource;
 		
 				void Start()
@@ -23,13 +23,12 @@ namespace ArcticBlast
 				}
 
 				/// <summary>
-				/// Play a given audio clip
+				/// Queue the provided clip in the attached audio source and plays it
 				/// </summary>
 				protected void PlayClip(AudioClip clip)
 				{		 
 						if (clip != null)
 						{		   
-								// Queue the provided clip in the attached audio source and play it
 								audioSource.clip = clip;
 								Play();  
 						}
@@ -40,7 +39,8 @@ namespace ArcticBlast
 				void Play()
 				{
 						audioSource.Play();
-				}		   
+				}
+				
 				/// <summary>
 				/// Get the audio clip from the array of clips by name
 				/// </summary>

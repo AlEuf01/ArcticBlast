@@ -4,6 +4,7 @@ namespace ArcticBlast
 {
 		
 		/// <summary>
+		/// SoundEffectController.cs
 		/// Controller to manage playing sound effects
 		/// </summary>
 		public class SoundEffectController : SoundController
@@ -18,8 +19,10 @@ namespace ArcticBlast
 				{
 						AudioEvents.OnPlaySound -= PlayClip;
 				}
-		
-				// Plays a sound clip with a given name as a oneshot
+
+				/// <summary>
+				/// Plays a sound clip with a given name as a oneshot
+				/// </summary>
 				public void PlayClip(string clipName)
 				{
 						AudioClip clip = GetClipByName(clipName);

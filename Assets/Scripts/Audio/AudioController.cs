@@ -21,6 +21,14 @@ namespace ArcticBlast
 						Events.OnConsumeBeanCan -= PlayCollect;
 						Events.OnPause -= Pause;
 				}
+				
+				/// <summary>
+				/// Play a pause sound effect
+				/// </summary>
+				void Pause()
+				{		   
+						AudioEvents.PlaySound("smb_pause");
+				}
 
 				/// <summary>
 				/// Play a collection (ie, collect powerup) sound effect
@@ -28,14 +36,6 @@ namespace ArcticBlast
 				void PlayCollect()
 				{
 						AudioEvents.PlaySound("consume");
-				}
-
-				/// <summary>
-				/// Play a pause sound effect
-				/// </summary>
-				void Pause()
-				{		   
-						AudioEvents.PlaySound("smb_pause");
 				}
 
 				/// <summary>
@@ -53,7 +53,15 @@ namespace ArcticBlast
 				{
 						AudioEvents.PlayMusic("win");
 				}
-
+				
+				/// <summary>
+				/// Play looping background music
+				/// </summary>
+				public static void PlayLoop()
+				{
+						AudioEvents.PlayMusic("loop");
+				}
+				
 				/// <summary>
 				/// Play a music clip after losing
 				/// </summary>
@@ -62,13 +70,6 @@ namespace ArcticBlast
 						AudioEvents.PlayMusic("lose");
 				}
 
-				/// <summary>
-				/// Play looping background music
-				/// </summary>
-				public static void PlayLoop()
-				{
-						AudioEvents.PlayMusic("loop");
-				}
 		}
 	
 }

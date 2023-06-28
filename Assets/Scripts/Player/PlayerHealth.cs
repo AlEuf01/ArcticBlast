@@ -16,12 +16,14 @@ namespace ArcticBlast {
 				// Flag to make player immune to damage
 				bool invincible = false;
 	
-				void OnEnable() {
+				void OnEnable()
+				{
 						Events.OnKillPlayer += Die;
 						Events.OnCompleteLevel += Freeze;
 				}
 	
-				void OnDisable() {
+				void OnDisable()
+				{
 						Events.OnKillPlayer -= Die;
 						Events.OnCompleteLevel -= Freeze;
 				}
@@ -33,7 +35,8 @@ namespace ArcticBlast {
 						movement = GetComponent<PlayerMovement>();
 				}
 				
-				public void Die() {
+				public void Die()
+				{
 						// Debug.Log("Player should die.");
 						if (invincible) {
 								// Do nothing		  
@@ -44,7 +47,8 @@ namespace ArcticBlast {
 						}
 				}
 
-				void Freeze() {
+				void Freeze()
+				{
 						movement.enabled = false;
 						rb.isKinematic = true;
 						rb.velocity  = Vector2.zero;
@@ -53,14 +57,16 @@ namespace ArcticBlast {
 						collider.enabled = false;
 				}
 
-				void StopMovement() {
+				void StopMovement()
+				{
 						movement.enabled = false;
 						rb.velocity = Vector2.zero;
 						gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 						collider.isTrigger = true;
 				}
 	
-				IEnumerator PlayerDeath() {		   			
+				IEnumerator PlayerDeath()
+				{		   			
 
 						AudioEvents.PlayLose();
 			

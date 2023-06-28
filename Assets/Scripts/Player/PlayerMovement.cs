@@ -22,7 +22,8 @@ namespace Cyborg.Platformer {
 				float moveY = 0f;
 				bool jump = false;
 	
-				protected override void Start() {
+				protected override void Start()
+				{
 						base.Start();
 						GroundChecker = GetComponent<GroundChecker>();
 				}
@@ -34,13 +35,15 @@ namespace Cyborg.Platformer {
 						jump = Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow);
 						
 				}
-				void FixedUpdate() {
+				void FixedUpdate()
+				{
 						Move();
 						Jump();
 				}
 		
 				// Handles movement
-				void Move() {
+				void Move()
+				{
 
 						float speed = Mathf.Abs(moveX * Time.fixedDeltaTime * 10f);
 						animator.SetFloat("Speed", speed);
@@ -66,8 +69,10 @@ namespace Cyborg.Platformer {
 				}
 
 		
-				void Jump() {
-						if (jump && GroundChecker.IsGrounded) {
+				void Jump()
+				{
+						if (jump && GroundChecker.IsGrounded)
+						{
 								rb.AddForce(Vector2.up * JumpForce);
 				
 								// Tie events to jumping
@@ -83,7 +88,8 @@ namespace Cyborg.Platformer {
 				}
 				
 				// Update the flip direction of the sprite
-				void UpdateFlip(float deltaX) {
+				void UpdateFlip(float deltaX)
+				{						
 	    
 						if (deltaX < 0.0f && !sr.flipX ) {
 								// If moving left and not flipped
@@ -94,7 +100,8 @@ namespace Cyborg.Platformer {
 						}		
 				}
 	
-				void FlipSprite() {
+				void FlipSprite()
+				{
 						sr.flipX = !sr.flipX;					
 				}
 	

@@ -7,21 +7,31 @@ namespace ArcticBlast {
     public class GlacierTarget : MonoBehaviour, IEnemy
     {
 
-	// Handles farting on this glacier
-	public void FartOn() {							
-	    Melt();
+				private GlacierMovement _glacierMovement;
+
+				void Start()
+				{
+						_glacierMovement = GetComponentInParent<GlacierMovement>();
+				}
+				
+				// Handles farting on this glacier
+				public void FartOn()
+				{							
+						Melt();
 	    
-	}
+				}
 
-	// Handles mega-farting on this glacier
-	public void MegaFartOn() {
-	    Melt(2f);
-	}
+				// Handles mega-farting on this glacier
+				public void MegaFartOn()
+				{
+						Melt(2f);
+				}
 
-	// Melt the glacier by the given amount
-	void Melt(float scalar = 1f) {
-	    GetComponentInParent<GlacierMovement>().PushBack(scalar);
-	}
+				// Melt the glacier by the given amount
+				void Melt(float scalar = 1f)
+				{
+						_glacierMovement.PushBack(scalar);
+				}
 	
     }
     

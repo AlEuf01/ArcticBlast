@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Scenes;
-
-namespace ArcticBlast.UI {
+namespace ArcticBlast.UI
+{
 
 		/// <summary>
+		/// StartButton.cs
 		/// Press this button to start the game
 		/// </summary>		
     public class StartButton : MonoBehaviour, IButton
@@ -17,7 +17,7 @@ namespace ArcticBlast.UI {
 				/// </summary>
 				public void OnClick()
 				{
-						SceneEvents.ChangeScene("Tutorial");
+						SceneEvents.RestartGame();
 				}
     
 		}

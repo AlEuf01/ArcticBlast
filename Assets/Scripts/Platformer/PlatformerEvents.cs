@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Cyborg.Platformer {
 
-	public class PlatformerEvents
-	{
+		public class PlatformerEvents
+		{
 
-		public static event Action OnJump;
+				public static event Action OnJump;
 
-		public static void Jump() {
-			if (OnJump != null) {
-				OnJump();
-			}
+				public static void Jump() {
+						if (OnJump != null) {
+								OnJump();
+						}
+				}
 		}
-	}
 
 }

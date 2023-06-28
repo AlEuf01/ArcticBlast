@@ -6,6 +6,6 @@ namespace ArcticBlast {
     
     public class GlacierEdge : MonoBehaviour
     {
-	public float cameraOffset = 6.0f;
+				public float cameraOffset = 6.0f;
     }
 }

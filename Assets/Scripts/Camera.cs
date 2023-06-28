@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Cyborg.Platformer;
-using Cyborg.Scenes;
 
 namespace ArcticBlast {
 

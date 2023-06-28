@@ -1,20 +1,18 @@
 ﻿using System;
 using UnityEngine;
-using Cyborg.Scenes;
 
 namespace ArcticBlast
 {
-    
-    // Class to handle all events for the game
+		
+    /// <summary>
+    /// Class to handle all events for the game
+		/// </summary>
     public class Events
     {
 	
 				public delegate void IntEvent(int amount);
 				public static event IntEvent OnUpdateAmmo;
 
-				public delegate void StringEvent(string text);
-				public static event StringEvent OnChoosePath;
-	
 				// Event handler for completing a level
 				public static event Action OnCompleteLevel;
 	
@@ -47,40 +45,45 @@ namespace ArcticBlast
 						}
 				}
 	
-				public static void GameOver() {
+				public static void GameOver()
+				{
 						if (OnGameOver != null) {
 								OnGameOver();
 						}
 				}
 	
-				public static void Jump() {
+				public static void Jump()
+				{
 						if (OnJump != null) {
 								OnJump();
 						}
 				}
 		
-				public static void Fire() {
+				public static void Fire()
+				{
 						if (OnFire != null) {
 								OnFire();
 						}
 				}
 		
-				public static void Pause() {
+				public static void Pause()
+				{
 						AudioEvents.Pause();
             if (OnPause != null) {
 								OnPause();  
             }			
 				}
 	
-				public static void UnPause() {
+				public static void UnPause()
+				{
 						AudioEvents.UnPause();
             if (OnUnPause != null) {
                 OnUnPause();    
-            }
-	    
+            }	    
 				}
 	
-				public static void CompleteLevel() {
+				public static void CompleteLevel()
+				{
 						if (OnCompleteLevel != null) {
 								OnCompleteLevel();
 						}
@@ -92,31 +95,36 @@ namespace ArcticBlast
 						}
 				}
 	
-				public static void ConsumeBeanCan() {
+				public static void ConsumeBeanCan()
+				{
 						if (OnConsumeBeanCan != null) {
 								OnConsumeBeanCan();
 						}
 				}
 	
-				public static void ConsumeBeanBarrel() {
+				public static void ConsumeBeanBarrel()
+				{
 						if (OnConsumeBeanBarrel != null) {
 								OnConsumeBeanBarrel();
 						}
 				}
 	
-				public static void Fart() {
+				public static void Fart()
+				{
 						if (OnFart != null) {
 								OnFart();
 						}
 				}
 	
-				public static void MegaFart() {
+				public static void MegaFart()
+				{
 						if (OnMegaFart != null) {
 								OnMegaFart();
 						}
 				}
 	
-				public static void UpdateAmmo(int amount) {
+				public static void UpdateAmmo(int amount)
+				{
 						if (OnUpdateAmmo != null) {
 								OnUpdateAmmo(amount);
 						}

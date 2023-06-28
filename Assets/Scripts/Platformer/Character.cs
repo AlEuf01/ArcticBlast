@@ -10,7 +10,8 @@ public class Character : MonoBehaviour
 	protected Animator animator;
 	protected Collider2D collider;
 	
-	protected virtual void Start() {
+	protected virtual void Start()
+	{
 	    rb = gameObject.GetComponent<Rigidbody2D>();
 	    collider = gameObject.GetComponent<Collider2D>();
 	    

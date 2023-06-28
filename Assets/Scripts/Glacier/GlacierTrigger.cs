@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace ArcticBlast
 {
-    /// <summary>
-		/// Trigger for a glacier
-		/// </summary>
     public abstract class GlacierTrigger : MonoBehaviour
     {
 
@@ -32,7 +29,8 @@ namespace ArcticBlast
 						return other.gameObject.tag == "Glacier";
 				}
 
-				void TriggerEntered() {
+				void TriggerEntered()
+				{
 						EnterPayload();
 				}
 

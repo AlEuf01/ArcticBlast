@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Scenes;
-
-namespace ArcticBlast.Player {
-	
-    // Manages the player's firing actions
+namespace ArcticBlast.Player
+{
+		/// <summary>
+		/// PlayerFire.cs
+		///
+    /// Manages the player's firing actions
+		/// </summary>
     public class PlayerFire : Character
     {
 
@@ -23,7 +25,8 @@ namespace ArcticBlast.Player {
 				public AmmoManager AmmoManager;
 				public PlayerSound sound;
 	
-				void OnEnable() {
+				void OnEnable()
+				{
 						Events.OnFire += Fire;
 						Events.OnConsumeBeanCan += ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
@@ -31,7 +34,8 @@ namespace ArcticBlast.Player {
 						Events.OnCompleteLevel += RemoveAmmo;
 				}
 	
-				void OnDisable() {
+				void OnDisable()
+				{
 						Events.OnFire -= Fire;
 						Events.OnConsumeBeanCan -= ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
@@ -39,44 +43,55 @@ namespace ArcticBlast.Player {
 						Events.OnCompleteLevel -= RemoveAmmo;
 				}
 	
-				void Awake() {
+				void Awake()
+				{
 						AmmoManager = new AmmoManager();
 
 						sound = GetComponentInChildren<PlayerSound>();
 				}
 	
-				void RemoveAmmo() {
-						Debug.Log("Killed player or completed level; removing all ammo.");
+				void RemoveAmmo()
+				{
+						// Debug.Log("Killed player or completed level; removing all ammo.");
 						AmmoManager.RemoveAllAmmo();
 						Events.UpdateAmmo(0);
 				}
 	
-				void ConsumeBeanCan() {
+				void ConsumeBeanCan()
+				{
 						// Debug.Log("Consumed a bean can");			
 						// Increment player's ammo			
 						AmmoManager.Add();
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
 	
-				void ConsumeBeanBarrel() {
+				void ConsumeBeanBarrel()
+				{
 						// Debug.Log("Consumed a bean barrel");
 						AmmoManager.Fill();
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
 	
         // Handles firing the flamethrower
-        void Fire() {				   	
-						if (AmmoManager.HasMegaFartAmmo()) {
+        void Fire()
+				{				   	
+						if (AmmoManager.HasMegaFartAmmo())
+						{
 								MegaFart();
-						} else if (AmmoManager.HasAmmo()) {
+						}
+						else if (AmmoManager.HasAmmo())
+						{
 								SingleFart();
-						} else {
+						}
+						else
+						{
 								NoFart();
 						}
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
 	
-				void MegaFart() {			
+				void MegaFart()
+				{			
 
 						sound.MegaFart();
 	    
@@ -86,12 +101,14 @@ namespace ArcticBlast.Player {
 						Events.MegaFart();
 	    
 						IEnemy target = GetTarget();
-						if (target != null) {
+						if (target != null)
+						{
 								target.MegaFartOn();
 						}
 				}
 		
-				void SingleFart() {
+				void SingleFart()
+				{
 
 						// Sound Effect
 						sound.Fart();
@@ -103,12 +120,14 @@ namespace ArcticBlast.Player {
 						Events.Fart();
 	    
 						IEnemy target = GetTarget();
-						if (target != null) {
+						if (target != null)
+						{
 								target.FartOn();
 						}			
 				}
 	
-				void NoFart() {
+				void NoFart()
+				{
 						// The player clicks the fire button, but has no ammo
 	    
 						// SFX
@@ -118,7 +137,8 @@ namespace ArcticBlast.Player {
 				}
 
 				// Play a farting animation
-				IEnumerator PlayFireAnimation(GameObject fartPrefab) {
+				IEnumerator PlayFireAnimation(GameObject fartPrefab)
+				{
 						// Debug.Log("Firing");
 	    
 						animator.SetBool("IsFiring", true);
@@ -141,11 +161,13 @@ namespace ArcticBlast.Player {
 	
 	
 				// Get the direction of fire (opposite facing direction)
-				Direction GetFireDirection() {
+				Direction GetFireDirection()
+				{
 						return sr.flipX ? Direction.Left : Direction.Right;
 				}
 	
-				IEnemy GetTarget() {
+				IEnemy GetTarget()
+				{
 
 						IEnemy result = null;
 	    
@@ -153,7 +175,8 @@ namespace ArcticBlast.Player {
 	    
 						RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
 	    
-						if (hit.collider != null) {
+						if (hit.collider != null)
+						{
 								// Debug.Log("Hitting " + hit.collider.gameObject.name);
 								result = hit.collider.gameObject.GetComponent<IEnemy>();		
 						}

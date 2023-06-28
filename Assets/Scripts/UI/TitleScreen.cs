@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Scenes;
-
 namespace ArcticBlast {
-    
+
+		/// <summary>
+		/// TitleScreen.cs
+		/// </summary>
     public class TitleScreen : MonoBehaviour
     {
 
-	void Update() {
-	    if (Input.GetKeyDown(KeyCode.Space)) {
-		StartGame();
-	    }
-	}
+				void Update()
+				{
+						if (Input.GetKeyDown(KeyCode.Space))
+						{
+								StartGame();
+						}
+				}
 
-	void StartGame() {
-	    SceneEvents.ChangeScene("Tutorial");
-	}
+				void StartGame()
+				{
+						SceneEvents.RestartGame();
+				}
     }
 }

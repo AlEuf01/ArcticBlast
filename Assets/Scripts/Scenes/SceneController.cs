@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Cyborg.Scenes
+namespace ArcticBlast
 {
 
     // Singleton to load and unload scenes
@@ -24,51 +24,88 @@ namespace Cyborg.Scenes
         public static event Action BeforeSceneLoad;
         public static event Action AfterSceneLoad;        
 
-				void OnEnable() {
+				void OnEnable()
+				{
 						SceneEvents.OnChangeScene += SwitchScene;
+						SceneEvents.OnRestartGame += Restart;
 				}
 	
-				void OnDisable() {
+				void OnDisable()
+				{
 						SceneEvents.OnChangeScene -= SwitchScene;
+						SceneEvents.OnRestartGame -= Restart;
 				}
-	
-        // Called from triggers between areas when the player wants to switch scenes
-        public void SwitchScene(string sceneName) {
-						if (Fader.isFading) {
+
+				/// <summary>
+				/// Restarts from the start scene
+				/// </summary>
+				void Restart()
+				{
+						SwitchScene(config.Start);
+				}
+
+				/// <summary>
+        /// Called from triggers between areas when the player wants to switch scenes
+				/// </summary>
+        public void SwitchScene(string sceneName)
+				{
+						if (Fader.isFading)
+						{
 								// Do nothing; currently fading in/out
-						} else if (IsActiveScene(sceneName)) {
+						}
+						else if (IsActiveScene(sceneName))
+						{
 								// Do nothing; this is the active scene
-						} else {
+						}
+						else
+						{
 								StartCoroutine(FadeAndSwitchScenes(sceneName));
 						}
         }
-	
-        // Load the title screen
-        public void ToMainMenu() {
+
+				/// <summary>
+        /// Load the title screen
+				/// </summary>
+        public void ToMainMenu()
+				{
 	    
-						if (BeforeSceneUnload != null) {
+						if (BeforeSceneUnload != null)
+						{
 								BeforeSceneUnload();
 						}
 	    
             StartCoroutine(LoadMainMenu());
         }
-	
+
+				/// <summary>
+				/// Starts the game
+				/// </summary>
 				IEnumerator Start ()
         {
 						// Load UI in the background
             yield return LoadUI();
 	    
 						// If there's a main menu, load it
-						if (config.Title != "") {
+						if (config.Title != "")
+						{
 								yield return LoadMainMenu();
-						} else if (config.Start != "") {
+						}
+						else if (config.Start != "")
+						{
 								yield return LoadStartScene(config.Start);
-						} else {
+						}
+						else
+						{
 								Debug.LogError("No Title or Start Scene specified in Scene Config; can't load the first scene.");
 						}
 				}
-	
-				IEnumerator LoadStartScene(string sceneName) {
+
+				
+				/// <summary>
+        /// Load the start scene
+				/// </summary>
+				IEnumerator LoadStartScene(string sceneName)
+				{
 	    
 						if (sceneName == "") {
 								Debug.LogError("Trying to load an empty scene name.");
@@ -87,22 +124,34 @@ namespace Cyborg.Scenes
 						yield return StartCoroutine(Fader.FadeIn());
 	    
 				}
-	
-        IEnumerator LoadMainMenu() {
+
+				/// <summary>
+        /// Load the title screen
+				/// </summary>
+        IEnumerator LoadMainMenu()
+				{
 						yield return StartCoroutine(LoadStartScene(config.Title));
         }
-	
-        IEnumerator LoadUI() {
-            
-						// Load all UI scenes
-            foreach(string sceneName in config.UserInterface) {
+
+				/// <summary>
+				/// Load all UI scenes
+				/// </summary>
+        IEnumerator LoadUI()
+				{            
+            foreach(string sceneName in config.UserInterface)
+						{
                 yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);     
             }     
         }
 
-        IEnumerator FadeAndSwitchScenes(string sceneName) {
+				/// <summary>
+				/// Fade out and swap out scenes
+				/// </summary>
+        IEnumerator FadeAndSwitchScenes(string sceneName)
+				{
 
-						if (BeforeSceneUnload != null) {
+						if (BeforeSceneUnload != null)
+						{
 								BeforeSceneUnload();
 						}
             
@@ -112,20 +161,24 @@ namespace Cyborg.Scenes
 						// Switch scene
             yield return SwitchToScene(sceneName);
 	    
-            if (BeforeSceneLoad != null) {
+            if (BeforeSceneLoad != null)
+						{
                 BeforeSceneLoad();
             }
             
             // Fade from black
             yield return StartCoroutine(Fader.FadeIn());
 	    
-						if (AfterSceneLoad != null) {
+						if (AfterSceneLoad != null)
+						{
 								AfterSceneLoad();
 						}
 	    
         }
-
-        // Loads the scene at scenepath and sets it to be active
+				/// <summary>
+        /// Loads the scene at scenepath and sets it to be active
+				/// <param name="scenePath">the new scene to load</param>
+				/// </summary>
         IEnumerator LoadSceneAndSetActive (string scenePath)
         {
             
@@ -139,27 +192,44 @@ namespace Cyborg.Scenes
             SceneManager.SetActiveScene (newlyLoadedScene);
 
         }
-
-        // Switch from the currently loaded scene to this new scene
+				/// <summary>
+        /// Switch from the currently loaded scene to this new scene
+				/// <param name="sceneName">the new scene to load</param>
+				/// </summary>
         IEnumerator SwitchToScene(string sceneName) {
             yield return SwitchToScene(SceneManager.GetActiveScene().buildIndex, sceneName);
         }
 
-        // Unload the old scene (by index) and load the new scene
-        IEnumerator SwitchToScene(int oldSceneIndex, string newScene) {
+				/// <summary>
+        /// Unload the old scene (by index) and load the new scene				
+				/// <param name="oldScene">the old scene index to unload</param>
+				/// <param name="newScene">the new scene to load</param>
+				/// </summary>
+        IEnumerator SwitchToScene(int oldSceneIndex, string newScene)
+				{
             yield return SwitchToScene(SceneManager.GetSceneByBuildIndex(oldSceneIndex).name, newScene);
         }
 
-        // Unload the old scene and load the new scene
-        IEnumerator SwitchToScene(string oldScene, string newScene) {
-            if (Application.CanStreamedLevelBeLoaded(newScene)) {
+				/// <summary>
+        /// Unload the old scene and load the new scene
+				/// <param name="oldScene">the old scene to unload</param>
+				/// <param name="newScene">the new scene to load</param>
+				/// </summary>
+        IEnumerator SwitchToScene(string oldScene, string newScene)
+				{
+            if (Application.CanStreamedLevelBeLoaded(newScene))
+						{
 								yield return SceneManager.UnloadSceneAsync(oldScene);
 								yield return StartCoroutine(LoadSceneAndSetActive(newScene));
 						}
         }
 
-        // Returns true if sceneName is the active scene
-        bool IsActiveScene(string sceneName) {
+				/// <summary>
+        /// Returns true if sceneName is the active scene
+				/// <param name="sceneName">the scene to test</param>
+				/// </summary>
+        bool IsActiveScene(string sceneName)
+				{
             return SceneManager.GetActiveScene().name == sceneName;
         }
     }

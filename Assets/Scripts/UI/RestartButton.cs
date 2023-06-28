@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using Cyborg.Scenes;
-
 namespace ArcticBlast.UI {
 
 		/// <summary>
+		/// RestartButton.cs
+		///
 		/// Press this button to restart the game
 		/// </summary>
 		public class RestartButton : MonoBehaviour, IButton
@@ -17,12 +17,14 @@ namespace ArcticBlast.UI {
 				private bool clicked = false;
 
 				// Fire or jump events trigger this button
-				void OnEnable() {
+				void OnEnable()
+				{
 						Events.OnFire += OnClick;
 						Events.OnJump += OnClick;
 				}
 
-				void OnDisable() {
+				void OnDisable()
+				{
 						Events.OnFire -= OnClick;
 						Events.OnJump -= OnClick;
 				}
@@ -30,10 +32,11 @@ namespace ArcticBlast.UI {
 				/// <summary>
 				/// Click handler for restart button
 				/// </summary>
-				public void OnClick() {
+				public void OnClick()
+				{
 						if (!clicked) {
 								clicked = true;
-								SceneEvents.ChangeScene("Tutorial");
+								SceneEvents.RestartGame();
 						}
 				}
 

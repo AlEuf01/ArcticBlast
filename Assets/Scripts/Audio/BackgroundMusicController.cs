@@ -2,42 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cyborg.Audio {
-
-	// Handles background music for the game
-	public class BackgroundMusicController : SoundController
-	{
+namespace ArcticBlast
+{
+		/// <summary>
+		/// Handles background music for the game
+		/// </summary>
+		public class BackgroundMusicController : SoundController
+		{
 		
-		void OnEnable() {
-			AudioEvents.OnPlayMusic += PlayMusic;
-
-			AudioEvents.OnPause += Pause;
-			AudioEvents.OnUnPause += UnPause;
-		}
+				void OnEnable()
+				{
+						AudioEvents.OnPlayMusic += PlayMusic;
+						AudioEvents.OnPause += Pause;
+						AudioEvents.OnUnPause += UnPause;
+				}
 		
-		void OnDisable() {
-			AudioEvents.OnPlayMusic -= PlayMusic;
+				void OnDisable()
+				{
+						AudioEvents.OnPlayMusic -= PlayMusic;
+						AudioEvents.OnPause -= Pause;
+						AudioEvents.OnUnPause -= UnPause;
+				}
 
-			AudioEvents.OnPause -= Pause;
-			AudioEvents.OnUnPause -= UnPause;
-		}
+				public void PlayMusic(string clipName)
+				{
+						if (!IsPlaying(clipName))
+						{
+								PlayClip(GetClipByName(clipName));
+						}
+				}
 
-		public void PlayMusic(string clipName) {
-			if (IsPlaying(clipName)) {
-				// Do Nothing; already playing this clip
-			} else {
-				PlayClip(GetClipByName(clipName));
-			}
-		}
-		
-		public void Pause() {
-			audioSource.Pause();
-		}
-		
-		public void UnPause() {
-			audioSource.UnPause();
-		}
-	}
+				/// <summary>
+				/// Pauses the current background track
+				/// </summary>
+				public void Pause()
+				{
+						audioSource.Pause();
+				}
+
+				/// <summary>
+				/// Unpauses the background music
+				/// </summary>
+				public void UnPause()
+				{
+						audioSource.UnPause();
+				}
+}
 
 }
 

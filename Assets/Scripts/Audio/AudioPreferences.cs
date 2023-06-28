@@ -1,33 +1,33 @@
 ﻿using UnityEngine;
 
-namespace Cyborg.Audio {
+namespace ArcticBlast {
 
-	public enum PlayerPrefKeys
-	{
-		Volume
-	}
-	
-	
-	// Manages user-defined audio controls
-	public static class AudioPreferences 
-	{
+		public enum PlayerPrefKeys
+				{
+					Volume
+			}
 		
-		// Audio controls don't start out maxed
-		const float DEFAULT_VOLUME = 0.75f;
 		
-		public static float Volume
+		// Manages user-defined audio controls
+		public static class AudioPreferences 
 		{
-			get
-			{
-				return PlayerPrefs.GetFloat(PlayerPrefKeys.Volume.ToString(), DEFAULT_VOLUME);
-			}
-			set
-			{
-				PlayerPrefs.SetFloat(PlayerPrefKeys.Volume.ToString(), value);
-			}
-		}
+				
+				// Audio controls don't start out maxed
+				const float DEFAULT_VOLUME = 0.75f;
 		
-	}
+				public static float Volume
+				{
+						get
+						{
+								return PlayerPrefs.GetFloat(PlayerPrefKeys.Volume.ToString(), DEFAULT_VOLUME);
+						}
+						set
+						{
+								PlayerPrefs.SetFloat(PlayerPrefKeys.Volume.ToString(), value);
+						}
+				}
+		
+		}
 	
 }
 

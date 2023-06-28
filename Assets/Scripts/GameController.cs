@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cyborg.Audio;
 using Cyborg.Scenes;
 
 using ArcticBlast.Utils;
 
-namespace ArcticBlast {
+namespace ArcticBlast
+{
 
     /// <summary>
+		/// GameController.cs
 		/// Controller for the main logic of the game
 		/// </summary>
     public class GameController : Singleton<GameController>

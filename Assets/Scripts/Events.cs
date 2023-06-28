@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
-using Cyborg.Audio;
 using Cyborg.Scenes;
 
-namespace ArcticBlast {
+namespace ArcticBlast
+{
     
     // Class to handle all events for the game
     public class Events

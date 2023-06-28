@@ -3,48 +3,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cyborg.Audio {
+namespace ArcticBlast
+{
 
-	public class AudioEvents
-	{
+		/// <summary>
+		/// AudioEvents.cs
+		/// Manages events related to the audio system
+		/// </summary>
+		public class AudioEvents
+		{
 		
-		// Play a sound effect clip
-		public delegate void PlaySoundHandler(string soundClipName);
-		public static event PlaySoundHandler OnPlaySound;
-		public static event PlaySoundHandler OnPlayMusic;
+				// Play a sound effect clip
+				public delegate void PlaySoundHandler(string soundClipName);
+				public static event PlaySoundHandler OnPlaySound;
+				public static event PlaySoundHandler OnPlayMusic;
 		
-		// Pause or unpause the background music
-		public static event Action OnPause;
-		public static event Action OnUnPause;
-		
-		// Handles playing a sound
-		public static void PlaySound(string clipName) {
-			if (OnPlaySound != null) {
-				OnPlaySound(clipName);
-			}	
-		}
+				// Event when pausing the backgorund music
+				public static event Action OnPause;
 
-		// Handles changing the background music track
-		public static void PlayMusic(string clipName) {
-			if (OnPlayMusic != null) {
-				OnPlayMusic(clipName);
-			}
-		}
+				// Event when unpausing the background music
+				public static event Action OnUnPause;
 
-		// Handles pausing and unpausing
+				/// <summary>
+				/// Handles playing a sound
+				/// <param name="clipName">the name of the clip to playe</param>
+				/// </summary>
+				public static void PlaySound(string clipName)
+				{
+						if (OnPlaySound != null) {
+								OnPlaySound(clipName);
+						}	
+				}
+
+				/// <summary>
+				/// Handles changing the background music track
+				/// <param name="clipName">the name of the clip to playe</param>
+				/// </summary>
+				public static void PlayMusic(string clipName)
+				{
+						if (OnPlayMusic != null)
+						{
+								OnPlayMusic(clipName);
+						}
+				}
+
+				/// <summary>
+				/// Pauses the current music track
+				/// </summary>
+				public static void Pause()
+				{
+						if (OnPause != null)
+						{
+								OnPause();
+						}
+				}
+
+				
+				/// <summary>
+				/// Unpauses the current music track
+				/// </summary>
+				public static void UnPause()
+				{
+						if (OnUnPause != null)
+						{
+								OnUnPause();
+						}
+				}
 		
-		public static void Pause() {
-			if (OnPause != null) {
-				OnPause();
-			}
 		}
-		
-		public static void UnPause() {
-			if (OnUnPause != null) {
-				OnUnPause();
-			}
-		}
-		
-	}
 	
 }

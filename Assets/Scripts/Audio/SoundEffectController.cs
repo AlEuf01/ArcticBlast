@@ -1,29 +1,36 @@
 ﻿using UnityEngine;
 
-namespace Cyborg.Audio {
-
-	// Controller to manage playing sound effects
-	public class SoundEffectController : SoundController
-	{
-		// Bind events
-		void OnEnable() {
-			AudioEvents.OnPlaySound += PlayClip;
-		}
+namespace ArcticBlast
+{
 		
-		// Unbind events
-		void OnDisable() {
-			AudioEvents.OnPlaySound -= PlayClip;
-		}
+		/// <summary>
+		/// Controller to manage playing sound effects
+		/// </summary>
+		public class SoundEffectController : SoundController
+		{
+				
+				void OnEnable()
+				{
+						AudioEvents.OnPlaySound += PlayClip;
+				}
 		
-		// Plays a sound clip with a given name
-		public void PlayClip(string clipName) {
-			AudioClip clip = GetClipByName(clipName);
+				void OnDisable()
+				{
+						AudioEvents.OnPlaySound -= PlayClip;
+				}
+		
+				// Plays a sound clip with a given name as a oneshot
+				public void PlayClip(string clipName)
+				{
+						AudioClip clip = GetClipByName(clipName);
 			
-			if (clip != null) {
-				audioSource.PlayOneShot(clip, AudioPreferences.Volume);
-			}
+						if (clip != null)
+						{
+								audioSource.PlayOneShot(clip, AudioPreferences.Volume);
+						}
+				}
+
 		}
-	}
 	
 }
 

@@ -1,52 +1,74 @@
 ﻿using UnityEngine;
 
-using Cyborg.Audio;
+namespace ArcticBlast
+{
 
-namespace ArcticBlast {
-
-	// Handle audio events for Arctic Blast
-	public class AudioController : MonoBehaviour
-	{
+		/// <summary>
+		/// AudioController.cs
+		/// Handle audio events for Arctic Blast
+		/// </summary>
+		public class AudioController : MonoBehaviour
+		{
 		
-		void OnEnable() {			
-			Events.OnConsumeBeanBarrel += PlayCollect;
-			Events.OnConsumeBeanCan += PlayCollect;
-			
-			Events.OnPause += Pause;
-		}
-		
-		void OnDisable() {
-			Events.OnConsumeBeanBarrel -= PlayCollect;
-			Events.OnConsumeBeanCan -= PlayCollect;
+				void OnEnable() {			
+						Events.OnConsumeBeanBarrel += PlayCollect;
+						Events.OnConsumeBeanCan += PlayCollect;			
+						Events.OnPause += Pause;
+				}
 
-			Events.OnPause -= Pause;
-		}
+				void OnDisable() {
+						Events.OnConsumeBeanBarrel -= PlayCollect;
+						Events.OnConsumeBeanCan -= PlayCollect;
+						Events.OnPause -= Pause;
+				}
 
-		// Play a collection (ie, collect powerup) sound effect
-		void PlayCollect() {
-			AudioEvents.PlaySound("consume");
-		}
-		
-		// Play a pause sound effect
-		void Pause() {		   
-			AudioEvents.PlaySound("smb_pause");
-		}
+				/// <summary>
+				/// Play a collection (ie, collect powerup) sound effect
+				/// </summary>
+				void PlayCollect()
+				{
+						AudioEvents.PlaySound("consume");
+				}
 
-		// Play a kick sound effect
-		public static void PlayKick() {
-			AudioEvents.PlaySound("smb_kick");
-		}
+				/// <summary>
+				/// Play a pause sound effect
+				/// </summary>
+				void Pause()
+				{		   
+						AudioEvents.PlaySound("smb_pause");
+				}
 
-		public static void PlayWin() {
-			AudioEvents.PlayMusic("win");
-		}
+				/// <summary>
+				/// Play a kick sound effect
+				/// </summary>
+				public static void PlayKick()
+				{
+						AudioEvents.PlaySound("smb_kick");
+				}
 
-		public static void PlayLose() {
-			AudioEvents.PlayMusic("lose");					  	  	   }
+				/// <summary>
+				/// Play a music clip after winning
+				/// </summary>
+				public static void PlayWin()
+				{
+						AudioEvents.PlayMusic("win");
+				}
 
-		public static void PlayLoop() {
-			AudioEvents.PlayMusic("loop");
+				/// <summary>
+				/// Play a music clip after losing
+				/// </summary>
+				public static void PlayLose()
+				{
+						AudioEvents.PlayMusic("lose");
+				}
+
+				/// <summary>
+				/// Play looping background music
+				/// </summary>
+				public static void PlayLoop()
+				{
+						AudioEvents.PlayMusic("loop");
+				}
 		}
-	}
 	
 }

@@ -66,7 +66,7 @@ namespace ArcticBlast
 				
 				void Update()
 				{
-						// Handle Key Events
+						// Handle Key Input Events
 						if (Input.GetKeyUp(KeyCode.P) || Input.GetKeyUp(KeyCode.Escape))
 						{
 								TogglePause();
@@ -78,7 +78,6 @@ namespace ArcticBlast
 				/// </summary>
 				void Restart()
 				{	    
-						// Debug.Log("Restarting the game.");	    
 						StartCoroutine(Lose());
 				}
 
@@ -88,13 +87,13 @@ namespace ArcticBlast
 				/// </summary>
 				void CompleteLevel()
 				{
-						// Debug.Log("Winning the game.");
-
 						
 						AudioEvents.PlayWin();
 
+						// Reset the player's ammo to zero
 						AmmoManager.Amount = 0;
-	    
+
+						// Got to the next level
 						levelNum++;
 						
 						StartCoroutine(HandleCompleteLevel());			
@@ -123,7 +122,7 @@ namespace ArcticBlast
 	    
 						AudioEvents.PlayLoop();
 	    
-						yield return new WaitForSeconds(3.0f);
+						yield return new WaitForSeconds(DelayWhenLosingLevel);
 	    
 						SceneEvents.RestartGame();
 				}
@@ -157,6 +156,7 @@ namespace ArcticBlast
 	    
 								yield return new WaitForSeconds(DelayWhenWinningGame);
 
+								// Reset to the first level
 								levelNum = 0;
 
 								// Restart to the beginning

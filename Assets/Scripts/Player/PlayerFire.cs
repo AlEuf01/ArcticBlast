@@ -12,18 +12,23 @@ namespace ArcticBlast.Player
     public class PlayerFire : Character
     {
 
+				// Blast range for firing on something
 				public float Range = 5f;		
 	
 				// LayerMask of objects that can be fired on
 				public LayerMask layerMask;
-	
+
+				// Prefabs for fart sound effects
 				public GameObject fartLarge, fartSmall, fartTiny;
-	
-				public Transform fartPointL;
-				public Transform fartPointR;
-	
-				public AmmoManager AmmoManager;
-				public PlayerSound sound;
+
+				// Positions to spawn fart
+				public Transform fartPointL, fartPointR;
+
+				// Reference to the ammo manager				
+				private AmmoManager AmmoManager;
+
+				// Reference to the sound system
+				private PlayerSound Sound;
 	
 				void OnEnable()
 				{
@@ -46,33 +51,42 @@ namespace ArcticBlast.Player
 				void Awake()
 				{
 						AmmoManager = new AmmoManager();
-
-						sound = GetComponentInChildren<PlayerSound>();
+						Sound = GetComponentInChildren<PlayerSound>();
 				}
-	
+
+				/// <summary>
+				/// Remove all ammo from the player
+				/// </summary>
 				void RemoveAmmo()
 				{
 						// Debug.Log("Killed player or completed level; removing all ammo.");
 						AmmoManager.RemoveAllAmmo();
 						Events.UpdateAmmo(0);
 				}
-	
+
+				/// <summary>
+				/// Consume one bean can, incrementing fart gauge
+				/// </summary>
 				void ConsumeBeanCan()
 				{
 						// Debug.Log("Consumed a bean can");			
-						// Increment player's ammo			
 						AmmoManager.Add();
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
-	
+
+				/// <summary>
+				/// Consume one bean barrel, filling fart gauge
+				/// </summary>
 				void ConsumeBeanBarrel()
 				{
 						// Debug.Log("Consumed a bean barrel");
 						AmmoManager.Fill();
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
-	
-        // Handles firing the flamethrower
+
+				/// <summary>
+        /// Handles firing
+				/// </summary>
         void Fire()
 				{				   	
 						if (AmmoManager.HasMegaFartAmmo())
@@ -87,13 +101,17 @@ namespace ArcticBlast.Player
 						{
 								NoFart();
 						}
+						
 						Events.UpdateAmmo(AmmoManager.Amount);
 				}
-	
+
+				/// <summary>
+				/// Farts with a full ammo bar
+				/// </summary>
 				void MegaFart()
 				{			
 
-						sound.MegaFart();
+						Sound.MegaFart();
 	    
 						StartCoroutine(PlayFireAnimation(fartLarge));
 	    
@@ -106,12 +124,15 @@ namespace ArcticBlast.Player
 								target.MegaFartOn();
 						}
 				}
-		
+
+				/// <summary>
+				/// Farts with one ammo
+				/// </summary>
 				void SingleFart()
 				{
 
 						// Sound Effect
-						sound.Fart();
+						Sound.Fart();
 	    
 						StartCoroutine(PlayFireAnimation(fartSmall));
 	    
@@ -125,18 +146,23 @@ namespace ArcticBlast.Player
 								target.FartOn();
 						}			
 				}
-	
+
+				/// <summary>
+				/// No fart. The player clicks the fire button, but has no ammo
+				/// </summary>
 				void NoFart()
 				{
-						// The player clicks the fire button, but has no ammo
 	    
 						// SFX
-						sound.Poof();
+						Sound.Poof();
 	    
 						StartCoroutine(PlayFireAnimation(fartTiny));
 				}
 
-				// Play a farting animation
+				/// <summary>
+				/// Play a farting animation
+				/// <param name="fartPrefab">The prefab for the fart</param>
+				/// </summary>
 				IEnumerator PlayFireAnimation(GameObject fartPrefab)
 				{
 						// Debug.Log("Firing");
@@ -159,27 +185,41 @@ namespace ArcticBlast.Player
 	    
 				}		
 	
-	
+
+				/// <summary>
 				// Get the direction of fire (opposite facing direction)
+				/// <return>The Direction to fire</return>
+				/// </summary>
 				Direction GetFireDirection()
 				{
 						return sr.flipX ? Direction.Left : Direction.Right;
 				}
-	
+
+				/// <summary>
+				/// Get the target of the fire
+				/// <return>The Enemy being fired on</return>
+				/// </summary>
 				IEnemy GetTarget()
 				{
 
 						IEnemy result = null;
-	    
+
 						Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
-	    
+
+						Debug.Log($"Firing in direction: {direction}");
+						
 						RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
-	    
+						
 						if (hit.collider != null)
 						{
-								// Debug.Log("Hitting " + hit.collider.gameObject.name);
+								Debug.Log("Hitting " + hit.collider.gameObject.name);
 								result = hit.collider.gameObject.GetComponent<IEnemy>();		
 						}
+						else
+						{
+								Debug.Log("Nothing in range to hit.");
+						}
+								
 	    
 						return result;
 				}

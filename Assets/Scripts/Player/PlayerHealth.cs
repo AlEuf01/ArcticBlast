@@ -16,7 +16,7 @@ namespace ArcticBlast {
 				PlayerMovement movement;
 	
 				// Flag to make player immune to damage
-				bool invincible = false;
+				public bool invincible = false;
 	
 				void OnEnable()
 				{

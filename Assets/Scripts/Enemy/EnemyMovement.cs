@@ -123,11 +123,11 @@ namespace ArcticBlast
 								// Update the facing direction
 								if (IsPlayerAhead)
 								{
-										sr.flipX = false;
+										transform.localScale = new Vector3(1f, 1f, 1f);
 								}
 								else
 								{
-										sr.flipX = true;								
+										transform.localScale = new Vector3(-1f, 1f, 1f);
 								}
 						}
 				}

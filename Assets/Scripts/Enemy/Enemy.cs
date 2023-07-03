@@ -26,6 +26,11 @@ namespace ArcticBlast {
 				// True if the enemy is currently attacking the player
 				public bool isAttacking;
 
+				public GameObject Puke;
+
+				// The amount of time to stun the player
+				public float stunDuration, pukeDuration, recoverDuration;
+
 				public void FartOn()
 				{
 						Stun();
@@ -36,6 +41,13 @@ namespace ArcticBlast {
 						// Stun();
 						Die();
 				}
+
+				protected override void Start()
+				{
+						base.Start();
+						Puke.gameObject.SetActive(false);
+				}
+					
 	
 				void FixedUpdate()
 				{
@@ -90,13 +102,15 @@ namespace ArcticBlast {
 						// Play sound effects
 						Events.EnemyKilled();
 
+						animator.SetTrigger("Die");						
+
 						// TODO: Play death animation, then destroy object
-						Destroy(gameObject);
+						// Destroy(gameObject);
 				}
 	
 
 				/// <summary>
-				/// Stun the enemy for the duration of the animatoin clip
+				/// Stun the enemy for the duration of the animation clip
 				/// </summary>
 				IEnumerator StunForDurationOfClip()
 				{
@@ -106,9 +120,18 @@ namespace ArcticBlast {
 
 						// rb.simulated = false;
 
-						float duration = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-						Debug.Log($"Duration of stun: {duration}");
-						yield return new WaitForSeconds(duration);
+						yield return new WaitForSeconds(stunDuration);
+
+						Puke.SetActive(true);
+
+						yield return new WaitForSeconds(pukeDuration);
+
+						animator.SetTrigger("Recover");
+
+						yield return new WaitForSeconds(recoverDuration);
+
+						Puke.SetActive(false);
+						
 						// rb.simulated = true;
 
 						isStunned = false;

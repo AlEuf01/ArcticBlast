@@ -4,21 +4,25 @@ using UnityEngine;
 
 namespace ArcticBlast {
 
-	// Manages keyboard input
-	public class InputManager : MonoBehaviour
-	{
+		/// <summary>
+		/// InputManager.cs
+		///
+		/// Manages keyboard input
+		/// </summary>
+		public class InputManager : MonoBehaviour
+		{
 	    
-	    // Check for Jump or Fire events
-	    void FixedUpdate()
-	    {
-		if (Input.GetButton("Jump")) {
-		    Events.Jump();
-		}
+				// Check for Jump or Fire events
+				void FixedUpdate()
+				{
+						if (Input.GetButton("Jump")) {
+								Events.Jump();
+						}
 		
-		if (Input.GetButtonDown("Fire1")) {
-		    Events.Fire();
+						if (Input.GetButtonDown("Fire1")) {
+								Events.Fire();
+						}
+				}
 		}
-	    }
-	}
     
 }

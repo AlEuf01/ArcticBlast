@@ -12,7 +12,7 @@ namespace ArcticBlast {
     {
 
 				// Distance to check for collisions with the player
-				const float HIT_DISTANCE = 0.8f;
+				const float HIT_DISTANCE = 2.0f;
 
 				// True if it's possible to stun this enemy, false otherwise
         public bool CanBeStunned = true;
@@ -36,6 +36,8 @@ namespace ArcticBlast {
 				/// </summary>
 				public GameObject Puke;
 
+				public float attackDuration = 1.0f;
+
 				// The amount of time to stun the player
 				public float stunDuration, pukeDuration, recoverDuration, deathDelay;
 
@@ -54,16 +56,11 @@ namespace ArcticBlast {
 						base.Start();
 						Puke.gameObject.SetActive(false);
 				}
-					
-	
-				void FixedUpdate()
-				{
-						CheckCollisions();
-				}
+				
 	
 				void OnCollisionEnter2D(Collision2D col)
 				{
-						if (!isStunned && col.gameObject.tag == "Player")
+						if (!isStunned && !isDead && col.gameObject.tag == "Player")
 						{
 								StartCoroutine(Attack());
 						}
@@ -80,14 +77,12 @@ namespace ArcticBlast {
 
 						// TODO: Play Sound Effect
 
-						// TODO: Stun, don't kill, the player
-						Events.KillPlayer();
+						Events.HitPlayer();
 
-						yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+						yield return new WaitForSeconds(attackDuration);
 	    
 						isAttacking = false;
 				}
-
 				
 				/// <summary>
 				/// Stun the enemy
@@ -117,9 +112,6 @@ namespace ArcticBlast {
 
 				}
 
-
-	
-
 				/// <summary>
 				/// Stun the enemy for the duration of the animation clip
 				/// </summary>
@@ -146,40 +138,6 @@ namespace ArcticBlast {
 						// rb.simulated = true;
 
 						isStunned = false;
-				}
-
-				/// <summary>
-				/// Check to see if the player jumped on the enemy
-				/// </summary>
-				void CheckCollisions()
-				{	    
-						if (CheckCollisionWithPlayer()) {
-								HandleJumpCollision();
-						}	    				
-				}
-
-				/// <summary>
-				/// Check collision in a certain direction
-				/// </summary>
-				bool CheckCollisionWithPlayer()
-				{
-						RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, HIT_DISTANCE, layerMask);
-						return hit.collider != null && hit.collider.gameObject.tag == "Player";
-				}
-
-				/// <summary>
-				/// Handle the player jumping on this enemy
-				/// </summary>
-				void HandleJumpCollision()
-				{
-						if (isStunned)
-						{
-								Die();
-						}
-						else if (!isDead)
-						{
-								Events.KillPlayer();
-						}
 				}
 	
 

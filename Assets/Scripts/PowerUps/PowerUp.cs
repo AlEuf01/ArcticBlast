@@ -44,7 +44,7 @@ namespace ArcticBlast
 						// Clean up if off the screen
 						if (transform.position.y < -0.9)
 						{
-								Destroy(gameObject, 3.0f);
+								Destroy(gameObject, 1.0f);
 						}
 				}
 

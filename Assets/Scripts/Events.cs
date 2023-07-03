@@ -20,6 +20,7 @@ namespace ArcticBlast
 	
 				// Event handler for killing the player
 				public static event Action OnKillPlayer;
+				public static event Action OnHitPlayer;
 	
 				// Event handler for consuming a power-up
 				public static event Action OnConsumeBeanCan;
@@ -92,7 +93,14 @@ namespace ArcticBlast
 								OnKillPlayer();
 						}
 				}
-	
+
+				
+				public static void HitPlayer() {
+						if (OnHitPlayer != null) {
+								OnHitPlayer();
+						}
+				}
+				
 				public static void ConsumeBeanCan()
 				{
 						if (OnConsumeBeanCan != null) {

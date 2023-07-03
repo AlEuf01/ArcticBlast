@@ -13,6 +13,9 @@ namespace ArcticBlast {
 	
 				public bool isDead = false;
 
+				public int MaxHP = 3;
+				public int CurrentHP = 3;
+
 				PlayerMovement movement;
 	
 				// Flag to make player immune to damage
@@ -21,13 +24,16 @@ namespace ArcticBlast {
 				void OnEnable()
 				{
 						Events.OnKillPlayer += Die;
+						Events.OnHitPlayer += Hit;
 						// Events.OnCompleteLevel += Freeze;
 				}
 	
 				void OnDisable()
 				{
 						Events.OnKillPlayer -= Die;
+						Events.OnHitPlayer -= Hit;
 						// Events.OnCompleteLevel -= Freeze;
+						
 				}
 
 				protected override void Start()
@@ -49,6 +55,15 @@ namespace ArcticBlast {
 								invincible = true;
 								isDead = true;
 								StartCoroutine(PlayerDeath());
+						}
+				}
+
+				void Hit()
+				{
+						CurrentHP--;
+						if (CurrentHP <= 0)
+						{
+								Die();
 						}
 				}
 

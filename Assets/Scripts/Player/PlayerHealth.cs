@@ -21,13 +21,13 @@ namespace ArcticBlast {
 				void OnEnable()
 				{
 						Events.OnKillPlayer += Die;
-						Events.OnCompleteLevel += Freeze;
+						// Events.OnCompleteLevel += Freeze;
 				}
 	
 				void OnDisable()
 				{
 						Events.OnKillPlayer -= Die;
-						Events.OnCompleteLevel -= Freeze;
+						// Events.OnCompleteLevel -= Freeze;
 				}
 
 				protected override void Start()

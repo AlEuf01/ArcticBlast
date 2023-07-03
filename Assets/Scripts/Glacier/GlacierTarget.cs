@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ArcticBlast {
-    
+
+		/// <summary>
+		/// The part of the glacier that the player can fire on
+		/// </summary>
     public class GlacierTarget : MonoBehaviour, IEnemy
     {
 

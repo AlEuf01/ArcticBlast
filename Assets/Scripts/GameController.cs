@@ -22,7 +22,7 @@ namespace ArcticBlast
 				/// <summary> 
 				/// Total number of levels
 				/// </summary>
-				public int numLevels = 4;
+				public int numLevels = 5;
 
 
 				public float DelayWhenWinningGame = 5.0f;

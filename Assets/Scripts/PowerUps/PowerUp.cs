@@ -40,6 +40,12 @@ namespace ArcticBlast
 				void Update()
 				{
 						transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
+
+						// Clean up if off the screen
+						if (transform.position.y < -0.9)
+						{
+								Destroy(gameObject, 3.0f);
+						}
 				}
 
 				void OnCollisionEnter2D(Collision2D coll)

@@ -8,16 +8,16 @@ namespace ArcticBlast.Environment {
     public class GarbageCollector : MonoBehaviour
     {
 
-		float delayLength = 1.0f;
+				float delayLength = 1.0f;
 		
-		void OnTriggerEnter2D(Collider2D other) {
+				void OnTriggerEnter2D(Collider2D other) {
 			
-			if (other.gameObject.tag == "PowerUp") {
-				// Debug.Log("Destroying powerup.");
-				Destroy(other.gameObject, delayLength);
+						if (other.gameObject.tag == "PowerUp") {
+								// Debug.Log("Destroying powerup.");
+								Destroy(other.gameObject, delayLength);
 
-			}
-		}
+						}
+				}
 
     }
     

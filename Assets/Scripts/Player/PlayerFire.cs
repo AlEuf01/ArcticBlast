@@ -22,7 +22,7 @@ namespace ArcticBlast.Player
 				public GameObject fartLarge, fartSmall, fartTiny;
 
 				// Positions to spawn fart
-				public Transform fartPointL, fartPointR;
+				public Transform fartPointL, fartPointR, firePoint;
 
 				// Reference to the ammo manager				
 				private AmmoManager AmmoManager;
@@ -207,8 +207,10 @@ namespace ArcticBlast.Player
 						Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
 
 						Debug.Log($"Firing in direction: {direction}");
-						
-						RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Range, layerMask);
+
+						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
+						Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
+						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, Range, layerMask);
 						
 						if (hit.collider != null)
 						{

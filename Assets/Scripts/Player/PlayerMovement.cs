@@ -24,8 +24,8 @@ namespace ArcticBlast
 				/// </summary>
 				GroundChecker GroundChecker;
 
-				bool isLanding = false;
-
+				bool isJumping = false;
+				
 				float moveX = 0f;
 				float moveY = 0f;
 				bool jump = false;
@@ -46,6 +46,7 @@ namespace ArcticBlast
 				void FixedUpdate()
 				{
 						Move();
+						Land();
 						Jump();
 				}
 		
@@ -55,23 +56,10 @@ namespace ArcticBlast
 
 						float speed = Mathf.Abs(moveX * Time.fixedDeltaTime * 10f);
 						animator.SetFloat("Speed", speed);
-
-						if (GroundChecker.IsGrounded)
-						{
-								isLanding = false;
-						}
 						
 						UpdateFlip(moveX);
 			
-						// Update the velocity
-						if (isLanding)
-						{
-								// do nothing
-						}
-						else
-						{
-								rb.velocity = new Vector2(moveX, moveY);
-						}
+						rb.velocity = new Vector2(moveX, moveY);
 						
 				}
 
@@ -86,6 +74,7 @@ namespace ArcticBlast
 								PlatformerEvents.Jump();
 
 								animator.SetBool("IsJumping", true);
+								isJumping = true;
 						}
 
 						jump = false;
@@ -93,8 +82,11 @@ namespace ArcticBlast
 
 				void Land()
 				{
-						isLanding = true;
-						animator.SetBool("IsJumping", false);
+						if (isJumping && GroundChecker.IsGrounded)
+						{
+								isJumping = false;
+								animator.SetBool("IsJumping", false);
+						}
 				}
 				
 				// Update the flip direction of the sprite

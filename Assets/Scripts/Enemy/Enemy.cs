@@ -24,12 +24,20 @@ namespace ArcticBlast {
 				public bool isStunned = false;
 
 				// True if the enemy is currently attacking the player
-				public bool isAttacking;
+				public bool isAttacking = false;
 
+				/// <summary>
+				/// True if the enemy is dead
+				/// </summary>
+				public bool isDead = false;
+
+				/// <summary>
+				/// Spawned Puke
+				/// </summary>
 				public GameObject Puke;
 
 				// The amount of time to stun the player
-				public float stunDuration, pukeDuration, recoverDuration;
+				public float stunDuration, pukeDuration, recoverDuration, deathDelay;
 
 				public void FartOn()
 				{
@@ -38,7 +46,6 @@ namespace ArcticBlast {
 	
 				public void MegaFartOn()
 				{
-						// Stun();
 						Die();
 				}
 
@@ -87,7 +94,7 @@ namespace ArcticBlast {
 				/// </summary>
 				void Stun()
 				{
-						if (CanBeStunned)
+						if (CanBeStunned && !isDead)
 						{
 								// Debug.Log("Stunning enemy.");
 								StartCoroutine(StunForDurationOfClip());				
@@ -102,11 +109,15 @@ namespace ArcticBlast {
 						// Play sound effects
 						Events.EnemyKilled();
 
+						isDead = true;
+						
 						animator.SetTrigger("Die");						
 
-						// TODO: Play death animation, then destroy object
-						// Destroy(gameObject);
+						Destroy(gameObject, deathDelay);
+
 				}
+
+
 	
 
 				/// <summary>
@@ -165,7 +176,7 @@ namespace ArcticBlast {
 						{
 								Die();
 						}
-						else
+						else if (!isDead)
 						{
 								Events.KillPlayer();
 						}

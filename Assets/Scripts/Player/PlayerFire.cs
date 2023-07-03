@@ -209,7 +209,7 @@ namespace ArcticBlast.Player
 						Debug.Log($"Firing in direction: {direction}");
 
 						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
-						Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
+						// Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
 						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, Range, layerMask);
 						
 						if (hit.collider != null)

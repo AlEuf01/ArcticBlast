@@ -21,25 +21,16 @@ namespace ArcticBlast
 				/// </summary>
 				private GameObject _player;
 
+				private Enemy _enemy;
+				
 				/// <summary>
-				/// Checks for whether the enemy is stunned
+				/// Checks for whether the enemy can move
 				/// </summary>
-				bool IsStunned
+				bool CanMove
 				{
 						get
 						{
-								return GetComponent<Enemy>().isStunned;
-						}
-				}
-
-				/// <summary>
-				/// Checks for whether the enemy is attacking
-				/// </summary>
-				bool IsAttacking
-				{
-						get
-						{
-								return GetComponent<Enemy>().isAttacking;
+								return !_enemy.isStunned && !_enemy.isAttacking && !_enemy.isDead;
 						}
 				}
 
@@ -70,6 +61,7 @@ namespace ArcticBlast
 						base.Start();
 	   
 						_player = GameObject.FindWithTag("Player");
+						_enemy = GetComponent<Enemy>();
 				}
 	
 				void FixedUpdate()
@@ -85,7 +77,7 @@ namespace ArcticBlast
 				void Animate()
 				{
 	    
-						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						if (IsPlayerAlive && CanMove)
 						{
 								animator.SetBool("IsWalking", true);
 						}
@@ -104,7 +96,7 @@ namespace ArcticBlast
 				void Move()
 				{
 						
-						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						if (IsPlayerAlive && CanMove)
 						{
 								Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);								
 								transform.Translate(IsPlayerAhead ? amount : -amount);
@@ -117,7 +109,7 @@ namespace ArcticBlast
 				/// </summary>
 				void UpdateDirection()
 				{
-						if (IsPlayerAlive && !IsAttacking && !IsStunned)
+						if (IsPlayerAlive && CanMove)
 						{
 								
 								// Update the facing direction

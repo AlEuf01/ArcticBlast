@@ -55,7 +55,6 @@ namespace ArcticBlast
 
 						float speed = Mathf.Abs(moveX * Time.fixedDeltaTime * 10f);
 						animator.SetFloat("Speed", speed);
-						animator.SetBool("IsJumping", !GroundChecker.IsGrounded);
 
 						if (GroundChecker.IsGrounded)
 						{
@@ -85,6 +84,8 @@ namespace ArcticBlast
 				
 								// Tie events to jumping
 								PlatformerEvents.Jump();
+
+								animator.SetBool("IsJumping", true);
 						}
 
 						jump = false;
@@ -92,7 +93,8 @@ namespace ArcticBlast
 
 				void Land()
 				{
-						isLanding = true;					 
+						isLanding = true;
+						animator.SetBool("IsJumping", false);
 				}
 				
 				// Update the flip direction of the sprite

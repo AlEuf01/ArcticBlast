@@ -91,14 +91,16 @@ namespace ArcticBlast {
 						AudioEvents.PlayLose();
 			
 						StopMovement();	    
-	    
+
+						Debug.Log("Killing player");
+						
 						animator.SetTrigger("Death");
 	    
-						yield return new WaitForSeconds(0.2f);
+						yield return new WaitForSeconds(1.0f);
 	    
 						Events.GameOver();
 	    
-						animator.ResetTrigger("Death");
+						// animator.ResetTrigger("Death");
 	    
 				}
     }

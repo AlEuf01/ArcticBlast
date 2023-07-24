@@ -12,20 +12,6 @@ namespace ArcticBlast
 		/// </summary>
     public class PowerUpSpawner : MonoBehaviour
     {
-				/// <summary>
-				/// The range in which the power up can spawn from origin
-				/// </summary>
-				public float range;	   
-
-				/// <summary>
-				/// Rate at which the power up spawns
-				/// </summary>
-				public float RepeatRate = 1f;
-
-				/// <summary>
-				/// Delay before initial spawn
-				/// </summary>
-				public float Delay = 2f;
 
 				/// <summary>
 				/// The maximum angle this can be rotated when spawning
@@ -39,7 +25,7 @@ namespace ArcticBlast
 				{
 		
 						Vector2 spawnPosition = transform.position;
-						spawnPosition.x = Random.Range(transform.position.x - range/2, transform.position.x + range/2);
+						spawnPosition.x = Random.Range(transform.position.x - GameParameters.Instance.PowerUpSpawnRange/2, transform.position.x + GameParameters.Instance.PowerUpSpawnRange/2);
 
 						return spawnPosition;
 		

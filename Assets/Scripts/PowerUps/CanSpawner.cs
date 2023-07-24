@@ -15,7 +15,7 @@ namespace ArcticBlast {
 				// Start is called before the first frame update
 				void Start()
 				{
-						InvokeRepeating("LaunchBeanCan", Delay, RepeatRate);    
+						InvokeRepeating("LaunchBeanCan", GameParameters.Instance.BeanCanSpawnDelay, GameParameters.Instance.BeanCanSpawnRate);    
 				}
 		
 				void LaunchBeanCan()

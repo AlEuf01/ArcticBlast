@@ -18,6 +18,12 @@ namespace ArcticBlast
 				public float GlacierPushBackDuration = 1.0f;
 
 				public float EnemySpeed = 1.0f;
+
+				public float BarrelSpawnRate = 1.0f;
+				public float BeanCanSpawnRate = 1.0f;
+				public float BarrelSpawnDelay = 2.0f;
+				public float BeanCanSpawnDelay = 2.0f;
+				public float PowerUpSpawnRange = 5.0f;
 		}
 
 }

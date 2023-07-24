@@ -14,7 +14,7 @@ namespace ArcticBlast
 
 				void Start()
 				{
-						InvokeRepeating("LaunchBarrel", Delay, RepeatRate);
+						InvokeRepeating("LaunchBarrel", GameParameters.Instance.BarrelSpawnDelay, GameParameters.Instance.BarrelSpawnRate);
 				}
 
 				void LaunchBarrel()

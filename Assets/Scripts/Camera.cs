@@ -6,17 +6,21 @@ namespace ArcticBlast {
 
 		/// <summary>
 		/// Camera.cs
-		/// Camera for Arctic Blast
+		/// 
+		/// Panning Camera for Arctic Blast
 		/// </summary>
     public class Camera : CameraController
     {
 
-				// Reference to the edge of the glacier
-				private GlacierEdge glacierEdge;
+				// Reference to glacier, used for clamping movement
+				private Glacier glacier;
 
 				// Cache the xMin specified by the user
 				private float initXMin;
-	
+
+				const float MIN_WIDTH = 1f;
+				const float GLACIER_OFFSET = 2f;
+				
 				void OnEnable()
 				{
 						SceneController.AfterSceneLoad += ResetXMin;
@@ -41,9 +45,9 @@ namespace ArcticBlast {
 				// Initializes the glacier edge
 				void SetGlacierEdge()
 				{
-						if (glacierEdge == null)
+						if (glacier == null)
 						{
-								glacierEdge = GameObject.FindObjectOfType<GlacierEdge>();
+								glacier = GameObject.FindObjectOfType<Glacier>();
 						}
 				}
 
@@ -66,10 +70,10 @@ namespace ArcticBlast {
 				{
 						
 						// Debug.Log("Setting glacier edge to " + glacierEdge.transform.position.x);
-						xMin = Mathf.Max(initXMin, glacierEdge.gameObject.transform.position.x + glacierEdge.cameraOffset);
+						xMin = Mathf.Max(initXMin, glacier.gameObject.transform.position.x + GLACIER_OFFSET);
 
-						// Make sure xMin is less than xMax
-						xMin = Mathf.Min(xMin, xMax - 1.0f);
+						// Make sure xMin is less than xMax by MIN_WIDTH
+						xMin = Mathf.Min(xMin, xMax - MIN_WIDTH);
 	    
 						base.SetPlayerPosition();
 				}

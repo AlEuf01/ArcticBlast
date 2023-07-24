@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace ArcticBlast {
 
+		/// <summary>
+		/// PlayerGlacierMovement.cs
+		/// Handles moving the player when they are on top of the glacier
+		/// </summary>
 		public class PlayerGlacierMovement : MonoBehaviour
 		{
 

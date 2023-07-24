@@ -90,7 +90,7 @@ namespace ArcticBlast {
 
 						AudioEvents.PlayLose();
 			
-						StopMovement();	    
+						// StopMovement();	    
 
 						Debug.Log("Killing player");
 						

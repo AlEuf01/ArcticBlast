@@ -11,8 +11,6 @@ namespace ArcticBlast {
     public class Enemy : Character, IEnemy
     {
 
-				// Distance to check for collisions with the player
-				const float HIT_DISTANCE = 2.0f;
 
 				// True if it's possible to stun this enemy, false otherwise
         public bool CanBeStunned = true;

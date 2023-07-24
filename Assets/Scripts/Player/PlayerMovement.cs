@@ -12,12 +12,12 @@ namespace ArcticBlast
 				/// <summary>
 				/// The speed of the player's movement
 				/// </summary>
-				public int Speed = 6;
+				// public int Speed = 6;
 
 				/// <summary>
 				/// The amount of force in a jump
 				/// </summary>
-				public int JumpForce = 1250;
+				// public int JumpForce = 1250;
 
 				/// <summary>
 				/// Collider to check if the player is grounded
@@ -38,7 +38,7 @@ namespace ArcticBlast
 
 				void Update()
 				{
-						moveX = Input.GetAxisRaw("Horizontal") * Speed;
+						moveX = Input.GetAxisRaw("Horizontal") * GameParameters.Instance.PlayerSpeed;
 						moveY = rb.velocity.y;
 						jump = Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow);
 						
@@ -68,7 +68,7 @@ namespace ArcticBlast
 				{
 						if (jump && GroundChecker.IsGrounded)
 						{
-								rb.AddForce(Vector2.up * JumpForce);
+								rb.AddForce(Vector2.up * GameParameters.Instance.PlayerJumpForce);
 				
 								// Tie events to jumping
 								PlatformerEvents.Jump();

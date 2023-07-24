@@ -14,17 +14,17 @@ namespace ArcticBlast {
 				/// <summary>
 				/// The movement speed of the glacier, going forward
 				/// </summary>
-				public float Speed = 1f;
+				// public float Speed = 1f;
 
 				/// <summary>
 				/// The speed when pushed back by the player
 				/// </summary>
-				public float PushBackSpeed = 2f;
+				// public float PushBackSpeed = 2f;
 
 				/// <summary>
 				/// The length of time to push back the glacier
 				/// </summary>
-				public float PushBackDuration = 1f;
+				// public float PushBackDuration = 1f;
 
 				/// <summary>
 				/// True if the glacier is currently sliding backwards
@@ -76,20 +76,20 @@ namespace ArcticBlast {
 				// Slide forwards by a given amount
 				void SlideForward()
 				{
-						Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);
+						Vector2 amount = new Vector2(GameParameters.Instance.GlacierSpeed * Time.deltaTime, 0f);
 						transform.Translate(amount);
 				}
 
 				// Slide backwards by a given amount
 				void SlideBack()
 				{
-						transform.Translate(new Vector2(-PushBackSpeed * Time.deltaTime * _slideBackForce, 0f));
+						transform.Translate(new Vector2(GameParameters.Instance.GlacierPushBackSpeed * Time.deltaTime * _slideBackForce * -1, 0f));
 				}
 
 				// Resume moving forward after the given duration
 				IEnumerator ResumeForwardMovement()
 				{	   
-						yield return new WaitForSeconds(PushBackDuration);	    
+						yield return new WaitForSeconds(GameParameters.Instance.GlacierPushBackDuration);	    
 						_isPushingBack = false;
 				}
     }

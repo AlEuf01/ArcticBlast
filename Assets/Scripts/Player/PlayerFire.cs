@@ -13,7 +13,7 @@ namespace ArcticBlast.Player
     {
 
 				// Blast range for firing on something
-				public float Range = 5f;		
+				// public float Range = 5f;		
 	
 				// LayerMask of objects that can be fired on
 				public LayerMask layerMask;
@@ -210,7 +210,7 @@ namespace ArcticBlast.Player
 
 						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
 						// Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
-						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, Range, layerMask);
+						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
 						
 						if (hit.collider != null)
 						{

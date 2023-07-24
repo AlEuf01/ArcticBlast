@@ -14,7 +14,7 @@ namespace ArcticBlast
 				/// <summary>
 				/// The movement speed
 				/// </summary>
-				public float Speed = 1f;
+				// public float Speed = 1f;
 
 				/// <summary>
 				/// Reference to the player
@@ -98,7 +98,7 @@ namespace ArcticBlast
 						
 						if (IsPlayerAlive && CanMove)
 						{
-								Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);								
+								Vector2 amount = new Vector2(GameParameters.Instance.EnemySpeed * Time.deltaTime, 0f);								
 								transform.Translate(IsPlayerAhead ? amount : -amount);
 
 						}

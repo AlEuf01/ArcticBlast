@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using ArcticBlast.Utils;
 
 namespace ArcticBlast
@@ -18,19 +17,30 @@ namespace ArcticBlast
 				/// Current level
 				/// </summary>				
 				public int levelNum = 0;
-
+				
 				/// <summary> 
 				/// Total number of levels
 				/// </summary>
 				public int numLevels = 5;
 
-
+				[Header("Timing Configuration")]
+				/// <summary> Delay in seconds after winning the game </summary>				
 				public float DelayWhenWinningGame = 5.0f;
+
+				/// <summary> Delay in seconds when advancing a level </summary>
 				public float DelayWhenAdvancingLevel = 3.0f;
+
+				/// <summary> Delay in seconds when losing a level </summary>
 				public float DelayWhenLosingLevel = 3.0f;
+
+				/// <summary> Delay before starting music </summary>
 				public float DelayBeforeStartingMusic = 1.0f;
 
+				[Header("Scene Names")]
+				/// <summary> Scene to load on victory </summary>
 				public string VictorySceneName = "_Win";
+
+				/// <summary> scene to load on Game Over </summary>
 				public string GameOverSceneName = "_GameOver";
 			 
 				void OnEnable()

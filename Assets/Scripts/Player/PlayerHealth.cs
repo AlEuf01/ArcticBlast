@@ -41,6 +41,10 @@ namespace ArcticBlast {
 						base.Start();
 						animator = GetComponent<Animator>();
 						movement = GetComponent<PlayerMovement>();
+
+						// Debugging code for death animation
+						// Debug.Log("Calling DieAfterAFewMinutes");
+						// StartCoroutine(DieAfterAFewMinutes());
 				}
 				
 				public void Die()
@@ -81,24 +85,39 @@ namespace ArcticBlast {
 				{
 						movement.enabled = false;
 						rb.velocity = Vector2.zero;
-						gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-						collider.isTrigger = true;
+
+						// Interrupts the player's jumps
+						animator.SetBool("IsJumping", false);
+						// gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+						// collider.isTrigger = true;
 				}
-	
+
+				IEnumerator DieAfterAFewMinutes(float time = 1.0f)
+				{
+
+						Debug.Log("Dying after a few seconds.");
+						yield return new WaitForSeconds(time);
+
+						Debug.Log("Dying now.");
+						StartCoroutine(PlayerDeath());
+				}
+				
 				IEnumerator PlayerDeath()
 				{		   			
 
 						AudioEvents.PlayLose();
 			
 						StopMovement();	    
-	    
+
+						Debug.Log("Killing player");
+						
 						animator.SetTrigger("Death");
 	    
-						yield return new WaitForSeconds(0.2f);
+						yield return new WaitForSeconds(1.5f);
 	    
 						Events.GameOver();
 	    
-						animator.ResetTrigger("Death");
+						// animator.ResetTrigger("Death");
 	    
 				}
     }

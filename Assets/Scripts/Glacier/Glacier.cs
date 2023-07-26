@@ -11,21 +11,8 @@ namespace ArcticBlast {
     public class Glacier : MonoBehaviour
     {
 
-				/// <summary>
-				/// The movement speed of the glacier, going forward
-				/// </summary>
-				// public float Speed = 1f;
-
-				/// <summary>
-				/// The speed when pushed back by the player
-				/// </summary>
-				// public float PushBackSpeed = 2f;
-
-				/// <summary>
-				/// The length of time to push back the glacier
-				/// </summary>
-				// public float PushBackDuration = 1f;
-
+				private float Speed = 1.0f;
+				
 				/// <summary>
 				/// True if the glacier is currently sliding backwards
 				/// </summary>
@@ -45,7 +32,14 @@ namespace ArcticBlast {
 				{
 						Events.OnMeltGlacier -= PushBack;
 				}
-								
+
+				void Start()
+				{
+						// Set speed as a range
+						Speed = Mathf.Clamp(GameParameters.Instance.GlacierSpeed + GameParameters.Instance.GlacierSpeedIncreaseRate * GameController.Instance.levelNum, GameParameters.Instance.GlacierSpeed, GameParameters.Instance.MaxGlacierSpeed);
+						
+				}
+				
 				void FixedUpdate()
 				{
 						Move();
@@ -76,7 +70,7 @@ namespace ArcticBlast {
 				// Slide forwards by a given amount
 				void SlideForward()
 				{
-						Vector2 amount = new Vector2(GameParameters.Instance.GlacierSpeed * Time.deltaTime, 0f);
+						Vector2 amount = new Vector2(Speed * Time.deltaTime, 0f);
 						transform.Translate(amount);
 				}
 

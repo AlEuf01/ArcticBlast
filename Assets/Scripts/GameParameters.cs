@@ -14,6 +14,9 @@ namespace ArcticBlast
 				public int PlayerJumpForce = 1250;
 
 				public float GlacierSpeed = 1.0f;
+				public float GlacierSpeedIncreaseRate = 0.3f;
+				public float MaxGlacierSpeed = 2.0f;
+				
 				public float GlacierPushBackSpeed = 2.0f;
 				public float GlacierPushBackDuration = 1.0f;
 

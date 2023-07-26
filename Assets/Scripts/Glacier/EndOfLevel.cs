@@ -11,9 +11,26 @@ namespace ArcticBlast
     public class EndOfLevel : GlacierTrigger
     {
 
+				public Animator animator;
+
+				void OnEnable()
+				{
+						Events.OnCompleteLevel += Hatch;
+				}
+
+				void OnDisable()
+				{
+						Events.OnCompleteLevel -= Hatch;
+				}
+				
 				protected override void EnterPayload()
 				{
 						Events.KillPlayer();
+				}
+
+				void Hatch()
+				{
+						animator.SetBool("Hatching", true);
 				}
     }
     

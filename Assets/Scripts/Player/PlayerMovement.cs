@@ -9,15 +9,6 @@ namespace ArcticBlast
 		/// </summary>
     public class PlayerMovement : Character
     {
-				/// <summary>
-				/// The speed of the player's movement
-				/// </summary>
-				// public int Speed = 6;
-
-				/// <summary>
-				/// The amount of force in a jump
-				/// </summary>
-				// public int JumpForce = 1250;
 
 				/// <summary>
 				/// Collider to check if the player is grounded
@@ -29,6 +20,8 @@ namespace ArcticBlast
 				float moveX = 0f;
 				float moveY = 0f;
 				bool jump = false;
+
+				bool checkInput = true;
 	
 				protected override void Start()
 				{
@@ -36,18 +29,40 @@ namespace ArcticBlast
 						GroundChecker = GetComponent<GroundChecker>();
 				}
 
+				void OnEnable()
+				{
+						Events.OnCompleteLevel += RunToEgg;
+				}
+				
+				void OnDisable()
+				{
+						Events.OnCompleteLevel -= RunToEgg;
+				}
+
 				void Update()
 				{
-						moveX = Input.GetAxisRaw("Horizontal") * GameParameters.Instance.PlayerSpeed;
-						moveY = rb.velocity.y;
-						jump = Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow);
+						if (checkInput == true)
+						{
+								moveX = Input.GetAxisRaw("Horizontal") * GameParameters.Instance.PlayerSpeed;
+								moveY = rb.velocity.y;
+								jump = Input.GetButtonDown("Jump") || Input.GetKeyUp(KeyCode.UpArrow);
+						}
 						
 				}
 				void FixedUpdate()
 				{
-						Move();
-						Land();
-						Jump();
+
+						if (checkInput == true)
+						{
+								Move();														
+								Land();
+								Jump();
+						}
+						else
+						{
+								Land();
+								MoveToEgg();
+						}
 				}
 		
 				// Handles movement
@@ -61,6 +76,20 @@ namespace ArcticBlast
 			
 						rb.velocity = new Vector2(moveX, moveY);
 						
+				}
+
+				void MoveToEgg()
+				{
+						if (transform.position.x < GameObject.FindObjectOfType<EndOfLevel>().transform.position.x - 2)
+						{
+								moveX = 1.5f * GameParameters.Instance.PlayerSpeed;
+						}
+						else
+						{
+								moveX = 0;
+						}
+
+						Move();
 				}
 
 		
@@ -108,6 +137,15 @@ namespace ArcticBlast
 				void FlipSprite()
 				{
 						sr.flipX = !sr.flipX;					
+				}
+
+				void RunToEgg()
+				{
+						checkInput = false;
+						animator.SetBool("IsJumping", false);
+						sr.flipX = false;
+
+						
 				}
 	
     }

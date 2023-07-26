@@ -73,12 +73,7 @@ namespace ArcticBlast {
 
 				void Freeze()
 				{
-						movement.enabled = false;
-						rb.isKinematic = true;
-						rb.velocity  = Vector2.zero;
-						gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-						animator.SetFloat("Speed", 0f);
-						collider.enabled = false;
+						StopMovement();
 				}
 
 				void StopMovement()
@@ -88,8 +83,9 @@ namespace ArcticBlast {
 
 						// Interrupts the player's jumps
 						animator.SetBool("IsJumping", false);
-						// gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-						// collider.isTrigger = true;
+						animator.SetFloat("Speed", 0);
+						
+
 				}
 
 				IEnumerator DieAfterAFewMinutes(float time = 1.0f)

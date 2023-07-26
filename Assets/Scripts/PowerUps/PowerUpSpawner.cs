@@ -17,6 +17,21 @@ namespace ArcticBlast
 				/// The maximum angle this can be rotated when spawning
 				/// </summary>
 				const float MAX_ANGLE = 180f;
+
+				void OnEnable()
+				{
+						Events.OnCompleteLevel += Disable;
+				}
+
+				void OnDisable()
+				{
+						Events.OnCompleteLevel -= Disable;
+				}
+
+				void Disable()
+				{
+						gameObject.SetActive(false);
+				}
 				
 				/// <summary>
 				/// Get a randomized spawn position

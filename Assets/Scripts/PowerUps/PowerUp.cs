@@ -27,6 +27,17 @@ namespace ArcticBlast
 				// Current state of the powerup
 				protected PowerUpState powerUpState;
 
+				void OnEnable()
+				{
+						Events.OnCompleteLevel += Disable;
+				}
+
+				
+				void OnDisable()
+				{
+						Events.OnCompleteLevel -= Disable;
+				}
+				
 				void Awake()
 				{
 						spriteRenderer = GetComponent<SpriteRenderer>();
@@ -37,6 +48,11 @@ namespace ArcticBlast
 						powerUpState = PowerUpState.InAttractMode;
 				}
 
+				void Disable()
+				{
+						gameObject.SetActive(false);
+				}
+				
 				void Update()
 				{
 						transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);

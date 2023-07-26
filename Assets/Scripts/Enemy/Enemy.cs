@@ -39,6 +39,21 @@ namespace ArcticBlast {
 				// The amount of time to stun the player
 				public float stunDuration, pukeDuration, recoverDuration, deathDelay;
 
+				void OnEnable()
+				{
+						Events.OnCompleteLevel += Disable;
+				}
+
+				void OnDisable()
+				{
+						Events.OnCompleteLevel -= Disable;
+				}
+
+				void Disable()
+				{
+						gameObject.SetActive(false);
+				}
+				
 				public void FartOn()
 				{
 						Stun();

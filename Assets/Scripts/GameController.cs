@@ -28,7 +28,7 @@ namespace ArcticBlast
 				public float DelayWhenWinningGame = 5.0f;
 
 				/// <summary> Delay in seconds when advancing a level </summary>
-				public float DelayWhenAdvancingLevel = 3.0f;
+				public float DelayWhenAdvancingLevel = 2.0f;
 
 				/// <summary> Delay in seconds when losing a level </summary>
 				public float DelayWhenLosingLevel = 3.0f;
@@ -175,7 +175,7 @@ namespace ArcticBlast
 						}
 						else
 						{
-								// yield return new WaitForSeconds(DelayWhenAdvancingLevel);
+								yield return new WaitForSeconds(DelayWhenAdvancingLevel);
 								NextLevel();
 						}
 		

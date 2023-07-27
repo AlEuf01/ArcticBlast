@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ArcticBlast {
+namespace ArcticBlast
+{
 
 		/// <summary>
 		/// Glacier.cs

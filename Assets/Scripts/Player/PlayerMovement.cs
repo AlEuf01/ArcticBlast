@@ -89,7 +89,7 @@ namespace ArcticBlast
 								moveX = 0;
 						}
 
-						moveY = 0;
+						moveY = rb.velocity.y;
 
 						Move();
 				}

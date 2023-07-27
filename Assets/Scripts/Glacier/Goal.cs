@@ -15,7 +15,7 @@ namespace ArcticBlast
 				protected override void ExitPayload()
 				{
 						// Debug.Log("Entered goal!");
-						Events.CompleteLevel();			   
+						Events.CompleteLevel();
 				}
     }
     

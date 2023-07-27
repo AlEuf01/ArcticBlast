@@ -42,6 +42,8 @@ namespace ArcticBlast
 
 				/// <summary> scene to load on Game Over </summary>
 				public string GameOverSceneName = "_GameOver";
+
+				private bool isChangingLevel = false;
 			 
 				void OnEnable()
 				{
@@ -97,16 +99,20 @@ namespace ArcticBlast
 				/// </summary>
 				void CompleteLevel()
 				{
-						
-						AudioEvents.PlayWin();
 
-						// Reset the player's ammo to zero
-						AmmoManager.Amount = 0;
-
-						// Got to the next level
-						levelNum++;
-						
-						StartCoroutine(HandleCompleteLevel());			
+						if (isChangingLevel == false)
+						{
+								isChangingLevel = true;
+								AudioEvents.PlayWin();
+								
+								// Reset the player's ammo to zero
+								AmmoManager.Amount = 0;
+								
+								// Got to the next level
+								levelNum++;
+								
+								StartCoroutine(HandleCompleteLevel());
+						}
 				}
 
 				/// <summary>
@@ -145,8 +151,9 @@ namespace ArcticBlast
 				{
 						if (levelNum < numLevels)
 						{
-								Debug.Log($"Advancing to level {levelNum}");
+								Debug.Log($"Advancing to level {levelNum} out of {numLevels}");
 								SceneEvents.ChangeScene($"Level{levelNum}");
+								isChangingLevel = false;
 						}
 						else
 						{

@@ -22,6 +22,7 @@ namespace ArcticBlast
 				bool jump = false;
 
 				bool checkInput = true;
+				bool runningToEgg = false;
 	
 				protected override void Start()
 				{
@@ -61,7 +62,10 @@ namespace ArcticBlast
 						else
 						{
 								Land();
-								MoveToEgg();
+								if (runningToEgg)
+								{
+										MoveToEgg();
+								}
 						}
 				}
 		
@@ -146,6 +150,14 @@ namespace ArcticBlast
 						checkInput = false;
 						animator.SetBool("IsJumping", false);
 						sr.flipX = false;
+						if (GameController.Instance.levelNum == GameController.Instance.numLevels)
+						{
+								runningToEgg = true;
+						}
+						else
+						{
+								animator.SetFloat("Speed", 0);
+						}
 
 						
 				}

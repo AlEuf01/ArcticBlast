@@ -56,6 +56,9 @@ namespace ArcticBlast
 						}
 				}
 
+				/// <summary>
+				/// Returns true if the player is facing a boulder
+				/// </summary>
 				bool IsNearBoulder
 				{
 						get {

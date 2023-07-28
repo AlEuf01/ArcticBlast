@@ -24,14 +24,18 @@ namespace ArcticBlast
 				/// </summary>
 				private float _slideBackForce = 0.0f;
 
+				private bool levelDone;
+				
 				void OnEnable()
 				{
 						Events.OnMeltGlacier += PushBack;
+						Events.OnCompleteLevel += StopMovingForward;
 				}
 				
 				void OnDisable()
 				{
 						Events.OnMeltGlacier -= PushBack;
+						Events.OnCompleteLevel += StopMovingForward;
 				}
 
 				void Start()
@@ -49,7 +53,7 @@ namespace ArcticBlast
 				// Moves the glacier incrementally
 				void Move()
 				{						
-						if (_isPushingBack)
+						if (_isPushingBack || levelDone)
 						{
 								// Slide back away from the egg
 								SlideBack();
@@ -86,6 +90,11 @@ namespace ArcticBlast
 				{	   
 						yield return new WaitForSeconds(GameParameters.Instance.GlacierPushBackDuration);	    
 						_isPushingBack = false;
+				}
+
+				void StopMovingForward()
+				{
+						levelDone = true;
 				}
     }
     

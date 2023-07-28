@@ -3055,6 +3055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7075406878644877177}
   - component: {fileID: 1376371955149933228}
+  - component: {fileID: 7075406878644877178}
   m_Layer: 9
   m_Name: Sky
   m_TagString: Untagged
@@ -3299,3 +3300,16 @@ Transform:
   m_Father: {fileID: 5284326024219340872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7075406878644877178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197436047048659073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f76f7afd5917c2d94107981b0e2119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParallaxFactor: 0.6

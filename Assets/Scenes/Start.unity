@@ -555,6 +555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
+      propertyPath: PlayerJumpForce
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
+        type: 3}
       propertyPath: BarrelSpawnDelay
       value: 5
       objectReference: {fileID: 0}

@@ -23,19 +23,6 @@ namespace ArcticBlast
 				/// </summary>
 				public int numLevels = 5;
 
-				[Header("Timing Configuration")]
-				/// <summary> Delay in seconds after winning the game </summary>				
-				public float DelayWhenWinningGame = 5.0f;
-
-				/// <summary> Delay in seconds when advancing a level </summary>
-				public float DelayWhenAdvancingLevel = 2.0f;
-
-				/// <summary> Delay in seconds when losing a level </summary>
-				public float DelayWhenLosingLevel = 3.0f;
-
-				/// <summary> Delay before starting music </summary>
-				public float DelayBeforeStartingMusic = 1.0f;
-
 				[Header("Scene Names")]
 				/// <summary> Scene to load on victory </summary>
 				public string VictorySceneName = "_Win";
@@ -138,7 +125,7 @@ namespace ArcticBlast
 	    
 						AudioEvents.PlayLoop();
 	    
-						yield return new WaitForSeconds(DelayWhenLosingLevel);
+						yield return new WaitForSeconds(GameParameters.Instance.DelayWhenLosingLevel);
 	    
 						SceneEvents.RestartGame();
 				}
@@ -169,9 +156,9 @@ namespace ArcticBlast
 							    	 
 						if (levelNum == numLevels)
 						{
-								SceneEvents.ChangeScene(VictorySceneName);
+								// SceneEvents.ChangeScene(VictorySceneName);
 	    
-								yield return new WaitForSeconds(DelayWhenWinningGame);
+								// yield return new WaitForSeconds(GameParameters.Instance.DelayWhenWinningGame);
 
 								// Reset to the first level
 								levelNum = 0;
@@ -182,11 +169,11 @@ namespace ArcticBlast
 						}
 						else
 						{
-								yield return new WaitForSeconds(DelayWhenAdvancingLevel);
+								yield return new WaitForSeconds(GameParameters.Instance.DelayWhenAdvancingLevel);
 								NextLevel();
 						}
 		
-						yield return new WaitForSeconds(DelayBeforeStartingMusic);
+						yield return new WaitForSeconds(GameParameters.Instance.DelayBeforeStartingMusic);
 	    
 						AudioEvents.PlayLoop();
 	    
@@ -202,13 +189,15 @@ namespace ArcticBlast
 	    
 						AudioEvents.PlayLose();
 	    
-						SceneEvents.ChangeScene(GameOverSceneName);
-			
-						yield return new WaitForSeconds(DelayWhenLosingLevel);
-	    
+						// SceneEvents.ChangeScene(GameOverSceneName);
+
+						// yield return new WaitForSeconds(GameParameters.Instance.DelayWhenLosingLevel);
+
+						Debug.Log("Advancing to next level.");
+						
 						NextLevel();
 	    
-						yield return new WaitForSeconds(DelayBeforeStartingMusic);
+						yield return new WaitForSeconds(GameParameters.Instance.DelayBeforeStartingMusic);
 	    
 						AudioEvents.PlayLoop();
 				}

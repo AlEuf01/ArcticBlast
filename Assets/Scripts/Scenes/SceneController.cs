@@ -53,10 +53,6 @@ namespace ArcticBlast
 						{
 								// Do nothing; currently fading in/out
 						}
-						else if (IsActiveScene(sceneName))
-						{
-								// Do nothing; this is the active scene
-						}
 						else
 						{
 								StartCoroutine(FadeAndSwitchScenes(sceneName));

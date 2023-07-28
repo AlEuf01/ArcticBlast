@@ -36,12 +36,14 @@ namespace ArcticBlast
 				{
 						Events.OnGameOver += Restart;
 						Events.OnCompleteLevel += CompleteLevel;
+						SceneEvents.OnRestartGame += ResetLevel;
 				}
 	
 				void OnDisable()
 				{
 						Events.OnGameOver -= Restart;
 						Events.OnCompleteLevel -= CompleteLevel;
+						SceneEvents.OnRestartGame -= ResetLevel;
 				}
 				
 				/// <summary>
@@ -80,6 +82,10 @@ namespace ArcticBlast
 						StartCoroutine(Lose());
 				}
 
+				void ResetLevel()
+				{
+						levelNum = 0;
+				}
 				
 				/// <summary>
 				/// Completes a level
@@ -156,15 +162,11 @@ namespace ArcticBlast
 							    	 
 						if (levelNum == numLevels)
 						{
-								// SceneEvents.ChangeScene(VictorySceneName);
-	    
-								// yield return new WaitForSeconds(GameParameters.Instance.DelayWhenWinningGame);
 
-								// Reset to the first level
-								levelNum = 0;
 
-								// Restart to the beginning
-								SceneEvents.RestartGame();
+								yield return new WaitForSeconds(GameParameters.Instance.DelayWhenWinningGame);// We won the game!								
+								SceneEvents.ChangeScene(VictorySceneName);
+
 		
 						}
 						else

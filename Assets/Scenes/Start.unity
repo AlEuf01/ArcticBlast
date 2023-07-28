@@ -555,6 +555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
+      propertyPath: DelayWhenWinningGame
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
+        type: 3}
       propertyPath: DelayWhenAdvancingLevel
       value: 1.5
       objectReference: {fileID: 0}
@@ -832,7 +837,12 @@ PrefabInstance:
     - target: {fileID: 7353087036204664641, guid: 642a561652dd4f393832a7a0ea5a4c8d,
         type: 3}
       propertyPath: numLevels
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7353087036204664641, guid: 642a561652dd4f393832a7a0ea5a4c8d,
+        type: 3}
+      propertyPath: VictorySceneName
+      value: Title
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 642a561652dd4f393832a7a0ea5a4c8d, type: 3}

@@ -30,7 +30,10 @@ namespace ArcticBlast
 
 				void Hatch()
 				{
-						animator.SetBool("Hatching", true);
+						if (GameController.Instance.levelNum == GameController.Instance.numLevels)
+						{
+								animator.SetBool("Hatching", true);
+						}
 				}
     }
     

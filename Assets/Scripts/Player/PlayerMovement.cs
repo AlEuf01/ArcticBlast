@@ -148,11 +148,11 @@ namespace ArcticBlast
 				void RunToEgg()
 				{
 						checkInput = false;
-						animator.SetBool("IsJumping", false);
-						sr.flipX = false;
+						animator.SetBool("IsJumping", false);					 
 						if (GameController.Instance.levelNum == GameController.Instance.numLevels)
 						{
 								runningToEgg = true;
+								sr.flipX = false;
 						}
 						else
 						{

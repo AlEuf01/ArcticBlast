@@ -92,6 +92,8 @@ namespace ArcticBlast {
 
 						Events.HitPlayer();
 
+						gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+
 						yield return new WaitForSeconds(attackDuration);
 	    
 						isAttacking = false;

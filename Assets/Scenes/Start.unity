@@ -548,21 +548,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '@GameParameters'
       objectReference: {fileID: 0}
-    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
-        type: 3}
-      propertyPath: DelayWhenLosingLevel
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
-        type: 3}
-      propertyPath: DelayWhenWinningGame
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
-        type: 3}
-      propertyPath: DelayWhenAdvancingLevel
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781174, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: m_RootOrder

@@ -29,14 +29,16 @@ namespace ArcticBlast.Player
 
 				// Reference to the sound system
 				private PlayerSound Sound;
-	
+
+				private bool _canFire = true;
+				
 				void OnEnable()
 				{
 						Events.OnFire += Fire;
 						Events.OnConsumeBeanCan += ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
 						Events.OnKillPlayer += RemoveAmmo;
-						Events.OnCompleteLevel += RemoveAmmo;
+						Events.OnCompleteLevel += OnComplete;
 				}
 	
 				void OnDisable()
@@ -45,7 +47,7 @@ namespace ArcticBlast.Player
 						Events.OnConsumeBeanCan -= ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
 						Events.OnKillPlayer -= RemoveAmmo;
-						Events.OnCompleteLevel -= RemoveAmmo;
+						Events.OnCompleteLevel -= OnComplete;
 				}
 	
 				void Awake()
@@ -54,6 +56,12 @@ namespace ArcticBlast.Player
 						Sound = GetComponentInChildren<PlayerSound>();
 				}
 
+				void OnComplete()
+				{
+						_canFire = false;
+						RemoveAmmo();
+				}
+				
 				/// <summary>
 				/// Remove all ammo from the player
 				/// </summary>
@@ -88,18 +96,21 @@ namespace ArcticBlast.Player
         /// Handles firing
 				/// </summary>
         void Fire()
-				{				   	
-						if (AmmoManager.HasMegaFartAmmo())
+				{
+						if (_canFire)
 						{
-								MegaFart();
-						}
-						else if (AmmoManager.HasAmmo())
-						{
-								SingleFart();
-						}
-						else
-						{
-								NoFart();
+								if (AmmoManager.HasMegaFartAmmo())
+								{
+										MegaFart();
+								}
+								else if (AmmoManager.HasAmmo())
+								{
+										SingleFart();
+								}
+								else
+								{
+										NoFart();
+								}
 						}
 						
 						Events.UpdateAmmo(AmmoManager.Amount);

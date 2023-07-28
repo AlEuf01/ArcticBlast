@@ -55,6 +55,14 @@ namespace ArcticBlast
 								return _player.transform.position.x > transform.position.x;
 						}
 				}
+
+				bool IsNearBoulder
+				{
+						get {
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, IsPlayerAhead ? Vector2.right : Vector2.left, 1.0f, LayerMask.GetMask("Ground"));
+								return hit.collider != null && hit.collider.gameObject.GetComponentInParent<Obstacle>() != null;
+				}
+				}
 		
 				protected override void Start()
 				{
@@ -96,7 +104,7 @@ namespace ArcticBlast
 				void Move()
 				{
 						
-						if (IsPlayerAlive && CanMove)
+						if (IsPlayerAlive && CanMove && !IsNearBoulder)
 						{
 								Vector2 amount = new Vector2(GameParameters.Instance.EnemySpeed * Time.deltaTime, 0f);								
 								transform.Translate(IsPlayerAhead ? amount : -amount);

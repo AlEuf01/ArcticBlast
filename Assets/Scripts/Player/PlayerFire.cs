@@ -11,10 +11,7 @@ namespace ArcticBlast.Player
 		/// </summary>
     public class PlayerFire : Character
     {
-
-				// Blast range for firing on something
-				// public float Range = 5f;		
-	
+				
 				// LayerMask of objects that can be fired on
 				public LayerMask layerMask;
 
@@ -30,6 +27,7 @@ namespace ArcticBlast.Player
 				// Reference to the sound system
 				private PlayerSound Sound;
 
+				// Flag set to false if the player can no longer fire
 				private bool _canFire = true;
 				
 				void OnEnable()
@@ -37,7 +35,7 @@ namespace ArcticBlast.Player
 						Events.OnFire += Fire;
 						Events.OnConsumeBeanCan += ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel += ConsumeBeanBarrel;
-						Events.OnKillPlayer += RemoveAmmo;
+						Events.OnKillPlayer += OnComplete;
 						Events.OnCompleteLevel += OnComplete;
 				}
 	
@@ -46,7 +44,7 @@ namespace ArcticBlast.Player
 						Events.OnFire -= Fire;
 						Events.OnConsumeBeanCan -= ConsumeBeanCan;
 						Events.OnConsumeBeanBarrel -= ConsumeBeanBarrel;
-						Events.OnKillPlayer -= RemoveAmmo;
+						Events.OnKillPlayer -= OnComplete;
 						Events.OnCompleteLevel -= OnComplete;
 				}
 	
@@ -56,10 +54,14 @@ namespace ArcticBlast.Player
 						Sound = GetComponentInChildren<PlayerSound>();
 				}
 
+				/// <summary>
+				/// Prevent the player from firing after they're killed or the level is over
+				/// </summary>
 				void OnComplete()
 				{
 						_canFire = false;
 						RemoveAmmo();
+						Debug.Log("Preventing the player from firing.");
 				}
 				
 				/// <summary>

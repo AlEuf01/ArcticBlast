@@ -67,7 +67,7 @@ namespace ArcticBlast {
 						CurrentHP--;
 						if (CurrentHP <= 0)
 						{
-								Die();
+								Events.KillPlayer();
 						}
 				}
 

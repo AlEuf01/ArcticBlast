@@ -23,11 +23,17 @@ namespace ArcticBlast
 
 				bool checkInput = true;
 				bool runningToEgg = false;
-	
+
+				const float RANGE_EGG_MAX = 8.0f;
+				const float RANGE_EGG_MIN = 2.0f;
+
+				private Transform egg;
+
 				protected override void Start()
 				{
 						base.Start();
 						GroundChecker = GetComponent<GroundChecker>();
+						egg = GameObject.FindObjectOfType<Egg>().transform;
 				}
 
 				void OnEnable()
@@ -84,7 +90,7 @@ namespace ArcticBlast
 
 				void MoveToEgg()
 				{
-						if (transform.position.x < GameObject.FindObjectOfType<EndOfLevel>().transform.position.x - 2)
+						if (transform.position.x < egg.position.x - RANGE_EGG_MIN)
 						{
 								moveX = 1.5f * GameParameters.Instance.PlayerSpeed;
 						}
@@ -145,18 +151,23 @@ namespace ArcticBlast
 						sr.flipX = !sr.flipX;					
 				}
 
+				/// <summary>
+				/// Play Level Over animation
+				/// </summary>				
 				void RunToEgg()
 				{
+						// Prevent the player from moving						
 						checkInput = false;
-						animator.SetBool("IsJumping", false);					 
-						if (GameController.Instance.levelNum == GameController.Instance.numLevels)
+						animator.SetBool("IsJumping", false);
+
+						runningToEgg = true;
+						sr.flipX = false;
+						
+						// Check to see if within range of the egg
+						if (transform.position.x < egg.position.x - RANGE_EGG_MAX)
 						{
-								runningToEgg = true;
-								sr.flipX = false;
-						}
-						else
-						{
-								animator.SetFloat("Speed", 0);
+								// Teleport the player closer to the egg
+								transform.position = new Vector3(egg.position.x - RANGE_EGG_MAX, egg.position.y, transform.position.z);
 						}
 
 						

@@ -8,7 +8,7 @@ namespace ArcticBlast
     /// EndOfLevel.cs
 		/// Attach to trigger marking the end of the level. When the glacier enters this point, trigger end of game
 		/// </summary>
-    public class EndOfLevel : GlacierTrigger
+    public class Egg : GlacierTrigger
     {
 
 				public Animator animator;
@@ -30,10 +30,8 @@ namespace ArcticBlast
 
 				void Hatch()
 				{
-						if (GameController.Instance.levelNum == GameController.Instance.numLevels)
-						{
-								animator.SetBool("Hatching", true);
-						}
+						animator.SetBool("Hatching", true);
+				
 				}
     }
     

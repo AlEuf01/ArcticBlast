@@ -11,10 +11,7 @@ namespace ArcticBlast.Player
     /// Manages the player's firing actions
 		/// </summary>
     public class PlayerFire : Character
-    {
-				
-				// LayerMask of objects that can be fired on
-				public LayerMask layerMask;
+    {			  
 
 				// Prefabs for fart sound effects
 				public GameObject fartLarge, fartSmall, fartTiny;
@@ -131,8 +128,20 @@ namespace ArcticBlast.Player
 	    
 						AmmoManager.RemoveAllAmmo();
 						Events.MegaFart();
-	    
-						Array.ForEach(GetTargets().ToArray(), target => target.MegaFartOn());
+					 
+						GameObject[] targets = GetTargets().ToArray();
+						foreach (GameObject target in targets)
+						{
+								if (target != null)
+								{
+										
+										IEnemy enemy = target.GetComponent<IEnemy>();
+										
+										Debug.Log($"Mega-farting on {target.gameObject.name}");
+										enemy.MegaFartOn();
+								}
+						}
+					  
 				}
 
 				/// <summary>
@@ -149,8 +158,20 @@ namespace ArcticBlast.Player
 						AmmoManager.Remove();		  
 	    
 						Events.Fart();
-	    
-						Array.ForEach(GetTargets().ToArray(), target => target.FartOn());
+
+												
+						GameObject[] targets = GetTargets().ToArray();
+						foreach (GameObject target in targets)
+						{
+								if (target != null)
+								{
+
+										IEnemy enemy = target.GetComponent<IEnemy>();
+										
+										Debug.Log($"Farting on {target.gameObject.name}");
+										enemy.FartOn();
+								}
+						}
 				}
 
 				/// <summary>
@@ -205,10 +226,10 @@ namespace ArcticBlast.Player
 				/// Get the target of the fire
 				/// <return>The Enemy being fired on</return>
 				/// </summary>
-				List<IEnemy> GetTargets()
+				List<GameObject> GetTargets()
 				{
 
-						List<IEnemy> results = new List<IEnemy>();
+						List<GameObject> results = new List<GameObject>();
 
 						Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
 
@@ -216,13 +237,14 @@ namespace ArcticBlast.Player
 
 						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
 						// Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
+						int layerMask = (1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("Obstacle"));
 						RaycastHit2D[] hits = Physics2D.RaycastAll(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
 						for (int i = 0; i < hits.Length; i++)
 						{								
 								if (hits[i].collider != null)
 								{
 										Debug.Log("Hitting " + hits[i].collider.gameObject.name);
-										results.Add(hits[i].collider.gameObject.GetComponent<IEnemy>());		
+										results.Add(hits[i].collider.gameObject);		
 								}
 								else
 								{

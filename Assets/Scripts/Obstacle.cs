@@ -4,9 +4,17 @@ using UnityEngine;
 
 namespace ArcticBlast
 {
-		public class Obstacle : MonoBehaviour
+
+		/// <summary>
+		/// A snowball or other static obstacle
+		/// </summary>
+		public class Obstacle : MonoBehaviour, IEnemy
 		{
 
+				private int hitPoints = 3;
+
+				public GameObject[] states;
+				
 				void OnEnable()
 				{
 						Events.OnCompleteLevel += RemoveObstacle;
@@ -17,11 +25,47 @@ namespace ArcticBlast
 						Events.OnCompleteLevel -= RemoveObstacle;
 				}
 
+				void Start()
+				{
+						SetActiveState();
+				}
+				
 				void RemoveObstacle()
 				{
 						gameObject.SetActive(false);
-						// gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-						// gameObject.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+				}
+
+				public void FartOn()
+				{
+						// Do nothing
+				}
+
+				public void MegaFartOn()
+				{
+						
+						hitPoints--;
+						if (hitPoints == 0)
+						{
+								RemoveObstacle();
+						}
+						else
+						{
+								SetActiveState();
+						}
+				}
+
+				/// <summary>
+				/// Only show the sprite renderer and collider that corresponds to the current state of the obstacle
+				/// </summary>
+				void SetActiveState()
+				{						
+						// Update the state to be smaller
+						int n = hitPoints - 1;
+						foreach(GameObject state in states)
+						{
+								state.SetActive(false);
+						}
+						states[n].SetActive(true);
 				}
 		}
 

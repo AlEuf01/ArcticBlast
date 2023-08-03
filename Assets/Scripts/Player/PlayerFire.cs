@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -131,11 +132,7 @@ namespace ArcticBlast.Player
 						AmmoManager.RemoveAllAmmo();
 						Events.MegaFart();
 	    
-						IEnemy target = GetTarget();
-						if (target != null)
-						{
-								target.MegaFartOn();
-						}
+						Array.ForEach(GetTargets().ToArray(), target => target.MegaFartOn());
 				}
 
 				/// <summary>
@@ -153,11 +150,7 @@ namespace ArcticBlast.Player
 	    
 						Events.Fart();
 	    
-						IEnemy target = GetTarget();
-						if (target != null)
-						{
-								target.FartOn();
-						}			
+						Array.ForEach(GetTargets().ToArray(), target => target.FartOn());
 				}
 
 				/// <summary>
@@ -212,10 +205,10 @@ namespace ArcticBlast.Player
 				/// Get the target of the fire
 				/// <return>The Enemy being fired on</return>
 				/// </summary>
-				IEnemy GetTarget()
+				List<IEnemy> GetTargets()
 				{
 
-						IEnemy result = null;
+						List<IEnemy> results = new List<IEnemy>();
 
 						Vector2 direction = GetFireDirection() == Direction.Left ? Vector2.left : Vector2.right;
 
@@ -223,20 +216,22 @@ namespace ArcticBlast.Player
 
 						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
 						// Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
-						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
-						
-						if (hit.collider != null)
-						{
-								Debug.Log("Hitting " + hit.collider.gameObject.name);
-								result = hit.collider.gameObject.GetComponent<IEnemy>();		
-						}
-						else
-						{
-								Debug.Log("Nothing in range to hit.");
+						RaycastHit2D[] hits = Physics2D.RaycastAll(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
+						for (int i = 0; i < hits.Length; i++)
+						{								
+								if (hits[i].collider != null)
+								{
+										Debug.Log("Hitting " + hits[i].collider.gameObject.name);
+										results.Add(hits[i].collider.gameObject.GetComponent<IEnemy>());		
+								}
+								else
+								{
+										Debug.Log("Nothing in range to hit.");
+								}
 						}
 								
-	    
-						return result;
+								
+						return results;
 				}
 	
     }

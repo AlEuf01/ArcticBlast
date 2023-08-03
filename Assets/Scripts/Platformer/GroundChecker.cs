@@ -20,7 +20,7 @@ namespace ArcticBlast
 				/// <summary>
 				/// References the Ground layer to keep track of Ground objects
 				/// </summary>
-				public LayerMask GroundLayer;
+				public LayerMask[] GroundLayers;
 
 				/// <summary>
 				/// Radius to check against
@@ -46,16 +46,16 @@ namespace ArcticBlast
 								}
 				
 								// Return true if it exists, false otherwise
-								return GetGroundOverlapCircle() != null;
+								return GetGroundOverlapCircle();
 						}
 				}
 		
 				/// <summary>
 				/// See if there's overlap between the player and the ground
 				/// </summary>
-				Collider2D GetGroundOverlapCircle()
+				bool GetGroundOverlapCircle()
 				{
-						return Physics2D.OverlapCircle(IsGroundedChecker.position, GROUND_CHECK_RADIUS, GroundLayer);
+						return GetOverlapCircle(GROUND_CHECK_RADIUS);
 				}
 
 				/// <summary>
@@ -63,8 +63,20 @@ namespace ArcticBlast
 				/// </summary>
 				public bool IsJumpingInMidair()
 				{
-						return Physics2D.OverlapCircle(IsGroundedChecker.position, JUMP_MIDAIR_RADIUS, GroundLayer);
+						return GetOverlapCircle(JUMP_MIDAIR_RADIUS);
 				}
+
+				private bool GetOverlapCircle(float radius)
+				{
+						
+						bool result = false;
+						foreach (LayerMask layer in GroundLayers)
+						{
+								result = result || Physics2D.OverlapCircle(IsGroundedChecker.position, radius, layer);
+						}
+						return result;
+				}
+				
 		
 		}
 }

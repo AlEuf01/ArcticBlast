@@ -550,6 +550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
+      propertyPath: MaxGlacierX
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
+        type: 3}
       propertyPath: DelayWhenWinningGame
       value: 3
       objectReference: {fileID: 0}

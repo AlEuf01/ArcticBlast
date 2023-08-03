@@ -62,8 +62,8 @@ namespace ArcticBlast
 				bool IsNearBoulder
 				{
 						get {
-								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, IsPlayerAhead ? Vector2.right : Vector2.left, 1.0f, LayerMask.GetMask("Ground"));
-								return hit.collider != null && hit.collider.gameObject.GetComponentInParent<Obstacle>() != null;
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, IsPlayerAhead ? Vector2.right : Vector2.left, 1.0f, LayerMask.GetMask("Obstacle"));
+								return hit.collider != null && hit.collider.gameObject.GetComponent<Obstacle>() != null;
 				}
 				}
 		

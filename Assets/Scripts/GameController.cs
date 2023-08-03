@@ -145,7 +145,7 @@ namespace ArcticBlast
 						if (levelNum < numLevels)
 						{
 								Debug.Log($"Advancing to level {levelNum} out of {numLevels}");
-								SceneEvents.ChangeScene($"Level{levelNum}");
+								SceneEvents.ChangeScene("Level");
 								isChangingLevel = false;
 						}
 						else
@@ -162,7 +162,6 @@ namespace ArcticBlast
 							    	 
 						if (levelNum == numLevels)
 						{
-
 
 								yield return new WaitForSeconds(GameParameters.Instance.DelayWhenWinningGame);// We won the game!								
 								SceneEvents.ChangeScene(VictorySceneName);

@@ -32,7 +32,7 @@ namespace ArcticBlast {
 								// Debug.Log("Not on top of Glacier.");
 
 								// Debug.Log("On top of: " + hitDown.collider.gameObject.name);
-								transform.SetParent(GameObject.Find("Environment").transform);
+								transform.SetParent(null);
 						}
 			
 				}

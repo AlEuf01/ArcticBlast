@@ -18,11 +18,13 @@ namespace ArcticBlast
 				public GameObject grid;
 				public GameObject boundaryPrefab;
 				
+				public GameObject obstaclePrefab;
 				public PlayerMovement player;
 				public Glacier glacier;
 				public Goal goal;
 				public Egg egg;
 				public Enemy EnemyPrefab, EnemyHardPrefab;
+				public GameObject airdropPrefab;
 
 				private Vector3 playerPosition;
 				private Vector3 glacierPosition;
@@ -57,6 +59,7 @@ namespace ArcticBlast
 						Instantiate(backgrounds[bgIndex]);
 						Instantiate(grid);
 						Instantiate(camera);
+						Instantiate(airdropPrefab);
 						Instantiate(player, playerPosition, Quaternion.identity);
 						Instantiate(glacier, glacierPosition, Quaternion.identity);
 						Instantiate(goal, goalPosition, Quaternion.identity);
@@ -64,6 +67,7 @@ namespace ArcticBlast
 						Instantiate(boundaryPrefab, leftBoundaryPosition, Quaternion.identity);
 						Instantiate(boundaryPrefab, rightBoundaryPosition, Quaternion.identity);
 
+						// Spawn enemies
 						float enemy1Position = Random.Range(enemyMinPosition, enemyMaxPosition);
 						// Spawn 1 enemy
 						if (GameController.Instance.levelNum >= GameParameters.Instance.EnemyHardStartLevel)
@@ -86,6 +90,13 @@ namespace ArcticBlast
 										Instantiate(EnemyPrefab, new Vector3(enemyMinPosition, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
 								}
 						}
+
+						// Spawn Obstacles
+						if (Random.Range(0, 1.0f) < GameParameters.Instance.ObstacleSpawnChance && GameController.Instance.levelNum >= GameParameters.Instance.ObstacleMinLevel)
+						{
+								Instantiate(obstaclePrefab, new Vector3(Random.Range(enemyMinPosition, enemyMaxPosition), -0.85f, 0), Quaternion.identity);
+						}
+
 										
 				}
 

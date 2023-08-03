@@ -69,16 +69,22 @@ namespace ArcticBlast
 
 						// Spawn enemies
 						float enemy1Position = Random.Range(enemyMinPosition, enemyMaxPosition);
+
+						// Keep track of how many enemies were spawned
+						int enemySpawnCount = 0;
+						
 						// Spawn 1 enemy
 						if (GameController.Instance.levelNum >= GameParameters.Instance.EnemyHardStartLevel)
 						{
 								// Spawn a hard enemy
 								Instantiate(EnemyHardPrefab, new Vector3(enemy1Position, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
+								enemySpawnCount++;
 						}
 						else if (GameController.Instance.levelNum >= GameParameters.Instance.EnemyStartLevel)
 						{
 								// Spawn an easy enemy
 								Instantiate(EnemyPrefab, new Vector3(enemy1Position, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
+								enemySpawnCount++;
 						}
 
 
@@ -88,15 +94,23 @@ namespace ArcticBlast
 								if ((enemyMinPosition + 5f) > enemy1Position)
 								{
 										Instantiate(EnemyPrefab, new Vector3(enemyMinPosition, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
+										enemySpawnCount++;
 								}
 						}
 
 						// Spawn Obstacles
-						if (Random.Range(0, 1.0f) < GameParameters.Instance.ObstacleSpawnChance && GameController.Instance.levelNum >= GameParameters.Instance.ObstacleMinLevel)
+						if (enemySpawnCount == 2)
+						{
+								// spawn obstacle between two enemies
+								Instantiate(obstaclePrefab, new Vector3((enemyMinPosition + enemy1Position)/2, -0.85f, 0), Quaternion.identity);
+						}
+						else if (Random.Range(0, 1.0f) < GameParameters.Instance.ObstacleSpawnChance && GameController.Instance.levelNum >= GameParameters.Instance.ObstacleMinLevel)
 						{
 								Instantiate(obstaclePrefab, new Vector3(Random.Range(enemyMinPosition, enemyMaxPosition), -0.85f, 0), Quaternion.identity);
 						}
+						
 
+						
 										
 				}
 

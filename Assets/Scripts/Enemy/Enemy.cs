@@ -12,8 +12,11 @@ namespace ArcticBlast {
     {
 
 
-				// True if it's possible to stun this enemy, false otherwise
+				/// <summary> True if it's possible to stun this enemy, false otherwise </summary>
         public bool CanBeStunned = true;
+
+				/// <summary> True if it's possible to kill this enemy, false otherwise </summary>
+				public bool CanBeKilled = true;
 
 				// The LayerMask to check collisions on
 				public LayerMask layerMask;
@@ -37,7 +40,7 @@ namespace ArcticBlast {
 				public float attackDuration = 1.0f;
 
 				// The amount of time to stun the player
-				public float stunDuration, pukeDuration, recoverDuration, deathDelay;
+				public float stunDuration, longPukeDuration, pukeDuration, recoverDuration, deathDelay;
 
 				void OnEnable()
 				{
@@ -56,12 +59,19 @@ namespace ArcticBlast {
 				
 				public void FartOn()
 				{
-						Stun();
+						Stun(pukeDuration);
 				}
 	
 				public void MegaFartOn()
 				{
-						Die();
+						if (CanBeKilled)
+						{
+								Die();
+						}
+						else
+						{
+								Stun(longPukeDuration);
+						}
 				}
 
 				protected override void Start()
@@ -102,12 +112,12 @@ namespace ArcticBlast {
 				/// <summary>
 				/// Stun the enemy
 				/// </summary>
-				void Stun()
+				void Stun(float duration)
 				{
 						if (CanBeStunned && !isDead)
 						{
 								// Debug.Log("Stunning enemy.");
-								StartCoroutine(StunForDurationOfClip());				
+								StartCoroutine(StunForDurationOfClip(duration));				
 						}
 				}
 
@@ -130,7 +140,7 @@ namespace ArcticBlast {
 				/// <summary>
 				/// Stun the enemy for the duration of the animation clip
 				/// </summary>
-				IEnumerator StunForDurationOfClip()
+				IEnumerator StunForDurationOfClip(float duration)
 				{
 						isStunned = true;
 
@@ -142,7 +152,7 @@ namespace ArcticBlast {
 
 						Puke.SetActive(true);
 
-						yield return new WaitForSeconds(pukeDuration);
+						yield return new WaitForSeconds(duration);
 
 						animator.SetTrigger("Recover");
 

@@ -561,7 +561,12 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: EnemyStartLevel
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
+        type: 3}
+      propertyPath: MaxGlacierSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
@@ -571,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: ObstacleMinLevel
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
@@ -581,12 +586,17 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: ObstacleSpawnChance
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: DelayWhenWinningGame
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
+        type: 3}
+      propertyPath: GlacierPushBackSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
@@ -596,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: MultipleEnemyStartLevel
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}

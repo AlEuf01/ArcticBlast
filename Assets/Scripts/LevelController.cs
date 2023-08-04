@@ -48,8 +48,8 @@ namespace ArcticBlast
 						glacierPosition = new Vector3(glacierX, -0.13f, 0);
 
 						Debug.Log("Glacier position " + glacierX);
-						goalPosition = new Vector3(glacierPosition.x + 1f, -1.1f, 0);
-						eggPosition = new Vector3(GameParameters.Instance.EggPositionX, -1.75f, 0);
+						goalPosition = new Vector3(glacierPosition.x + 1f, -1.2f, 0);
+						eggPosition = new Vector3(GameParameters.Instance.EggPositionX, -1.85f, 0);
 
 						leftBoundaryPosition = new Vector3(glacierPosition.x - 4f, -1.25f, 0);
 						rightBoundaryPosition = new Vector3(GameParameters.Instance.EggPositionX + 1, -1.25f, 0);
@@ -93,7 +93,7 @@ namespace ArcticBlast
 						// If we're supposed to spawn multiple enemies and this isn't the first time we're spawning a hard one, spawn a new easy one
 						if (GameController.Instance.levelNum >= GameParameters.Instance.MultipleEnemyStartLevel && GameController.Instance.levelNum != GameParameters.Instance.EnemyHardStartLevel)
 						{
-								if ((enemyMinPosition - 3f) > enemy1Position)
+								if ((enemyMinPosition + 3f) < enemy1Position)
 								{
 										Instantiate(EnemyPrefab, new Vector3(enemyMinPosition, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
 										Debug.Log("Spawning another enemy at " + enemyMinPosition);
@@ -101,7 +101,7 @@ namespace ArcticBlast
 								}
 								else
 								{
-										Debug.Log("No room to spawn another enemy.");
+										Debug.Log($"No room to spawn another enemy. enemyMinPosition: {enemyMinPosition}, enemy1Position: { enemy1Position }, enemyMaxPosition: {enemyMaxPosition}");
 								}
 						}
 

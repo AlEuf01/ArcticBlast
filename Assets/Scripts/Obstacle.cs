@@ -11,6 +11,7 @@ namespace ArcticBlast
 				public void FartOn()
 				{
 						// Do nothing
+						transform.parent.GetComponent<ObstacleContainer>().FartOn();
 				}
 
 				public void MegaFartOn()

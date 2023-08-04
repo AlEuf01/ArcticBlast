@@ -11,7 +11,14 @@ namespace ArcticBlast
 
 				void FixedUpdate()
 				{
-						transform.Translate(new Vector2(Speed * Time.fixedDeltaTime * -1, 0));
+						if (transform.position.x < GameParameters.Instance.MinGlacierX)
+						{
+								Destroy(gameObject);
+						}
+						else
+						{
+								transform.Translate(new Vector2(Speed * Time.fixedDeltaTime * -1, 0));
+						}
 				}
 		}
 

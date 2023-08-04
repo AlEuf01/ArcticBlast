@@ -17,6 +17,8 @@ namespace ArcticBlast
 
 				// Delay before launching an airplane
 				public float initialDelay;
+
+				public float delayBetweenPlanes;
 				
 				// The coordinates to spawn airplanes from
 				private Vector3 launchPoint;
@@ -24,7 +26,7 @@ namespace ArcticBlast
 				void Start()
 				{
 						launchPoint = new Vector3(GameParameters.Instance.EggPositionX, GameParameters.Instance.AirplaneHeight, 0);
-						Invoke("LaunchAirplane", initialDelay);						
+						InvokeRepeating("LaunchAirplane", initialDelay, delayBetweenPlanes);						
 				}
 				
 				void LaunchAirplane()

@@ -34,16 +34,17 @@ namespace ArcticBlast
 				private Vector3 leftBoundaryPosition;
 				private Vector3 rightBoundaryPosition;
 
-				private float enemyMinPosition, enemyMaxPosition, enemyPositionY;
-				
+				private float enemyMinPosition, enemyMaxPosition, enemyPositionY, glacierX, enemy1Position;
+				private int enemySpawnCount, bgIndex;
+
 				// Start is called before the first frame update
 				void Start()
 				{
-						int bgIndex = GameController.Instance.levelNum % backgrounds.Length;
+						bgIndex = GameController.Instance.levelNum % backgrounds.Length;
 
 						playerPosition = new Vector3(GameParameters.Instance.PlayerStartPositionX, -1.41f, 0);
 
-						float glacierX = Mathf.Clamp(GameParameters.Instance.MaxGlacierX - 2.0f * GameController.Instance.levelNum, GameParameters.Instance.MinGlacierX, GameParameters.Instance.MaxGlacierX);
+						glacierX = Mathf.Clamp(GameParameters.Instance.MaxGlacierX - 2.0f * GameController.Instance.levelNum, GameParameters.Instance.MinGlacierX, GameParameters.Instance.MaxGlacierX);
 						glacierPosition = new Vector3(glacierX, -0.13f, 0);
 
 						goalPosition = new Vector3(glacierPosition.x + 1f, -1.1f, 0);
@@ -54,7 +55,6 @@ namespace ArcticBlast
 
 						enemyMinPosition = goalPosition.x + 4f;
 						enemyMaxPosition = playerPosition.x - 4f;
-
 								
 						Instantiate(backgrounds[bgIndex]);
 						Instantiate(grid);
@@ -68,10 +68,10 @@ namespace ArcticBlast
 						Instantiate(boundaryPrefab, rightBoundaryPosition, Quaternion.identity);
 
 						// Spawn enemies
-						float enemy1Position = Random.Range(enemyMinPosition, enemyMaxPosition);
+						enemy1Position = Random.Range(enemyMinPosition, enemyMaxPosition);
 
 						// Keep track of how many enemies were spawned
-						int enemySpawnCount = 0;
+						enemySpawnCount = 0;
 						
 						// Spawn 1 enemy
 						if (GameController.Instance.levelNum >= GameParameters.Instance.EnemyHardStartLevel)
@@ -106,7 +106,7 @@ namespace ArcticBlast
 						}
 						else if (Random.Range(0, 1.0f) < GameParameters.Instance.ObstacleSpawnChance && GameController.Instance.levelNum >= GameParameters.Instance.ObstacleMinLevel)
 						{
-								Instantiate(obstaclePrefab, new Vector3(Random.Range(enemyMinPosition, enemyMaxPosition), -0.85f, 0), Quaternion.identity);
+								Instantiate(obstaclePrefab, new Vector3(enemy1Position + 4f, -0.85f, 0), Quaternion.identity);
 						}
 						
 

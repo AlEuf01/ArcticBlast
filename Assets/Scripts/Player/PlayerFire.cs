@@ -238,20 +238,28 @@ namespace ArcticBlast.Player
 						Ray2D hitRay = new Ray2D(firePoint.transform.position, direction);
 						// Debug.DrawRay(hitRay.origin, hitRay.direction * Range, Color.red, 2f);
 						int layerMask = (1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("Obstacle"));
+						/**
 						RaycastHit2D[] hits = Physics2D.RaycastAll(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
 						for (int i = 0; i < hits.Length; i++)
 						{								
 								if (hits[i].collider != null)
 								{
 										Debug.Log("Hitting " + hits[i].collider.gameObject.name);
-										results.Add(hits[i].collider.gameObject);		
+										results.Add(hits[i].collider.gameObject);
 								}
 								else
 								{
 										Debug.Log("Nothing in range to hit.");
 								}
 						}
-								
+						**/
+
+						RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction, GameParameters.Instance.PlayerFireRange, layerMask);
+						if (hit.collider != null)
+						{
+								Debug.Log("Hitting " + hit.collider.gameObject.name);
+								results.Add(hit.collider.gameObject);
+						}
 								
 						return results;
 				}

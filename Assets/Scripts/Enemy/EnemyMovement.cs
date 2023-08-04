@@ -22,7 +22,14 @@ namespace ArcticBlast
 				private GameObject _player;
 
 				private Enemy _enemy;
-				
+
+				Vector2 FacingDirection
+				{
+						get
+						{
+								return IsPlayerAhead ? Vector2.right : Vector2.left;
+						}
+				}
 				/// <summary>
 				/// Checks for whether the enemy can move
 				/// </summary>
@@ -51,8 +58,23 @@ namespace ArcticBlast
 				/// </summary>
 				bool IsPlayerAhead
 				{
-						get {
+						get
+						{
 								return _player.transform.position.x > transform.position.x;
+						}
+				}
+
+				bool IsEnemyAhead
+				{
+						get
+						{
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, 4.0f, LayerMask.GetMask("Enemy"));
+								if (hit.collider != null)
+								{
+										Debug.Log("Found enemy: " + hit.collider.gameObject.name);
+										return hit.collider.gameObject.GetComponent<Enemy>() != null;
+								}
+								return false;
 						}
 				}
 
@@ -61,10 +83,17 @@ namespace ArcticBlast
 				/// </summary>
 				bool IsNearBoulder
 				{
-						get {
-								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, IsPlayerAhead ? Vector2.right : Vector2.left, 1.0f, LayerMask.GetMask("Obstacle"));
-								return hit.collider != null && hit.collider.gameObject.GetComponent<Obstacle>() != null;
-				}
+						get
+						{
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, 2.0f, LayerMask.GetMask("Obstacle"));
+								if (hit.collider != null)
+								{
+										Debug.Log("Found boulder: " + hit.collider.gameObject.name);
+										
+										return hit.collider.gameObject.GetComponent<Obstacle>() != null;
+								}
+								return false;
+						}
 				}
 		
 				protected override void Start()
@@ -106,8 +135,11 @@ namespace ArcticBlast
 				/// </summary>
 				void Move()
 				{
-						
-						if (IsPlayerAlive && CanMove && !IsNearBoulder)
+						if (IsEnemyAhead)
+						{
+								Debug.Log("Enemy ahead.");
+						}
+						if (IsPlayerAlive && CanMove && !IsNearBoulder && !IsEnemyAhead)
 						{
 								Vector2 amount = new Vector2(GameParameters.Instance.EnemySpeed * Time.deltaTime, 0f);								
 								transform.Translate(IsPlayerAhead ? amount : -amount);

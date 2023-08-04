@@ -31,6 +31,8 @@ namespace ArcticBlast
 				public int EnemyHardStartLevel = 5;
 				public float EnemySpeed = 1.0f;
 				public float EnemyPositionY = -1.56f;
+				public float DistanceToStopInFrontOfBoulder = 2.0f;
+				public float DistanceToStopInFrontOfEnemy = 2.0f;
 				public float ObstacleSpawnChance = 0.4f;
 				public int ObstacleMinLevel = 1;
 

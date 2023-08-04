@@ -47,6 +47,7 @@ namespace ArcticBlast
 						glacierX = Mathf.Clamp(GameParameters.Instance.MaxGlacierX - 2.0f * GameController.Instance.levelNum, GameParameters.Instance.MinGlacierX, GameParameters.Instance.MaxGlacierX);
 						glacierPosition = new Vector3(glacierX, -0.13f, 0);
 
+						Debug.Log("Glacier position " + glacierX);
 						goalPosition = new Vector3(glacierPosition.x + 1f, -1.1f, 0);
 						eggPosition = new Vector3(GameParameters.Instance.EggPositionX, -1.75f, 0);
 
@@ -54,7 +55,7 @@ namespace ArcticBlast
 						rightBoundaryPosition = new Vector3(GameParameters.Instance.EggPositionX + 1, -1.25f, 0);
 
 						enemyMinPosition = goalPosition.x + 4f;
-						enemyMaxPosition = playerPosition.x - 4f;
+						enemyMaxPosition = playerPosition.x - 6f;
 								
 						Instantiate(backgrounds[bgIndex]);
 						Instantiate(grid);
@@ -83,6 +84,7 @@ namespace ArcticBlast
 						else if (GameController.Instance.levelNum >= GameParameters.Instance.EnemyStartLevel)
 						{
 								// Spawn an easy enemy
+								Debug.Log("Spawning enemy at " + enemy1Position);
 								Instantiate(EnemyPrefab, new Vector3(enemy1Position, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
 								enemySpawnCount++;
 						}
@@ -91,22 +93,40 @@ namespace ArcticBlast
 						// If we're supposed to spawn multiple enemies and this isn't the first time we're spawning a hard one, spawn a new easy one
 						if (GameController.Instance.levelNum >= GameParameters.Instance.MultipleEnemyStartLevel && GameController.Instance.levelNum != GameParameters.Instance.EnemyHardStartLevel)
 						{
-								if ((enemyMinPosition + 5f) > enemy1Position)
+								if ((enemyMinPosition - 3f) > enemy1Position)
 								{
 										Instantiate(EnemyPrefab, new Vector3(enemyMinPosition, GameParameters.Instance.EnemyPositionY, 0), Quaternion.identity);
+										Debug.Log("Spawning another enemy at " + enemyMinPosition);
 										enemySpawnCount++;
+								}
+								else
+								{
+										Debug.Log("No room to spawn another enemy.");
 								}
 						}
 
 						// Spawn Obstacles
 						if (enemySpawnCount == 2)
 						{
-								// spawn obstacle between two enemies
-								Instantiate(obstaclePrefab, new Vector3((enemyMinPosition + enemy1Position)/2, -0.85f, 0), Quaternion.identity);
+								if ((enemy1Position - enemyMinPosition) <= 3)
+								{
+										// Enemies too close together, don't spawn obstacle
+										Debug.Log("Enemies too close together; not spawning an obstacle.");
+								}
+								else
+								{
+										// spawn obstacle between two enemies
+										Instantiate(obstaclePrefab, new Vector3((enemyMinPosition + enemy1Position)/2, -0.85f, 0), Quaternion.identity);
+								}
 						}
 						else if (Random.Range(0, 1.0f) < GameParameters.Instance.ObstacleSpawnChance && GameController.Instance.levelNum >= GameParameters.Instance.ObstacleMinLevel)
 						{
 								Instantiate(obstaclePrefab, new Vector3(enemy1Position + 4f, -0.85f, 0), Quaternion.identity);
+								Debug.Log($"Spawning an obstacle at {enemy1Position + 4f}.");
+						}
+						else
+						{
+								Debug.Log("Not spawning an obstacle.");
 						}
 						
 

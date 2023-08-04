@@ -23,6 +23,8 @@ namespace ArcticBlast
 
 				private Enemy _enemy;
 
+				private bool isMoving;
+				
 				Vector2 FacingDirection
 				{
 						get
@@ -68,10 +70,10 @@ namespace ArcticBlast
 				{
 						get
 						{
-								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, 4.0f, LayerMask.GetMask("Enemy"));
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, GameParameters.Instance.DistanceToStopInFrontOfEnemy, LayerMask.GetMask("Enemy"));
 								if (hit.collider != null)
 								{
-										Debug.Log("Found enemy: " + hit.collider.gameObject.name);
+										// Debug.Log("Found enemy: " + hit.collider.gameObject.name);
 										return hit.collider.gameObject.GetComponent<Enemy>() != null;
 								}
 								return false;
@@ -85,10 +87,10 @@ namespace ArcticBlast
 				{
 						get
 						{
-								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, 2.0f, LayerMask.GetMask("Obstacle"));
+								RaycastHit2D hit = Physics2D.Raycast(this.transform.position, FacingDirection, GameParameters.Instance.DistanceToStopInFrontOfBoulder, LayerMask.GetMask("Obstacle"));
 								if (hit.collider != null)
 								{
-										Debug.Log("Found boulder: " + hit.collider.gameObject.name);
+										// Debug.Log("Found boulder: " + hit.collider.gameObject.name);
 										
 										return hit.collider.gameObject.GetComponent<Obstacle>() != null;
 								}
@@ -117,7 +119,7 @@ namespace ArcticBlast
 				void Animate()
 				{
 	    
-						if (IsPlayerAlive && CanMove)
+						if (isMoving)
 						{
 								animator.SetBool("IsWalking", true);
 						}
@@ -135,15 +137,16 @@ namespace ArcticBlast
 				/// </summary>
 				void Move()
 				{
-						if (IsEnemyAhead)
-						{
-								Debug.Log("Enemy ahead.");
-						}
 						if (IsPlayerAlive && CanMove && !IsNearBoulder && !IsEnemyAhead)
 						{
 								Vector2 amount = new Vector2(GameParameters.Instance.EnemySpeed * Time.deltaTime, 0f);								
 								transform.Translate(IsPlayerAhead ? amount : -amount);
+								isMoving = true;
+						}
 
+						else
+						{
+								isMoving = false;
 						}
 				}
 

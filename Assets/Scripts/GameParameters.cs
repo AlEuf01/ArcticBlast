@@ -33,6 +33,8 @@ namespace ArcticBlast
 				public float EnemyPositionY = -1.56f;
 				public float ObstacleSpawnChance = 0.4f;
 				public int ObstacleMinLevel = 1;
+
+				public float AirplaneHeight = 2.0f;
 				
 				[Header("Power Ups")]
 				public float BarrelSpawnRate = 1.0f;

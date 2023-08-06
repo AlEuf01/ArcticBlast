@@ -576,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: ObstacleMinLevel
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
@@ -586,7 +586,7 @@ PrefabInstance:
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}
       propertyPath: ObstacleSpawnChance
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2587978555208781173, guid: bae012da4bb8dd3b78611edc9a14cbe4,
         type: 3}

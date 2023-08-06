@@ -14,6 +14,8 @@ namespace ArcticBlast
 				private int hitPoints = 3;
 
 				public GameObject[] states;
+
+				public GameObject Particles;
 				
 				void OnEnable()
 				{
@@ -28,6 +30,7 @@ namespace ArcticBlast
 				void Start()
 				{
 						SetActiveState();
+						Particles.SetActive(false);
 				}
 				
 				void RemoveObstacle()
@@ -53,14 +56,24 @@ namespace ArcticBlast
 				public void FartOn()
 				{
 						hitPoints--;
+						StartCoroutine(ShowParticleEffect());
 						if (hitPoints == 0)
 						{
 								RemoveObstacle();
 						}
 						else
 						{
-								SetActiveState();
+								SetActiveState();								
 						}
+				}
+
+				IEnumerator ShowParticleEffect()
+				{
+						Particles.GetComponent<ParticleSystem>().time = 0;
+						Particles.GetComponent<ParticleSystem>().Play();
+						Particles.SetActive(true);
+						yield return new WaitForSeconds(1.0f);
+						Particles.SetActive(false);
 				}
 		}
 

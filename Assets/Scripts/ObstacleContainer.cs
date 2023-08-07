@@ -35,6 +35,7 @@ namespace ArcticBlast
 				
 				void RemoveObstacle()
 				{
+
 						gameObject.SetActive(false);
 				}
 
@@ -50,21 +51,19 @@ namespace ArcticBlast
 						{
 								state.SetActive(false);
 						}
-						states[n].SetActive(true);
+
+						if (n >= 0 && n < states.Length)
+						{
+								states[n].SetActive(true);
+						}
 				}
 
 				public void FartOn()
 				{
 						hitPoints--;
 						StartCoroutine(ShowParticleEffect());
-						if (hitPoints == 0)
-						{
-								RemoveObstacle();
-						}
-						else
-						{
-								SetActiveState();								
-						}
+						SetActiveState();								
+
 				}
 
 				IEnumerator ShowParticleEffect()
